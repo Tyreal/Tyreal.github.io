@@ -162,6 +162,155 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/15/C++%20Primer%20Chapter%205%20Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/02/15/C++%20Primer%20Chapter%205%20Notes/" class="post-title-link" itemprop="url">C++ Primer Chapter 5 Notes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-02-15 21:21:44" itemprop="dateCreated datePublished" datetime="2023-02-15T21:21:44+08:00">2023-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-22 21:37:16" itemprop="dateModified" datetime="2023-03-22T21:37:16+08:00">2023-03-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h1><h2 id="简单语句"><a href="#简单语句" class="headerlink" title="简单语句"></a>简单语句</h2><ul>
+<li><p><strong>空语句</strong>：只有一个单独的分号。</p>
+</li>
+<li><p>使用空语句时应该加上注释，从而令读这段代码的人知道该语句是有意省略的。</p>
+<p>多余的空语句并非总是无害的。</p>
+</li>
+<li><p><strong>复合语句（块）</strong>：用花括号 <code>&#123;&#125;</code>包裹起来的语句和声明的序列。一个块就是一个作用域。</p>
+</li>
+<li><p>语句块不以分号作为结束。</p>
+<p>空块的作用等价于空语句。</p>
+</li>
+</ul>
+<h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><ul>
+<li><p><strong>悬垂else</strong>：用来描述在嵌套的<code>if else</code>语句中，如果<code>if</code>比<code>else</code>多时如何处理的问题。C++使用的方法是<code>else</code>匹配最近没有配对的<code>if</code>。</p>
+</li>
+<li><p><code>**if**</code>语句</p>
+<p>if&#96;语句的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition)</span><br><span class="line">    statement</span><br></pre></td></tr></table></figure>
+
+<p><code>if-else</code>语句的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition)</span><br><span class="line">    statement</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    statement2</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>condition</code>是判断条件，可以是一个表达式或者初始化了的变量声明。<code>condition</code>必须用圆括号括起来。</p>
+<ul>
+<li><p>如果<code>condition</code>为真，则执行<code>statement</code>。执行完成后，程序继续执行<code>if</code>语句后面的其他语句。</p>
+</li>
+<li><p>如果<code>condition</code>为假，则跳过<code>statement</code>。对于简单<code>if</code>语句来说，程序直接执行<code>if</code>语句后面的其他语句；对于<code>if-else</code>语句来说，程序先执行<code>statement2</code>，再执行<code>if</code>语句后面的其他语句。</p>
+</li>
+</ul>
+<p><code>if</code>语句可以嵌套，其中<code>else</code>与离它最近的尚未匹配的<code>if</code>相匹配。</p>
+</li>
+<li><p><strong><code>switch</code>语句</strong>）：<code>switch</code>语句先对括号里的表达式求值，值转换成整数类型后再与每个<code>case</code>标签（case label）的值进行比较。如果表达式的值和某个<code>case</code>标签匹配，程序从该标签之后的第一条语句开始执行，直到到达<code>switch</code>的结尾或者遇到<code>break</code>语句为止。<code>case</code>标签必须是整型常量表达式。</p>
+<p>通常情况下每个<code>case</code>分支后都有<code>break</code>语句。如果确实不应该出现<code>break</code>语句，最好写一段注释说明程序的逻辑。</p>
+<p>尽管<code>switch</code>语句没有强制要求在最后一个<code>case</code>标签后写上<code>break</code>，但为了安全起见，最好添加<code>break</code>。这样即使以后增加了新的<code>case</code>分支，也不用再在前面补充<code>break</code>语句了。</p>
+<p><code>switch</code>语句中可以添加一个<code>default</code>标签（default label），如果没有任何一个<code>case</code>标签能匹配上<code>switch</code>表达式的值，程序将执行<code>default</code>标签后的语句。</p>
+</li>
+<li><p><strong><code>if</code>语句</strong> ：<code>if</code>语句的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition)</span><br><span class="line">    statement</span><br></pre></td></tr></table></figure>
+
+<p><code>if-else</code>语句的形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition)</span><br><span class="line">    statement</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    statement2</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>condition</code>是判断条件，可以是一个表达式或者初始化了的变量声明。<code>condition</code>必须用圆括号括起来。</p>
+<ul>
+<li><p>如果<code>condition</code>为真，则执行<code>statement</code>。执行完成后，程序继续执行<code>if</code>语句后面的其他语句。</p>
+</li>
+<li><p>如果<code>condition</code>为假，则跳过<code>statement</code>。对于简单<code>if</code>语句来说，程序直接执行<code>if</code>语句后面的其他语句；对于<code>if-else</code>语句来说，程序先执行<code>statement2</code>，再执行<code>if</code>语句后面的其他语句。</p>
+</li>
+</ul>
+<p><code>if</code>语句可以嵌套，其中<code>else</code>与离它最近的尚未匹配的<code>if</code>相匹配。</p>
+</li>
+</ul>
+<h2 id="迭代语句"><a href="#迭代语句" class="headerlink" title="迭代语句"></a>迭代语句</h2><ul>
+<li><p><strong>while</strong>：只要<code>condition</code>的求值结果为<code>true</code>，就一直执行<code>statement</code>（通常是一个块）。<code>condition</code>不能为空，如果<code>condition</code>第一次求值就是<code>false</code>，<code>statement</code>一次都不会执行。</p>
+<p>定义在<code>while</code>条件部分或者循环体内的变量每次迭代都经历从创建到销毁的过程。</p>
+</li>
+<li><p>当不确定到底要迭代多少次时，使用 <code>while</code>循环比较合适，比如读取输入的内容。</p>
+</li>
+<li><p><strong>for</strong>：<code>for</code>语句头中定义的对象只在<code>for</code>循环体内可见。 <code>for</code>语句可以省略掉 <code>init-statement</code>， <code>condition</code>和 <code>expression</code>的任何一个；<strong>甚至全部</strong>。</p>
+</li>
+<li><p><strong>范围for</strong>： 其中<code>expression</code>表示一个序列，拥有能返回迭代器的<code>begin</code>和<code>end</code>成员。<code>declaration</code>定义一个变量，序列中的每个元素都应该能转换成该变量的类型（可以使用<code>auto</code>）。如果需要对序列中的元素执行写操作，循环变量必须声明成引用类型。每次迭代都会重新定义循环控制变量，并将其初始化为序列中的下一个值，之后才会执行<code>statement</code>。</p>
+</li>
+</ul>
+<h2 id="跳转语句"><a href="#跳转语句" class="headerlink" title="跳转语句"></a>跳转语句</h2><ul>
+<li><p><strong>break</strong>：<code>break</code>语句负责终止离它最近的<code>while</code>、<code>do while</code>、<code>for</code>或者<code>switch</code>语句，并从这些语句之后的第一条语句开始继续执行。</p>
+</li>
+<li><p><strong>continue</strong>：终止最近的循环中的当前迭代并立即开始下一次迭代。只能在<code>while</code>、<code>do while</code>、<code>for</code>循环的内部。</p>
+</li>
+<li><p>对于<code>while</code>和<code>do-while</code>语句来说，继续判断条件的值。</p>
+</li>
+<li><p>对于传统的<code>for</code>语句来说，继续执行<code>for</code>语句头中的第三部分，之后判断条件的值。</p>
+</li>
+<li><p>对于范围<code>for</code>语句来说，是用序列中的下一个元素初始化循环变量。</p>
+</li>
+<li><p><code>**goto**</code>语句是一种特殊的语句，在它之前有一个标识符和一个冒号。标签标识符独立于变量和其他标识符的名字，它们之间不会相互干扰。</p>
+</li>
+<li><p><code>goto</code>语句使程序无条件跳转到标签为<code>label</code>的语句处执行，但两者必须位于同一个函数内，同时<code>goto</code>语句也不能将程序的控制权从变量的作用域之外转移到作用域之内。</p>
+<p>建议不要在程序中使用<code>goto</code>语句，它使得程序既难理解又难修改。</p>
+</li>
+</ul>
+<h2 id="try语句块和异常处理"><a href="#try语句块和异常处理" class="headerlink" title="try语句块和异常处理"></a>try语句块和异常处理</h2><ul>
+<li><strong>throw表达式</strong>：异常检测部分使用 <code>throw</code>表达式来表示它遇到了无法处理的问题。我们说 <code>throw</code>引发 <code>raise</code>了异常。</li>
+<li><strong>try语句块</strong>：以 <code>try</code>关键词开始，以一个或多个 <code>catch</code>字句结束。 <code>try</code>语句块中的代码抛出的异常通常会被某个 <code>catch</code>捕获并处理。 <code>catch</code>子句也被称为<strong>异常处理代码</strong>。</li>
+<li><strong>异常类</strong>：用于在 <code>throw</code>表达式和相关的 <code>catch</code>子句之间传递异常的具体信息。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/02/06/C++%20Primer%20Chapter%204%20Notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1266,7 +1415,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
