@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="JavaScript 3D library for NexT  Installation  If you want to use the CDN instead of clone this repo, please jump to the Step 3.  Step 1 &amp;rarr; Go to NexT dir  Change dir to NexT directory. There must">
-<meta property="og:type" content="website">
-<meta property="og:title" content="HUI BLOG">
-<meta property="og:url" content="http://example.com/lib/three/README.html">
+  <meta name="description" content="容器1. 容器之间的实现关系与分类  各种容器之间的关系概览 - **Notes**  - 容器之间的缩进表明容器之间的**&quot;基于&quot;**关系   - 例如 heap 是基于vector上实现的，set是基于红黑树实现的   - 类与类之间的复用方法：1）类中声明另一个类的对象 2）继承   - sizeof 表示数据结构本身所占的大小，与容器所含元素大小无关    2. 深入探">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ STL 4">
+<meta property="og:url" content="http://example.com/2023/07/22/C++STL_4_container_list/index.html">
 <meta property="og:site_name" content="HUI BLOG">
-<meta property="og:description" content="JavaScript 3D library for NexT  Installation  If you want to use the CDN instead of clone this repo, please jump to the Step 3.  Step 1 &amp;rarr; Go to NexT dir  Change dir to NexT directory. There must">
+<meta property="og:description" content="容器1. 容器之间的实现关系与分类  各种容器之间的关系概览 - **Notes**  - 容器之间的缩进表明容器之间的**&quot;基于&quot;**关系   - 例如 heap 是基于vector上实现的，set是基于红黑树实现的   - 类与类之间的复用方法：1）类中声明另一个类的对象 2）继承   - sizeof 表示数据结构本身所占的大小，与容器所含元素大小无关    2. 深入探">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-14T13:15:47.909Z">
-<meta property="article:modified_time" content="2023-02-14T13:15:47.909Z">
+<meta property="article:published_time" content="2023-07-22T11:14:54.000Z">
+<meta property="article:modified_time" content="2023-07-23T02:53:02.686Z">
 <meta property="article:author" content="HUI">
+<meta property="article:tag" content="c++">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/lib/three/README">
+<link rel="canonical" href="http://example.com/2023/07/22/C++STL_4_container_list/">
 
 
 <script id="page-configurations">
@@ -40,13 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title> | HUI BLOG
-</title>
+  <title>C++ STL 4 | HUI BLOG</title>
   
 
 
@@ -158,84 +158,143 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
-      <header class="post-header">
-
-<h1 class="post-title" itemprop="name headline">
-</h1>
-
-<div class="post-meta">
   
-  <ul class="breadcrumb">
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/22/C++STL_4_container_list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++ STL 4
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-22 19:14:54" itemprop="dateCreated datePublished" datetime="2023-07-22T19:14:54+08:00">2023-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-23 10:53:02" itemprop="dateModified" datetime="2023-07-23T10:53:02+08:00">2023-07-23</time>
+              </span>
+
           
-            <li><a href="/lib/">LIB</a></li>
-            <li><a href="/lib/three/">THREE</a></li>
-            <li>README</li>
-          
-  </ul>
 
-</div>
+        </div>
+      </header>
 
-</header>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-      
-      
-      <div class="post-body">
-          <h1 align="center"><a target="_blank" rel="noopener" href="https://github.com/mrdoob/three.js">JavaScript 3D library</a> for <a target="_blank" rel="noopener" href="https://github.com/theme-next">NexT</a></h1>
+        <h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p><strong>1. 容器之间的实现关系与分类</strong></p>
+<ul>
+<li><p>各种容器之间的关系概览</p>
+<pre><code>- **Notes**
 
-<h1 align="center">Installation</h1>
+- 容器之间的缩进表明容器之间的**&quot;基于&quot;**关系
+  - 例如 heap 是基于vector上实现的，set是基于红黑树实现的
+  - 类与类之间的复用方法：1）类中声明另一个类的对象 2）继承
+  - sizeof 表示数据结构本身所占的大小，与容器所含元素大小无关
+</code></pre>
+</li>
+</ul>
+<p><strong>2. 深入探索 list</strong></p>
+<ul>
+<li><p>List 源码概览</p>
+<pre><code>- **Notes**
 
-<h2>If you want to use the CDN instead of clone this repo, please jump to the Step 3.</h2>
+- **__list_node** 的前向指针，后向指针都是 **void\*** 类型，具体使用需要类型转换，这样设置并不优雅
+  - list 申请内存时，除了申请数据内存，还需要多申请两个指针的内存 
+</code></pre>
+</li>
+<li><p>List的 <strong>iterator</strong> 的设计</p>
+<ul>
+<li><p><strong>iterator</strong> 概览</p>
+<ul>
+<li><p><strong>Notes</strong></p>
+<pre><code>- container 结构特征：**typedef** + **指针操作符(\*, -&gt;, ++)**重载
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>iterator</strong> ++ 重载<br>  - <strong>Notes</strong><br><br>- operator++(int) 表明重载后置++；operator++() 表明重载前置++<br>- <strong>*node</strong> 表明获取node指针对应的节点<br><br>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (*node).next 是 void* 指针， 这一步实现了node指向当前节点的next节点</span></span><br><span class="line">node = (link_type)((*node).next)</span><br></pre></td></tr></table></figure><br>  - <strong>*this</strong> 不会重载 <strong>iterator</strong>，返回实例对象本身 </p>
+<ul>
+<li><p>前置自增返回本身类型，后置自增返回本身类型的引用，只是为了与 <strong>++++i</strong>（支持）与**i++++**（不支持）对齐</p>
+<ul>
+<li>*运算符表示获取list 节点的data</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>G4.9链表的设计更新</p>
+<ul>
+<li><p><strong>Notes</strong></p>
+<ul>
+<li>iterator 模板参数只有一个</li>
+<li>将node 划分为 指针 + 数据 （解耦合）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>forward list</p>
+</li>
+</ul>
 
-<h2 align="center">Step 1 &rarr; Go to NexT dir</h2>
-
-<p>Change dir to <strong>NexT</strong> directory. There must be <code>layout</code>, <code>source</code>, <code>languages</code> and other directories:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> themes/next</span><br><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">_config.yml  crowdin.yml  docs  gulpfile.js  languages  layout  LICENSE.md  package.json  README.md  scripts  <span class="built_in">source</span></span><br></pre></td></tr></table></figure>
-
-<h2 align="center">Step 2 &rarr; Get module</h2>
-
-<p>Install module to <code>source/lib</code> directory:</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-three <span class="built_in">source</span>/lib/three</span><br></pre></td></tr></table></figure>
-
-<h2 align="center">Step 3 &rarr; Set it up</h2>
-
-<p>Enable module in <strong>NexT</strong> <code>_config.yml</code> file:</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">three_waves:</span> <span class="literal">true</span></span><br><span class="line"><span class="string">OR</span></span><br><span class="line"><span class="attr">canvas_lines:</span> <span class="literal">true</span></span><br><span class="line"><span class="string">OR</span></span><br><span class="line"><span class="attr">canvas_sphere:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>And, if you wants to use the CDN, then need to set:</strong></p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">vendors:</span></span><br><span class="line">  <span class="string">...</span></span><br><span class="line">  <span class="attr">three:</span> <span class="string">//cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js</span></span><br><span class="line">  <span class="attr">three_waves:</span> <span class="string">//cdn.jsdelivr.net/gh/theme-next/theme-next-three@latest/three-waves.min.js</span></span><br><span class="line">  <span class="attr">canvas_lines:</span> <span class="string">//cdn.jsdelivr.net/gh/theme-next/theme-next-three@latest/canvas_lines.min.js</span></span><br><span class="line">  <span class="attr">canvas_sphere:</span> <span class="string">//cdn.jsdelivr.net/gh/theme-next/theme-next-three@latest/canvas_sphere.min.js</span></span><br></pre></td></tr></table></figure>
-
-<h1 align="center">Update</h1>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> themes/next/source/lib/three</span><br><span class="line">$ git pull</span><br></pre></td></tr></table></figure>
-
-      </div>
-      
-      
-      
     </div>
-    
-  <ul class="breadcrumb">
-          
-            <li><a href="/lib/">LIB</a></li>
-            <li><a href="/lib/three/">THREE</a></li>
-            <li>README</li>
-          
-  </ul>
 
     
     
     
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/c/" rel="tag"># c++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/07/22/C++STL_3_allocator/" rel="prev" title="C++ STL 3">
+      <i class="fa fa-chevron-left"></i> C++ STL 3
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
 
 
           </div>
@@ -286,7 +345,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">JavaScript 3D library for NexT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">If you want to use the CDN instead of clone this repo, please jump to the Step 3.</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Step 1 → Go to NexT dir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">Step 2 → Get module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">Step 3 → Set it up</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Update</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%B9%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">容器</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
