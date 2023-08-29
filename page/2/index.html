@@ -162,6 +162,224 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/22/C++STL_4_container_list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/22/C++STL_4_container_list/" class="post-title-link" itemprop="url">C++ STL 4</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-22 19:14:54" itemprop="dateCreated datePublished" datetime="2023-07-22T19:14:54+08:00">2023-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-23 10:53:02" itemprop="dateModified" datetime="2023-07-23T10:53:02+08:00">2023-07-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h1><p><strong>1. 容器之间的实现关系与分类</strong></p>
+<ul>
+<li><p>各种容器之间的关系概览</p>
+<pre><code>- **Notes**
+
+- 容器之间的缩进表明容器之间的**&quot;基于&quot;**关系
+  - 例如 heap 是基于vector上实现的，set是基于红黑树实现的
+  - 类与类之间的复用方法：1）类中声明另一个类的对象 2）继承
+  - sizeof 表示数据结构本身所占的大小，与容器所含元素大小无关
+</code></pre>
+</li>
+</ul>
+<p><strong>2. 深入探索 list</strong></p>
+<ul>
+<li><p>List 源码概览</p>
+<pre><code>- **Notes**
+
+- **__list_node** 的前向指针，后向指针都是 **void\*** 类型，具体使用需要类型转换，这样设置并不优雅
+  - list 申请内存时，除了申请数据内存，还需要多申请两个指针的内存 
+</code></pre>
+</li>
+<li><p>List的 <strong>iterator</strong> 的设计</p>
+<ul>
+<li><p><strong>iterator</strong> 概览</p>
+<ul>
+<li><p><strong>Notes</strong></p>
+<pre><code>- container 结构特征：**typedef** + **指针操作符(\*, -&gt;, ++)**重载
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p><strong>iterator</strong> ++ 重载<br>  - <strong>Notes</strong><br><br>- operator++(int) 表明重载后置++；operator++() 表明重载前置++<br>- <strong>*node</strong> 表明获取node指针对应的节点<br><br>  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (*node).next 是 void* 指针， 这一步实现了node指向当前节点的next节点</span></span><br><span class="line">node = (link_type)((*node).next)</span><br></pre></td></tr></table></figure><br>  - <strong>*this</strong> 不会重载 <strong>iterator</strong>，返回实例对象本身 </p>
+<ul>
+<li><p>前置自增返回本身类型，后置自增返回本身类型的引用，只是为了与 <strong>++++i</strong>（支持）与**i++++**（不支持）对齐</p>
+<ul>
+<li>*运算符表示获取list 节点的data</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>G4.9链表的设计更新</p>
+<ul>
+<li><p><strong>Notes</strong></p>
+<ul>
+<li>iterator 模板参数只有一个</li>
+<li>将node 划分为 指针 + 数据 （解耦合）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>forward list</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/22/C++STL_3_allocator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/22/C++STL_3_allocator/" class="post-title-link" itemprop="url">C++ STL 3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-22 18:11:45" itemprop="dateCreated datePublished" datetime="2023-07-22T18:11:45+08:00">2023-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-23 10:36:39" itemprop="dateModified" datetime="2023-07-23T10:36:39+08:00">2023-07-23</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="分配器"><a href="#分配器" class="headerlink" title="分配器"></a>分配器</h1><p><strong>1. 先谈 Opterator new() 和 malloc()</strong></p>
+<ul>
+<li>无论是C，C++（Operator new）都最终走向<strong>malloc</strong>分配内存，<strong>malloc</strong>通过调用系统底层的内存分配接口分配内存</li>
+<li><strong>malloc</strong>分配内存如图中块所示，尺寸会大于本身所需内存的size（小数据块很容易造成内存浪费）</li>
+</ul>
+<p><strong>2. STL中allocator的使用范例</strong><br>大部分<strong>allocator</strong>的实现源码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- Notes</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><strong>allocator</strong> 仅仅是C malloc和free函数的封装</p>
+</li>
+<li><p><strong>allocator&lt; int &gt;()</strong> 表示声明了一个allocator对象</p>
+</li>
+<li><p><strong>deallocator</strong>释放，必须指定allocator对应的大小</p>
+</li>
+<li><p>不建议直接使用allocator</p>
+</li>
+<li><p><strong>GNUC2.9</strong> 的alloc 的分配设计 </p>
+<ul>
+<li><p>这种设计主要是为了避免malloc导致的额外开销</p>
+</li>
+<li><p>具体设计</p>
+<ul>
+<li>设计了16条链表，每个链表分配固定大小的空间</li>
+<li>这样同一条链表里面的内存共享同一个cookie</li>
+</ul>
+</li>
+<li><p>GNUC4.9继续改用了大部分allocator（malloc）的方式，改用pool_alloc</p>
+<ul>
+<li>注意命名空间 <strong>__gnu_cxx</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/19/C++STL_2_basic/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2354,409 +2572,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/19/C++%20Primer%20Chapter%2013%20Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HUI">
-      <meta itemprop="description" content="We have a long way to go">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HUI BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/19/C++%20Primer%20Chapter%2013%20Notes/" class="post-title-link" itemprop="url">C++ Primer Chapter 13 Notes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-19 17:21:56" itemprop="dateCreated datePublished" datetime="2023-05-19T17:21:56+08:00">2023-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-27 14:45:52" itemprop="dateModified" datetime="2023-05-27T14:45:52+08:00">2023-05-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第13章-拷贝控制"><a href="#第13章-拷贝控制" class="headerlink" title="第13章 拷贝控制"></a>第13章 拷贝控制</h1><p>一个类通过定义五种特殊的成员函数来控制对象的拷贝、移动、赋值和销毁操作。</p>
-<p>拷贝构造函数、拷贝赋值运算符、移动构造函数、移动赋值运算符、析构函数</p>
-<p>这些操作统称为拷贝控制操作</p>
-<p>在定义任何类时，拷贝控制操作都是必要部分。</p>
-<h2 id="拷贝、赋值、销毁"><a href="#拷贝、赋值、销毁" class="headerlink" title="拷贝、赋值、销毁"></a>拷贝、赋值、销毁</h2><h3 id="拷贝构造函数"><a href="#拷贝构造函数" class="headerlink" title="拷贝构造函数"></a>拷贝构造函数</h3><p>如果一个构造函数的第一个参数是自身类类型的引用（几乎总是<code>const</code>引用），且任何额外参数都有默认值，则此构造函数是拷贝构造函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>();   </span><br><span class="line">    <span class="built_in">Foo</span>(<span class="type">const</span> Foo&amp;);   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>由于拷贝构造函数在一些情况下会被隐式使用，因此通常不会声明为<code>explicit</code>的。</p>
-<p>如果类未定义自己的拷贝构造函数，编译器会为类合成一个。一般情况下，合成拷贝构造函数（synthesized copy constructor）会将其参数的非<code>static</code>成员逐个拷贝到正在创建的对象中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sales_data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Sales_data</span>(<span class="type">const</span> Sales_data&amp;);</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string bookNo;</span><br><span class="line">    <span class="type">int</span> units_sold = <span class="number">0</span>;</span><br><span class="line">    <span class="type">double</span> revenue = <span class="number">0.0</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Sales_data::<span class="built_in">Sales_data</span>(<span class="type">const</span> Sales_data &amp;orig):</span><br><span class="line">    <span class="built_in">bookNo</span>(orig.bookNo),</span><br><span class="line">    <span class="built_in">units_sold</span>(orig.units_sold),    </span><br><span class="line">    <span class="built_in">revenue</span>(orig.revenue)  </span><br><span class="line">    &#123; &#125; </span><br></pre></td></tr></table></figure>
-
-<p>使用直接初始化时，实际上是要求编译器按照函数匹配规则来选择与实参最匹配的构造函数。使用拷贝初始化时，是要求编译器将右侧运算对象拷贝到正在创建的对象中，如果需要的话还要进行类型转换。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">string <span class="title">dots</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;.&#x27;</span>)</span></span>;  </span><br><span class="line"><span class="function">string <span class="title">s</span><span class="params">(dots)</span></span>;         </span><br><span class="line">string s2 = dots;     </span><br></pre></td></tr></table></figure>
-
-<p>拷贝初始化通常使用拷贝构造函数来完成。但如果一个类拥有移动构造函数，则拷贝初始化有时会使用移动构造函数而非拷贝构造函数来完成。</p>
-<p>发生拷贝初始化的情况：</p>
-<ul>
-<li><p>用<code>=</code>定义变量。</p>
-</li>
-<li><p>将对象作为实参传递给非引用类型的形参。</p>
-</li>
-<li><p>从返回类型为非引用类型的函数返回对象。</p>
-</li>
-<li><p>用花括号列表初始化数组中的元素或聚合类中的成员。</p>
-</li>
-</ul>
-<p>当传递一个实参或者从函数返回一个值时，不能隐式使用<code>explicit</code>构造函数。</p>
-<h3 id="拷贝赋值运算符"><a href="#拷贝赋值运算符" class="headerlink" title="拷贝赋值运算符"></a>拷贝赋值运算符</h3><p>重载运算符（overloaded operator）的参数表示运算符的运算对象。</p>
-<p>如果一个运算符是成员函数，则其左侧运算对象会绑定到隐式的<code>this</code>参数上。</p>
-<p>赋值运算符通常应该返回一个指向其左侧运算对象的引用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Foo&amp; <span class="keyword">operator</span>=(<span class="type">const</span> Foo&amp;); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>标准库通常要求保存在容器中的类型要具有赋值运算符，且其返回值是左侧运算对象的引用。</p>
-<p>如果类未定义自己的拷贝赋值运算符，编译器会为类合成一个。一般情况下，合成拷贝赋值运算符（synthesized copy-assignment operator）会将其右侧运算对象的非<code>static</code>成员逐个赋值给左侧运算对象的对应成员，之后返回左侧运算对象的引用。</p>
-<h3 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h3><p>析构函数负责释放对象使用的资源，并销毁对象的非<code>static</code>数据成员。</p>
-<p>析构函数的名字由波浪号<code>~</code>接类名构成，它没有返回值，也不接受参数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    ~<span class="built_in">Foo</span>(); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>由于析构函数不接受参数，所以它不能被重载。</p>
-<p>如果类未定义自己的析构函数，编译器会为类合成一个。合成析构函数（synthesized destructor）的函数体为空。</p>
-<p>析构函数首先执行函数体，然后再销毁数据成员。在整个对象销毁过程中，析构函数体是作为成员销毁步骤之外的另一部分而进行的。成员按照初始化顺序的逆序销毁。</p>
-<p>隐式销毁一个内置指针类型的成员不会<code>delete</code>它所指向的对象。</p>
-<p>无论何时一个对象被销毁，都会自动调用其析构函数。</p>
-<p>当指向一个对象的引用或指针离开作用域时，该对象的析构函数不会执行。</p>
-<h3 id="三-x2F-五法则"><a href="#三-x2F-五法则" class="headerlink" title="三&#x2F;五法则"></a>三&#x2F;五法则</h3><p>需要析构函数的类一般也需要拷贝和赋值操作。</p>
-<p>需要拷贝操作的类一般也需要赋值操作，反之亦然。</p>
-<h3 id="使用-default"><a href="#使用-default" class="headerlink" title="使用=default"></a>使用<code>=default</code></h3><p>可以通过将拷贝控制成员定义为<code>=default</code>来显式地要求编译器生成合成版本。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sales_data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">Sales_data</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">Sales_data</span>(<span class="type">const</span> Sales_data&amp;) = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">Sales_data</span>() = <span class="keyword">default</span>;</span><br><span class="line">  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在类内使用<code>=default</code>修饰成员声明时，合成的函数是隐式内联的。如果不希望合成的是内联函数，应该只对成员的类外定义使用<code>=default</code>。</p>
-<p>只能对具有合成版本的成员函数使用<code>=default</code>。</p>
-<h3 id="阻止拷贝"><a href="#阻止拷贝" class="headerlink" title="阻止拷贝"></a>阻止拷贝</h3><p>大多数类应该定义默认构造函数、拷贝构造函数和拷贝赋值运算符，无论是显式地还是隐式地。</p>
-<p>在C++11新标准中，将拷贝构造函数和拷贝赋值运算符定义为删除的函数（deleted function）可以阻止类对象的拷贝。删除的函数是一种虽然进行了声明，但是却不能以任何方式使用的函数。定义删除函数的方式是在函数的形参列表后面添加<code>=delete</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">NoCopy</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NoCopy</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">NoCopy</span>(<span class="type">const</span> NoCopy&amp;) = <span class="keyword">delete</span>; </span><br><span class="line">    NoCopy &amp;<span class="keyword">operator</span>=(<span class="type">const</span> NoCopy&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    ~<span class="built_in">NoCopy</span>() = <span class="keyword">default</span>; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><code>=delete</code>和<code>=default</code>有两点不同：</p>
-<ul>
-<li><p><code>=delete</code>可以对任何函数使用；<code>=default</code>只能对具有合成版本的函数使用。</p>
-</li>
-<li><p><code>=delete</code>必须出现在函数第一次声明的地方；<code>=default</code>既能出现在类内，也能出现在类外。</p>
-</li>
-</ul>
-<p>析构函数不能是删除的函数。对于析构函数被删除的类型，不能定义该类型的变量或者释放指向该类型动态分配对象的指针。</p>
-<p>如果一个类中有数据成员不能默认构造、拷贝或销毁，则对应的合成拷贝控制成员将被定义为删除的。</p>
-<p>在旧版本的C++标准中，类通过将拷贝构造函数和拷贝赋值运算符声明为<code>private</code>成员来阻止类对象的拷贝。在新标准中建议使用<code>=delete</code>而非<code>private</code>。</p>
-<h2 id="拷贝控制"><a href="#拷贝控制" class="headerlink" title="拷贝控制"></a>拷贝控制</h2><p>通常，管理类外资源的类必须定义拷贝控制成员。</p>
-<h3 id="行为像值的类"><a href="#行为像值的类" class="headerlink" title="行为像值的类"></a>行为像值的类</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HasPtr</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">HasPtr</span>(<span class="type">const</span> std::string &amp;s = std::<span class="built_in">string</span>()):</span><br><span class="line">        <span class="built_in">ps</span>(<span class="keyword">new</span> std::<span class="built_in">string</span>(s)), <span class="built_in">i</span>(<span class="number">0</span>) &#123; &#125;</span><br><span class="line">    <span class="built_in">HasPtr</span>(<span class="type">const</span> HasPtr &amp;p):</span><br><span class="line">        <span class="built_in">ps</span>(<span class="keyword">new</span> std::<span class="built_in">string</span>(*p.ps)), <span class="built_in">i</span>(p.i) &#123; &#125;</span><br><span class="line">    HasPtr&amp; <span class="keyword">operator</span>=(<span class="type">const</span> HasPtr &amp;);</span><br><span class="line">    ~<span class="built_in">HasPtr</span>() &#123; <span class="keyword">delete</span> ps; &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string *ps;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>编写赋值运算符时有两点需要注意：</p>
-<ul>
-<li><p>即使将一个对象赋予它自身，赋值运算符也能正确工作。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// WRONG way</span></span><br><span class="line">HasPtr&amp; HasPtr::<span class="keyword">operator</span>=(<span class="type">const</span> HasPtr &amp;rhs)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">delete</span> ps;  </span><br><span class="line">    ps = <span class="keyword">new</span> <span class="built_in">string</span>(*(rhs.ps));</span><br><span class="line">    i = rhs.i;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>赋值运算符通常结合了拷贝构造函数和析构函数的工作。</p>
-<p>编写赋值运算符时，一个好的方法是先将右侧运算对象拷贝到一个局部临时对象中。拷贝完成后，就可以安全地销毁左侧运算对象的现有成员了。</p>
-</li>
-</ul>
-<h3 id="定义行为像指针的类"><a href="#定义行为像指针的类" class="headerlink" title="定义行为像指针的类"></a>定义行为像指针的类</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HasPtr</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">HasPtr</span>(<span class="type">const</span> std::string &amp;s = std::<span class="built_in">string</span>()):</span><br><span class="line">        <span class="built_in">ps</span>(<span class="keyword">new</span> std::<span class="built_in">string</span>(s)), <span class="built_in">i</span>(<span class="number">0</span>), <span class="built_in">use</span>(<span class="keyword">new</span> std::<span class="built_in">size_t</span>(<span class="number">1</span>)) &#123;&#125;</span><br><span class="line">    <span class="built_in">HasPtr</span>(<span class="type">const</span> HasPtr &amp;p):</span><br><span class="line">        <span class="built_in">ps</span>(p.ps), <span class="built_in">i</span>(p.i), <span class="built_in">use</span>(p.use) &#123; ++*use; &#125;</span><br><span class="line">    HasPtr&amp; <span class="keyword">operator</span>=(<span class="type">const</span> HasPtr&amp;);</span><br><span class="line">    ~<span class="built_in">HasPtr</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string *ps;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    std::<span class="type">size_t</span> *use; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>析构函数释放内存前应该判断是否还有其他对象指向这块内存。</p>
-<h2 id="交换操作"><a href="#交换操作" class="headerlink" title="交换操作"></a>交换操作</h2><p>通常，管理类外资源的类会定义<code>swap</code>函数。如果一个类定义了自己的<code>swap</code>函数，算法将使用自定义版本，否则将使用标准库定义的<code>swap</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">HasPtr</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">void</span> <span class="title">swap</span><span class="params">(HasPtr&amp;, HasPtr&amp;)</span></span>;</span><br><span class="line"> </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">swap</span><span class="params">(HasPtr &amp;lhs, HasPtr &amp;rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> std::swap;</span><br><span class="line">    <span class="built_in">swap</span>(lhs.ps, rhs.ps);  </span><br><span class="line">    <span class="built_in">swap</span>(lhs.i, rhs.i);   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一些算法在交换两个元素时会调用<code>swap</code>函数，其中每个<code>swap</code>调用都应该是未加限定的。如果存在类型特定的<code>swap</code>版本，其匹配程度会优于<code>std</code>中定义的版本（假定作用域中有<code>using</code>声明）。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(Foo &amp;lhs, Foo &amp;rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;   </span><br><span class="line">    std::<span class="built_in">swap</span>(lhs.h, rhs.h);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(Foo &amp;lhs, Foo &amp;rhs)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> std::swap;</span><br><span class="line">    <span class="built_in">swap</span>(lhs.h, rhs.h); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>与拷贝控制成员不同，<code>swap</code>函数并不是必要的。但是对于分配了资源的类，定义<code>swap</code>可能是一种重要的优化手段。</p>
-<p>由于<code>swap</code>函数的存在就是为了优化代码，所以一般将其声明为内联函数。</p>
-<p>定义了<code>swap</code>的类通常用<code>swap</code>来实现赋值运算符。在这种版本的赋值运算符中，右侧运算对象以值方式传递，然后将左侧运算对象与右侧运算对象的副本进行交换（拷贝并交换，copy and swap）。这种方式可以正确处理自赋值情况。</p>
-<h2 id="拷贝控制示例"><a href="#拷贝控制示例" class="headerlink" title="拷贝控制示例"></a>拷贝控制示例</h2><p>拷贝赋值运算符通常结合了拷贝构造函数和析构函数的工作。在这种情况下，公共部分应该放在<code>private</code>的工具函数中完成。</p>
-<h2 id="动态内存管理类"><a href="#动态内存管理类" class="headerlink" title="动态内存管理类"></a>动态内存管理类</h2><p>移动构造函数通常是将资源从给定对象“移动”而不是拷贝到正在创建的对象中。</p>
-<h2 id="对象移动"><a href="#对象移动" class="headerlink" title="对象移动"></a>对象移动</h2><p>某些情况下，一个对象拷贝后就立即被销毁了，此时移动而非拷贝对象会大幅度提高性能。</p>
-<p>在旧版本的标准库中，容器所能保存的类型必须是可拷贝的。但在新标准中，可以用容器保存不可拷贝，但可移动的类型。</p>
-<p>标准库容器、<code>string</code>和<code>shared_ptr</code>类既支持移动也支持拷贝。IO类和<code>unique_ptr</code>类可以移动但不能拷贝。</p>
-<h3 id="右值引用"><a href="#右值引用" class="headerlink" title="右值引用"></a>右值引用</h3><p>为了支持移动操作，C++11引入了右值引用类型。右值引用就是必须绑定到右值的引用。可以通过<code>&amp;&amp;</code>来获得右值引用。</p>
-<p>右值引用只能绑定到即将被销毁，并且没有其他用户的临时对象上。使用右值引用的代码可以自由地接管所引用对象的资源。</p>
-<p>变量表达式都是左值，所以不能将一个右值引用直接绑定到一个变量上，即使这个变量的类型是右值引用也不行。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> &amp;&amp;rr1 = <span class="number">42</span>;     </span><br><span class="line"><span class="type">int</span> &amp;&amp;rr2 = rr1;    </span><br></pre></td></tr></table></figure>
-
-<p>调用<code>move</code>函数可以获得绑定在左值上的右值引用，此函数定义在头文件<code>utility</code>中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> &amp;&amp;rr3 = std::<span class="built_in">move</span>(rr1);</span><br></pre></td></tr></table></figure>
-
-<p>调用<code>move</code>函数的代码应该使用<code>std::move</code>而非<code>move</code>，这样做可以避免潜在的名字冲突。</p>
-<h3 id="移动构造函数和移动赋值运算符（Move-Constructor-and-Move-Assignment）"><a href="#移动构造函数和移动赋值运算符（Move-Constructor-and-Move-Assignment）" class="headerlink" title="移动构造函数和移动赋值运算符（Move Constructor and Move Assignment）"></a>移动构造函数和移动赋值运算符（Move Constructor and Move Assignment）</h3><p>移动构造函数的第一个参数是该类类型的右值引用，其他任何额外参数都必须有默认值。</p>
-<p>除了完成资源移动，移动构造函数还必须确保移后源对象是可以安全销毁的。</p>
-<p>在函数的形参列表后面添加关键字<code>noexcept</code>可以指明该函数不会抛出任何异常。</p>
-<p>对于构造函数，<code>noexcept</code>位于形参列表和初始化列表开头的冒号之间。在类的头文件声明和定义中（如果定义在类外）都应该指定<code>noexcept</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">StrVec</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">StrVec</span>(StrVec&amp;&amp;) <span class="keyword">noexcept</span>;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>标准库容器能对异常发生时其自身的行为提供保障。虽然移动操作通常不抛出异常，但抛出异常也是允许的。为了安全起见，除非容器确定元素类型的移动操作不会抛出异常，否则在重新分配内存的过程中，它就必须使用拷贝而非移动操作。</p>
-<p>不抛出异常的移动构造函数和移动赋值运算符必须标记为<code>noexcept</code>。</p>
-<p>在移动操作之后，移后源对象必须保持有效的、可销毁的状态，但是用户不能使用它的值。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">StrVec &amp;StrVec::<span class="keyword">operator</span>=(StrVec &amp;&amp;rhs) <span class="keyword">noexcept</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> != &amp;rhs)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">free</span>();     </span><br><span class="line">        elements = rhs.elements;    </span><br><span class="line">        first_free = rhs.first_free;</span><br><span class="line">        cap = rhs.cap;</span><br><span class="line">        rhs.elements = rhs.first_free = rhs.cap = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>只有当一个类没有定义任何拷贝控制成员，且类的每个非<code>static</code>数据成员都可以移动时，编译器才会为类合成移动构造函数和移动赋值运算符。编译器可以移动内置类型的成员。如果一个成员是类类型，且该类有对应的移动操作，则编译器也能移动该成员。</p>
-<p>与拷贝操作不同，移动操作永远不会被隐式定义为删除的函数。但如果显式地要求编译器生成<code>=default</code>的移动操作，且编译器不能移动全部成员，则移动操作会被定义为删除的函数。</p>
-<p>定义了移动构造函数或移动赋值运算符的类必须也定义自己的拷贝操作，否则这些成员会被默认地定义为删除的函数。</p>
-<p>如果一个类有可用的拷贝构造函数而没有移动构造函数，则其对象是通过拷贝构造函数来“移动”的，即使调用<code>move</code>函数时也是如此。拷贝赋值运算符和移动赋值运算符的情况类似。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Foo</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">Foo</span>(<span class="type">const</span> Foo&amp;);    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo x;</span><br><span class="line"><span class="function">Foo <span class="title">y</span><span class="params">(x)</span></span>;   </span><br><span class="line"><span class="function">Foo <span class="title">z</span><span class="params">(std::move(x))</span></span>;   </span><br></pre></td></tr></table></figure>
-
-<p>使用非引用参数的单一赋值运算符可以实现拷贝赋值和移动赋值两种功能。依赖于实参的类型，左值被拷贝，右值被移动。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">HasPtr&amp; <span class="keyword">operator</span>=(HasPtr rhs)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">swap</span>(*<span class="keyword">this</span>, rhs);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">hp = hp2;  </span><br><span class="line">hp = std::<span class="built_in">move</span>(hp2);   </span><br></pre></td></tr></table></figure>
-
-<p>建议将五个拷贝控制成员当成一个整体来对待。如果一个类需要任何一个拷贝操作，它就应该定义所有五个操作。</p>
-<p>移动赋值运算符可以直接检查自赋值情况。</p>
-<p>C++11标准库定义了移动迭代器（move iterator）适配器。一个移动迭代器通过改变给定迭代器的解引用运算符的行为来适配此迭代器。移动迭代器的解引用运算符返回一个右值引用。</p>
-<p>调用<code>make_move_iterator</code>函数能将一个普通迭代器转换成移动迭代器。原迭代器的所有其他操作在移动迭代器中都照常工作。</p>
-<p>最好不要在移动构造函数和移动赋值运算符这些类实现代码之外的地方随意使用<code>move</code>操作。</p>
-<h3 id="右值引用和成员函数"><a href="#右值引用和成员函数" class="headerlink" title="右值引用和成员函数"></a>右值引用和成员函数</h3><p>区分移动和拷贝的重载函数通常有一个版本接受一个<code>const T&amp;</code>参数，另一个版本接受一个<code>T&amp;&amp;</code>参数（<code>T</code>为类型）。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">const</span> X&amp;)</span></span>;   </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(X&amp;&amp;)</span></span>;      </span><br></pre></td></tr></table></figure>
-
-<p>有时可以对右值赋值：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string s1, s2;</span><br><span class="line">s1 + s2 = <span class="string">&quot;wow!&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<p>在旧标准中，没有办法阻止这种使用方式。为了维持向下兼容性，新标准库仍然允许向右值赋值。但是可以在自己的类中阻止这种行为，规定左侧运算对象（即<code>this</code>指向的对象）必须是一个左值。</p>
-<p>在非<code>static</code>成员函数的形参列表后面添加引用限定符（reference qualifier）可以指定<code>this</code>的左值&#x2F;右值属性。引用限定符可以是<code>&amp;</code>或者<code>&amp;&amp;</code>，分别表示<code>this</code>可以指向一个左值或右值对象。引用限定符必须同时出现在函数的声明和定义中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Foo &amp;<span class="keyword">operator</span>=(<span class="type">const</span> Foo&amp;) &amp;; </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo &amp;Foo::<span class="keyword">operator</span>=(<span class="type">const</span> Foo &amp;rhs) &amp;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>一个非<code>static</code>成员函数可以同时使用<code>const</code>和引用限定符，此时引用限定符跟在<code>const</code>限定符之后。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Foo <span class="title">someMem</span><span class="params">()</span> &amp; <span class="type">const</span></span>;     </span><br><span class="line">    <span class="function">Foo <span class="title">anotherMem</span><span class="params">()</span> <span class="type">const</span> &amp;</span>;   <span class="comment">// ok</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>引用限定符也可以区分成员函数的重载版本。</p>
-<p>如果一个成员函数有引用限定符，则具有相同参数列表的所有重载版本都必须有引用限定符。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Foo</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">Foo <span class="title">sorted</span><span class="params">()</span> &amp;&amp;</span>;</span><br><span class="line">    <span class="function">Foo <span class="title">sorted</span><span class="params">()</span> <span class="type">const</span></span>;    <span class="comment">// error</span></span><br><span class="line">    <span class="keyword">using</span> Comp = <span class="built_in">bool</span>(<span class="type">const</span> <span class="type">int</span>&amp;, <span class="type">const</span> <span class="type">int</span>&amp;);</span><br><span class="line">    <span class="function">Foo <span class="title">sorted</span><span class="params">(Comp*)</span></span>;  <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/04/C++%20Primer%20Chapter%2012%20Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HUI">
-      <meta itemprop="description" content="We have a long way to go">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HUI BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/04/C++%20Primer%20Chapter%2012%20Notes/" class="post-title-link" itemprop="url">C++ Primer Chapter 12 Notes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-04 20:12:11" itemprop="dateCreated datePublished" datetime="2023-04-04T20:12:11+08:00">2023-04-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-20 17:57:33" itemprop="dateModified" datetime="2023-05-20T17:57:33+08:00">2023-05-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第12章-动态内存"><a href="#第12章-动态内存" class="headerlink" title="第12章 动态内存"></a>第12章 动态内存</h1><p>程序用堆（heap）来存储动态分配的对象。动态对象的生存期由程序控制。</p>
-<h2 id="动态内存与智能指针"><a href="#动态内存与智能指针" class="headerlink" title="动态内存与智能指针"></a>动态内存与智能指针</h2><p>C++中的动态内存管理通过一对运算符完成：<code>new</code>在动态内存中为对象分配空间并返回指向该对象的指针，可以选择对对象进行初始化；<code>delete</code>接受一个动态对象的指针，销毁该对象并释放与之关联的内存。</p>
-<p>新标准库提供了两种智能指针（smart pointer）类型来管理动态对象。智能指针的行为类似常规指针，但它自动释放所指向的对象。这两种智能指针的区别在于管理底层指针的方式：<code>shared_ptr</code>允许多个指针指向同一个对象；<code>unique_ptr</code>独占所指向的对象。标准库还定义了一个名为<code>weak_ptr</code>的伴随类，它是一种弱引用，指向<code>shared_ptr</code>所管理的对象。这三种类型都定义在头文件<code>memory</code>中。</p>
-<h3 id="shared-ptr类"><a href="#shared-ptr类" class="headerlink" title="shared_ptr类"></a><code>shared_ptr</code>类</h3><p>智能指针是模板，创建时需要指明指针可以指向的类型。默认初始化的智能指针中保存着一个空指针。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shared_ptr&lt;string&gt; p1;      </span><br><span class="line">shared_ptr&lt;list&lt;<span class="type">int</span>&gt;&gt; p2;   </span><br></pre></td></tr></table></figure>
-
-<p><code>make_shared</code>函数（定义在头文件<code>memory</code>中）在动态内存中分配一个对象并初始化它，返回指向此对象的<code>shared_ptr</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shared_ptr&lt;<span class="type">int</span>&gt; p3 = <span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line">shared_ptr&lt;string&gt; p4 = <span class="built_in">make_shared</span>&lt;string&gt;(<span class="number">10</span>, <span class="string">&#x27;9&#x27;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>进行拷贝或赋值操作时，每个<code>shared_ptr</code>会记录有多少个其他<code>shared_ptr</code>与其指向相同的对象。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> p = <span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>); </span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">q</span><span class="params">(p)</span></span>;  </span><br></pre></td></tr></table></figure>
-
-<p>每个<code>shared_ptr</code>都有一个与之关联的计数器，通常称为引用计数（reference count）。拷贝<code>shared_ptr</code>时引用计数会递增。例如使用一个<code>shared_ptr</code>初始化另一个<code>shared_ptr</code>，或将它作为参数传递给函数以及作为函数的返回值返回。给<code>shared_ptr</code>赋予新值或<code>shared_ptr</code>被销毁时引用计数会递减。例如一个局部<code>shared_ptr</code>离开其作用域。一旦一个<code>shared_ptr</code>的引用计数变为0，它就会自动释放其所管理的对象。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> r = <span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);  </span><br><span class="line">r = q;  </span><br></pre></td></tr></table></figure>
-
-<p><code>shared_ptr</code>的析构函数会递减它所指向对象的引用计数。如果引用计数变为0，<code>shared_ptr</code>的析构函数会销毁对象并释放空间。</p>
-<p>如果将<code>shared_ptr</code>存放于容器中，而后不再需要全部元素，而只使用其中一部分，应该用<code>erase</code>删除不再需要的元素。</p>
-<p>程序使用动态内存通常出于以下三种原因之一：</p>
-<ul>
-<li><p>不确定需要使用多少对象。</p>
-</li>
-<li><p>不确定所需对象的准确类型。</p>
-</li>
-<li><p>需要在多个对象间共享数据。</p>
-</li>
-</ul>
-<h3 id="直接管理内存"><a href="#直接管理内存" class="headerlink" title="直接管理内存"></a>直接管理内存</h3><p>相对于智能指针，使用<code>new</code>和<code>delete</code>管理内存很容易出错。</p>
-<p>默认情况下，动态分配的对象是默认初始化的。所以内置类型或组合类型的对象的值将是未定义的，而类类型对象将用默认构造函数进行初始化。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string *ps = <span class="keyword">new</span> string;    </span><br><span class="line"><span class="type">int</span> *pi = <span class="keyword">new</span> <span class="type">int</span>;    </span><br></pre></td></tr></table></figure>
-
-<p>可以使用值初始化方式、直接初始化方式、传统构造方式（圆括号<code>()</code>）或新标准下的列表初始化方式（花括号<code>&#123;&#125;</code>）初始化动态分配的对象。</p>
-<p>只有当初始化的括号中仅有单一初始化器时才可以使用<code>auto</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> p1 = <span class="keyword">new</span> <span class="built_in">auto</span>(obj);   </span><br><span class="line"><span class="keyword">auto</span> p2 = <span class="keyword">new</span> <span class="keyword">auto</span>&#123;a,b,c&#125;;  <span class="comment">// error</span></span><br></pre></td></tr></table></figure>
-
-<p>可以用<code>new</code>分配<code>const</code>对象，返回指向<code>const</code>类型的指针。动态分配的<code>const</code>对象必须初始化。</p>
-<p>默认情况下，如果<code>new</code>不能分配所要求的内存空间，会抛出<code>bad_alloc</code>异常。使用定位<code>new</code>（placement new）可以阻止其抛出异常。定位<code>new</code>表达式允许程序向<code>new</code>传递额外参数。如果将<code>nothrow</code>传递给<code>new</code>，则<code>new</code>在分配失败后会返回空指针。<code>bad_alloc</code>和<code>nothrow</code>都定义在头文件<code>new</code>中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *p1 = <span class="keyword">new</span> <span class="type">int</span>;           </span><br><span class="line"><span class="type">int</span> *p2 = <span class="built_in">new</span> (nothrow) <span class="type">int</span>; </span><br></pre></td></tr></table></figure>
-
-<p>使用<code>delete</code>释放一块并非<code>new</code>分配的内存，或者将相同的指针值释放多次的行为是未定义的。</p>
-<p>由内置指针管理的动态对象在被显式释放前一直存在。</p>
-<p><code>delete</code>一个指针后，指针值就无效了（空悬指针，dangling pointer）。为了防止后续的错误访问，应该在<code>delete</code>之后将指针值置空。</p>
-<h3 id="shared-ptr和new结合使用"><a href="#shared-ptr和new结合使用" class="headerlink" title="shared_ptr和new结合使用"></a><code>shared_ptr</code>和<code>new</code>结合使用</h3><p>可以用<code>new</code>返回的指针初始化智能指针。该构造函数是<code>explicit</code>的，因此必须使用直接初始化形式。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">shared_ptr&lt;<span class="type">int</span>&gt; p1 = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">1024</span>);    <span class="comment">// error</span></span><br><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">p2</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1024</span>))</span></span>;     <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，用来初始化智能指针的内置指针必须指向动态内存，因为智能指针默认使用<code>delete</code>释放它所管理的对象。如果要将智能指针绑定到一个指向其他类型资源的指针上，就必须提供自定义操作来代替<code>delete</code>。</p>
-<p>不要混合使用内置指针和智能指针。当将<code>shared_ptr</code>绑定到内置指针后，资源管理就应该交由<code>shared_ptr</code>负责。不应该再使用内置指针访问<code>shared_ptr</code>指向的内存。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">process</span><span class="params">(shared_ptr&lt;<span class="type">int</span>&gt; ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   </span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> *<span class="title">x</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">1024</span>))</span></span>;  </span><br><span class="line"><span class="built_in">process</span>(x);     <span class="comment">// error</span></span><br><span class="line"><span class="built_in">process</span>(<span class="built_in">shared_ptr</span>&lt;<span class="type">int</span>&gt;(x));   </span><br><span class="line"><span class="type">int</span> j = *x;    </span><br></pre></td></tr></table></figure>
-
-<p>智能指针的<code>get</code>函数返回一个内置指针，指向智能指针管理的对象。主要用于向不能使用智能指针的代码传递内置指针。使用<code>get</code>返回指针的代码不能<code>delete</code>此指针。</p>
-<p>不要使用<code>get</code>初始化另一个智能指针或为智能指针赋值。</p>
-<p>可以用<code>reset</code>函数将新的指针赋予<code>shared_ptr</code>。与赋值类似，<code>reset</code>会更新引用计数，如果需要的话，还会释放内存空间。<code>reset</code>经常与<code>unique</code>一起使用，来控制多个<code>shared_ptr</code>共享的对象。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!p.<span class="built_in">unique</span>())</span><br><span class="line">    p.<span class="built_in">reset</span>(<span class="keyword">new</span> <span class="built_in">string</span>(*p));   </span><br><span class="line">*p += newVal;   </span><br></pre></td></tr></table></figure>
-
-<h3 id="智能指针和异常"><a href="#智能指针和异常" class="headerlink" title="智能指针和异常"></a>智能指针和异常</h3><p>如果使用智能指针，即使程序块过早结束，智能指针类也能确保在内存不再需要时将其释放。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> *ip = <span class="keyword">new</span> <span class="built_in">int</span>(<span class="number">42</span>);    </span><br><span class="line">    <span class="keyword">delete</span> ip;     </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">sp</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">42</span>))</span></span>;    </span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-
-<p>默认情况下<code>shared_ptr</code>假定其指向动态内存，使用<code>delete</code>释放对象。创建<code>shared_ptr</code>时可以传递一个（可选）指向删除函数的指针参数，用来代替<code>delete</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">destination</span>;  </span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">connection</span>;   </span><br><span class="line"><span class="function">connection <span class="title">connect</span><span class="params">(destination*)</span></span>;  </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">disconnect</span><span class="params">(connection)</span></span>;   </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">end_connection</span><span class="params">(connection *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">disconnect</span>(*p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(destination &amp;d <span class="comment">/* other  */</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    connection c = <span class="built_in">connect</span>(&amp;d);</span><br><span class="line">    <span class="function">shared_ptr&lt;connection&gt; <span class="title">p</span><span class="params">(&amp;c, end_connection)</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>智能指针规范：</p>
-<ul>
-<li><p>不使用相同的内置指针值初始化或<code>reset</code>多个智能指针。</p>
-</li>
-<li><p>不释放<code>get</code>返回的指针。</p>
-</li>
-<li><p>不使用<code>get</code>初始化或<code>reset</code>另一个智能指针。</p>
-</li>
-<li><p>使用<code>get</code>返回的指针时，如果最后一个对应的智能指针被销毁，指针就无效了。</p>
-</li>
-<li><p>使用<code>shared_ptr</code>管理并非<code>new</code>分配的资源时，应该传递删除函数。</p>
-</li>
-</ul>
-<h3 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a><code>unique_ptr</code></h3><p>与<code>shared_ptr</code>不同，同一时刻只能有一个<code>unique_ptr</code>指向给定的对象。当<code>unique_ptr</code>被销毁时，它指向的对象也会被销毁。</p>
-<p><code>make_unique</code>函数（C++14新增，定义在头文件<code>memory</code>中）在动态内存中分配一个对象并初始化它，返回指向此对象的<code>unique_ptr</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">p1</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>(<span class="number">42</span>))</span></span>;</span><br><span class="line"><span class="comment">// C++14</span></span><br><span class="line">unique_ptr&lt;<span class="type">int</span>&gt; p2 = <span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);</span><br></pre></td></tr></table></figure>
-
-<p>由于<code>unique_ptr</code>独占其指向的对象，因此<code>unique_ptr</code>不支持普通的拷贝或赋值操作。</p>
-<p><code>release</code>函数返回<code>unique_ptr</code>当前保存的指针并将其置为空。</p>
-<p><code>reset</code>函数成员接受一个可选的指针参数，重新设置<code>unique_ptr</code>保存的指针。如果<code>unique_ptr</code>不为空，则它原来指向的对象会被释放。</p>
-<p>调用<code>release</code>会切断<code>unique_ptr</code>和它原来管理的对象之间的联系。<code>release</code>返回的指针通常被用来初始化另一个智能指针或给智能指针赋值。如果没有用另一个智能指针保存<code>release</code>返回的指针，程序就要负责资源的释放。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p2.<span class="built_in">release</span>();   </span><br><span class="line"><span class="keyword">auto</span> p = p2.<span class="built_in">release</span>();   <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
-
-<p>不能拷贝<code>unique_ptr</code>的规则有一个例外：可以拷贝或赋值一个即将被销毁的<code>unique_ptr</code>（移动构造、移动赋值）。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">clone</span><span class="params">(<span class="type">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">unique_ptr&lt;<span class="type">int</span>&gt; <span class="title">ret</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span> (p))</span></span>;</span><br><span class="line">    <span class="comment">// . . .</span></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>老版本的标准库包含了一个名为<code>auto_ptr</code>的类，</p>
-<p>类似<code>shared_ptr</code>，默认情况下<code>unique_ptr</code>用<code>delete</code>释放其指向的对象。<code>unique_ptr</code>的删除器同样可以重载，但<code>unique_ptr</code>管理删除器的方式与<code>shared_ptr</code>不同。定义<code>unique_ptr</code>时必须在尖括号中提供删除器类型。创建或<code>reset</code>这种<code>unique_ptr</code>类型的对象时，必须提供一个指定类型的可调用对象（删除器）。</p>
-<h3 id="weak-ptr"><a href="#weak-ptr" class="headerlink" title="weak_ptr"></a><code>weak_ptr</code></h3><p><code>weak_ptr</code>是一种不控制所指向对象生存期的智能指针，它指向一个由<code>shared_ptr</code>管理的对象。将<code>weak_ptr</code>绑定到<code>shared_ptr</code>不会改变<code>shared_ptr</code>的引用计数。如果<code>shared_ptr</code>被销毁，即使有<code>weak_ptr</code>指向对象，对象仍然有可能被释放。</p>
-<p>创建一个<code>weak_ptr</code>时，需要使用<code>shared_ptr</code>来初始化它。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> p = <span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line"><span class="function">weak_ptr&lt;<span class="type">int</span>&gt; <span class="title">wp</span><span class="params">(p)</span></span>;   </span><br></pre></td></tr></table></figure>
-
-<p>使用<code>weak_ptr</code>访问对象时，必须先调用<code>lock</code>函数。该函数检查<code>weak_ptr</code>指向的对象是否仍然存在。如果存在，则返回指向共享对象的<code>shared_ptr</code>，否则返回空指针。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (shared_ptr&lt;<span class="type">int</span>&gt; np = wp.<span class="built_in">lock</span>())</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="动态数组"><a href="#动态数组" class="headerlink" title="动态数组"></a>动态数组</h2><p>使用<code>allocator</code>类可以将内存分配和初始化过程分离，这通常会提供更好的性能和更灵活的内存管理能力。</p>
-<h3 id="new和数组"><a href="#new和数组" class="headerlink" title="new和数组"></a><code>new</code>和数组</h3><p>使用<code>new</code>分配对象数组时需要在类型名之后跟一对方括号，在其中指明要分配的对象数量（必须是整型，但不必是常量）。<code>new</code>返回指向第一个对象的指针（元素类型）。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *pia = <span class="keyword">new</span> <span class="type">int</span>[<span class="built_in">get_size</span>()];   </span><br></pre></td></tr></table></figure>
-
-<p>由于<code>new</code>分配的内存并不是数组类型，因此不能对动态数组调用<code>begin</code>和<code>end</code>，也不能用范围<code>for</code>语句处理其中的元素。</p>
-<p>默认情况下，<code>new</code>分配的对象是默认初始化的。可以对数组中的元素进行值初始化，方法是在大小后面跟一对空括号<code>()</code>。在新标准中，还可以提供一个元素初始化器的花括号列表。如果初始化器数量大于元素数量，则<code>new</code>表达式失败，不会分配任何内存，并抛出<code>bad_array_new_length</code>异常。</p>
-<p>虽然可以使用空括号对<code>new</code>分配的数组元素进行值初始化，但不能在括号中指定初始化器。这意味着不能用<code>auto</code>分配数组。</p>
-<p>动态分配一个空数组是合法的，此时<code>new</code>会返回一个合法的非空指针。对于零长度的数组来说，该指针类似尾后指针，不能解引用。</p>
-<p>使用<code>delete[]</code>释放动态数组。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> p;     </span><br><span class="line"><span class="keyword">delete</span> [] pa;   </span><br></pre></td></tr></table></figure>
-
-<p>如果在<code>delete</code>数组指针时忘记添加方括号，或者在<code>delete</code>单一对象时使用了方括号，编译器很可能不会给出任何警告，程序可能会在执行过程中行为异常。</p>
-<p><code>unique_ptr</code>可以直接管理动态数组，定义时需要在对象类型后添加一对空方括号<code>[]</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function">unique_ptr&lt;<span class="type">int</span>[]&gt; <span class="title">up</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>])</span></span>;</span><br><span class="line">up.<span class="built_in">release</span>();   </span><br></pre></td></tr></table></figure>
-
-<p>指向数组的<code>unique_ptr</code>。</p>
-<p>与<code>unique_ptr</code>不同，<code>shared_ptr</code>不直接支持动态数组管理。如果想用<code>shared_ptr</code>管理动态数组，必须提供自定义的删除器。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">shared_ptr&lt;<span class="type">int</span>&gt; <span class="title">sp</span><span class="params">(<span class="keyword">new</span> <span class="type">int</span>[<span class="number">10</span>], [](<span class="type">int</span> *p) &#123; <span class="keyword">delete</span>[] p; &#125;)</span></span>;</span><br><span class="line">sp.<span class="built_in">reset</span>();   </span><br></pre></td></tr></table></figure>
-
-<p><code>shared_ptr</code>未定义下标运算符，智能指针类型也不支持指针算术运算。因此如果想访问<code>shared_ptr</code>管理的数组元素，必须先用<code>get</code>获取内置指针，再用内置指针进行访问。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// shared_ptrs don&#x27;t have subscript operator and don&#x27;t support pointer arithmetic</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i != <span class="number">10</span>; ++i)</span><br><span class="line">    *(sp.<span class="built_in">get</span>() + i) = i;    </span><br></pre></td></tr></table></figure>
-
-<h3 id="allocator类"><a href="#allocator类" class="headerlink" title="allocator类"></a><code>allocator</code>类</h3><p><code>allocator</code>类是一个模板，定义时必须指定其可以分配的对象类型。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">allocator&lt;string&gt; alloc;    </span><br><span class="line"><span class="keyword">auto</span> <span class="type">const</span> p = alloc.<span class="built_in">allocate</span>(n);   </span><br></pre></td></tr></table></figure>
-
-<p><code>allocator</code>分配的内存是未构造的，程序需要在此内存中构造对象。新标准库的<code>construct</code>函数接受一个指针和零或多个额外参数，在给定位置构造一个元素。额外参数用来初始化构造的对象，必须与对象类型相匹配。</p>
-<p>直接使用<code>allocator</code>返回的未构造内存是错误行为，其结果是未定义的。</p>
-<p>对象使用完后，必须对每个构造的元素调用<code>destroy</code>进行销毁。<code>destroy</code>函数接受一个指针，对指向的对象执行析构函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (q != p)</span><br><span class="line">    alloc.<span class="built_in">destroy</span>(--q);  </span><br></pre></td></tr></table></figure>
-
-<p><code>deallocate</code>函数用于释放<code>allocator</code>分配的内存空间。传递给<code>deallocate</code>的指针不能为空，它必须指向由<code>allocator</code>分配的内存。而且传递给<code>deallocate</code>的大小参数必须与调用<code>allocator</code>分配内存时提供的大小参数相一致。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alloc.<span class="built_in">deallocate</span>(p, n);</span><br></pre></td></tr></table></figure>
-
-<p>传递给<code>uninitialized_copy</code>的目的位置迭代器必须指向未构造的内存，它直接在给定位置构造元素。返回（递增后的）目的位置迭代器。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2822,12 +2641,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
