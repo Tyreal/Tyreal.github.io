@@ -162,6 +162,160 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/10/Operating-System-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/09/10/Operating-System-4/" class="post-title-link" itemprop="url">Operating System 4</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-10 14:38:21 / 修改时间：14:46:23" itemprop="dateCreated datePublished" datetime="2023-09-10T14:38:21+08:00">2023-09-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="四、I-x2F-O原理"><a href="#四、I-x2F-O原理" class="headerlink" title="四、I&#x2F;O原理"></a>四、I&#x2F;O原理</h2><p>注意文件索引和文件目录结构的区别，索引是检索文件的方式，而文件目录结构是用户管理计算机文件的一种结构，单级目录、多级目录等等。在用户目录的基础上，文件控制块FCB会指向对应的索引块。</p>
+<h3 id="4-1-文件的逻辑结构-【了解】"><a href="#4-1-文件的逻辑结构-【了解】" class="headerlink" title="4.1 文件的逻辑结构 【了解】"></a>4.1 文件的逻辑结构 【了解】</h3><p>文件可以分为两类：</p>
+<ol>
+<li><strong>无结构文件</strong></li>
+</ol>
+<p>文件内部数据就是一系列二进制流或字符流。最典型的就是txt文件。</p>
+<ol start="2">
+<li><strong>有结构文件</strong></li>
+</ol>
+<p>由一组相似的记录组成，又称记录式文件。典型的excel表、数据库表等。</p>
+<p>有结构文件的逻辑结构又分<code>顺序文件</code>、<code>索引文件</code>、<code>索引顺序文件</code>，注意逻辑结构是展示给用户的，是文件的组织形式，例如是一张顺序存储的excel表格，还是一张excel索引表加上excel顺序表，还是多级索引加顺序，而不是在计算机上的存储方式。</p>
+<p><strong>顺序文件</strong>：文件中的记录一个接一个地顺序排列（逻辑上），记录可以是定长的或可变长的。各个记录在物理上可以顺序存储或链式存储。</p>
+<p>顺序存储即逻辑相邻的文件物理上也相邻，链式存储即在末尾添加新的文件。</p>
+<p><strong>问题</strong>：对于可变长记录文件，要找到第i 个记录，必须先顺序第查找前 i - 1 个记录，但是很多应用场景中又必须使用可变长记录。如何解决这个问题？</p>
+<p><strong>索引文件</strong>:简单而言就是引入了索引表的文件。索引表本身是顺序文件，即索引表顺序存储在一起。</p>
+<p><strong>问题</strong>：：每个记录对应一个索引表项，因此索引表可能会很大。比如：文件的每个记录平均只占8B，而每个索引表项占32个字节，那么索引表都要比文件内容本身大4倍，这样对存储空间的利用率就太低了。</p>
+<p><strong>索引顺序文件</strong>：索引顺序文件是索引文件和顺序文件思想的结合。索引顺序文件中，同样会为文件建立一张索引表，但不同的是：并不是每个记录对应一个索引表项，而是一组记录对应一个索引表项，索引表项的地址直接指向顺序文件所在区域，再顺序查找到所需的文件，从而节省了很大的空间。</p>
+<p><strong>多级索引顺序件：</strong>在索引顺序文件的基础上再增加层次深度，可以减少查找的次数(顺序查找范围缩小了)</p>
+<h3 id="4-2-文件目录"><a href="#4-2-文件目录" class="headerlink" title="4.2 文件目录"></a>4.2 文件目录</h3><p>文件目录可以分为：<code>单级目录结构</code>、<code>两级目录结构</code>、<code>多级目录结构(树形目录结构)</code></p>
+<p><strong>单极目录结构：</strong>顾名思义，所有的文件放在一个目录中，类似于一个仓库把所有文件不加整理的堆放在一起，显然效率会很低下。</p>
+<p>**两级目录结构:**主要分为主文件目录和用户文件目录。类似于仓库中加了几个员工货架，不同员工的货物放在不同货架，但在一个货架中文件还是采用堆砌式的存储。</p>
+<p>多级目录结构，又称树形目录结构:我们当前主流操作系统都是多级目录结构，简而言之就是文件目录可以一级一级的延申，从而文件更有条理。</p>
+<p>FCB(文件控制块)，如果文件目录都以这种表的形式进行信息查找，会大大降低运行效率，增加系统负担。</p>
+<blockquote>
+<p>提出对策，其实在查找各级目录的过程中，只需要用到文件名这个信息，可以考虑让目录表瘦身来提升效率。</p>
+</blockquote>
+<p>索引结点指针指向索引结点(文件名之外的其他信息就存放在结点中，从而按需读取，提升效率)</p>
+<p>每一个文件都有一个FCB，记录了文件的地址、信息、权限等等属性</p>
+<h3 id="4-3-文件的物理结构【重要】"><a href="#4-3-文件的物理结构【重要】" class="headerlink" title="4.3 文件的物理结构【重要】"></a>4.3 文件的物理结构【重要】</h3><p>最重要的三种物理结构：顺序、链接、索引，其中最主要使用的是索引文件，可以随机访问，同时增删效率高。</p>
+<p>思考：想想数据结构中，顺序表和链表分别的优缺点是什么?</p>
+<p>文件的物理结构是文件分配在计算机存储上的分配方式。分配的基本单位是物理块,可以构想一下，一个大文件，如一首音乐23MB，难道直接一整个塞入硬盘吗？显然可能会出现一些问题，硬盘的空间也需要不断调整，就像内存分页一样，硬盘也被分为小的物理块号方便进行调度。</p>
+<ul>
+<li><p>连续分配</p>
+<ul>
+<li><p>优点：支持顺序访问和直接访问（即随机访问）；连续分配的文件在顺序访问时速度最快</p>
+</li>
+<li><p>缺点：不方便文件拓展；存储空间利用率低，会产生磁盘碎片</p>
+</li>
+</ul>
+</li>
+<li><p>链式分配</p>
+<p><strong>隐式</strong></p>
+</li>
+<li><p>采用链式分配（隐式链接）方式的文件，只支持顺序访问，不支持随机访问，查找效率低。另外，指向下一个盘块的指针也需要耗费少量的存储空间。</p>
+</li>
+</ul>
+<p>​		<strong>显式</strong></p>
+<ul>
+<li>直观理解就是在隐式的基础上添加了一张表，从表上能看出不同物理块号的下一块的地址</li>
+</ul>
+<p><strong>结论：</strong>采用链式分配（显式链接）方式的文件，支持顺序访问，也支持随机访问（想访问i 号逻辑块时，并不需要依次访问之前的0 ~ i-1号逻辑块），由于块号转换的过程不需要访问磁盘，因此相比于隐式链接来说，访问速度快很多。显然，显式链接也不会产生外部碎片，也可以很方便地对文件进行拓展。</p>
+<ul>
+<li><p>索引分配</p>
+<ul>
+<li>单级</li>
+<li>多级</li>
+</ul>
+<p>索引就是文件分成不同的物理块存入磁盘，对每个物理块都有一个索引与之对应，需要读写时就通过索引表查询其物理地址进行相关操作。</p>
+</li>
+</ul>
+<h3 id="4-3-磁盘结构"><a href="#4-3-磁盘结构" class="headerlink" title="4.3 磁盘结构"></a>4.3 磁盘结构</h3><p>磁道：每一圈就是一个磁道，最内侧磁道面积最小，所以数据密度最大</p>
+<p>扇区：磁道被划分为小的磁盘块</p>
+<p>一个<code>盘片</code>可能有两个<code>盘面</code>;每个盘面对应一个<code>磁头</code>；所有磁头连在一起，共进退；每个盘面的相对位置的磁道组成<code>柱面</code></p>
+<h3 id="4-4-磁盘调度算法"><a href="#4-4-磁盘调度算法" class="headerlink" title="4.4 磁盘调度算法"></a>4.4 磁盘调度算法</h3><p>磁盘调度算法要解决的核心问题就是<strong>寻道时间</strong>，即移动磁头的时间，而其他的启动时间、传输时间都很迅速，不是最主要的时间消耗。</p>
+<p>这里讲三种算法：</p>
+<ol>
+<li><strong>先来先服务FCFS</strong></li>
+</ol>
+<p>根据进程请求房屋内磁盘的现后顺序进行调度。符合惯性思维，但在很多时候，效果很差。</p>
+<ol start="2">
+<li><strong>最短寻找时间优先</strong></li>
+</ol>
+<p>(学过数据结构与算法的话，核心思想就是贪心算法)，该算法会优先处理与当前磁头最近的磁道的需求。</p>
+<ol start="3">
+<li><strong>扫描算法</strong></li>
+</ol>
+<p>核心思想，只有磁头移动到最外侧磁道的时候才能往内侧移动，移动到最内侧的时候才能向外侧移动。这样就不会产生饥饿问题。</p>
+<h3 id="4-5-文件共享"><a href="#4-5-文件共享" class="headerlink" title="4.5 文件共享"></a>4.5 文件共享</h3><p>文件共享分两种链接方式，硬链接和软连接</p>
+<p><strong>硬链接</strong>：就是在另一个用户的目录中，索引结点指针直接指向了发送分享的用户的索引节点，从而实现了共享，count的数量代表文件正在被几个用户使用。</p>
+<p><strong>软连接</strong>：类似于快捷方式，记录了原文件的路径，然后层层查找。</p>
+<h3 id="4-6-文件保护"><a href="#4-6-文件保护" class="headerlink" title="4.6 文件保护"></a>4.6 文件保护</h3><p>文件保护有三种方式口令、加密、访问控制</p>
+<ol>
+<li>口令</li>
+</ol>
+<p>为文件设置一串口令，就像打开手机需要先解锁。</p>
+<ol start="2">
+<li>加密</li>
+</ol>
+<p>使用加密方法对文件加密，只有拥有正确的解密方法才能解密，有点像不同军队之间进行通信，要实现进行加密，要是想窥探敌情，就要对密文进行破解。</p>
+<ol start="3">
+<li>访问控制</li>
+</ol>
+<p>每个文件的FCB或者索引结点中设置访问控制表，如windows中，设置了很多的访问权限。</p>
+<h3 id="4-7-I-x2F-O设备"><a href="#4-7-I-x2F-O设备" class="headerlink" title="4.7 I&#x2F;O设备"></a>4.7 I&#x2F;O设备</h3><p>I&#x2F;O就是输入输出，I&#x2F;O设备就是可以将数据输入到计算机或将计算机数据输出的设备，<code>常见的</code>：鼠标、键盘、音响、显示器、打印机、话筒、摄像头等等。</p>
+<p>**I&#x2F;O控制器:**CPU无法直接控制I&#x2F;O设备，需要一个电子部件去充当中间人，这个部件就是I&#x2F;O控制器，CPU控制I&#x2F;O控制器，I&#x2F;O控制器控制I&#x2F;O设备。</p>
+<p>假如我们的CPU能够控制I&#x2F;O设备，那不同的厂商、不同型号的设备，都要对应进行编码，显然是不切实际的，所以CPU要采用通用调度方式调度I&#x2F;O设备从而需要I&#x2F;O控制器。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/03/Operating-System-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1509,99 +1663,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/06/C++STL_6_container_vector/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HUI">
-      <meta itemprop="description" content="We have a long way to go">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HUI BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/08/06/C++STL_6_container_vector/" class="post-title-link" itemprop="url">C++ STL 6</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-08-06 10:11:54 / 修改时间：10:14:02" itemprop="dateCreated datePublished" datetime="2023-08-06T10:11:54+08:00">2023-08-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="深入-vector-array"><a href="#深入-vector-array" class="headerlink" title="深入 vector array"></a>深入 vector array</h1><ul>
-<li><p><strong>vector 的自动扩充机制</strong> </p>
-<ul>
-<li><strong>Notes</strong><ul>
-<li><p>空间两倍扩充机制</p>
-<ul>
-<li>insert aux 会多做 push back 的一次元素是否放满的检查<ul>
-<li>扩充算法：<ol>
-<li>allcator 申请2倍内存空间<br>2. 将更新位置元素之前的内容直接拷贝<br>3. 更新下一位置元素</li>
-<li>拷贝插入位置之后的内容</li>
-</ol>
-</li>
-<li>每一次扩充数据都会大量调用 构造 析构函数，产生大量开销</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>vector iterator traits</p>
-<ul>
-<li>偏特化的 traits</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>新版本的 public 继承的思考</p>
-<pre><code>- **关于新版本的 Vector_impl 继承 allocator 使用 public 继承的问题**
-
-- C++ 中 public 继承 是 **is、=** 的关系，这里表征 vector 就是 allocator 是不准确的，所以应当为 private 继承
-</code></pre>
-</li>
-<li><p><strong>array</strong></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1671,7 +1732,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
