@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="《剑指Offer》与Leetcode主站题目链接对应11、旋转数组的最小数字 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;find-minimum-in-rotated-sorted-array-ii&#x2F;已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。例如，原数组 nums &#x3D; [0,1,4,4,5,6,7] 在变化后可能得到：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode jianzhi Offer 11-20">
+<meta property="og:url" content="http://example.com/2023/12/20/jianzhi-Offer-Leetcode-11-20/index.html">
+<meta property="og:site_name" content="HUI BLOG">
+<meta property="og:description" content="《剑指Offer》与Leetcode主站题目链接对应11、旋转数组的最小数字 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;find-minimum-in-rotated-sorted-array-ii&#x2F;已知一个长度为 n 的数组，预先按照升序排列，经由 1 到 n 次 旋转 后，得到输入数组。例如，原数组 nums &#x3D; [0,1,4,4,5,6,7] 在变化后可能得到：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-20T13:20:45.000Z">
+<meta property="article:modified_time" content="2023-12-27T13:45:02.126Z">
+<meta property="article:author" content="HUI">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/12/20/jianzhi-Offer-Leetcode-11-20/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Leetcode jianzhi Offer 11-20 | HUI BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HUI BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/20/jianzhi-Offer-Leetcode-11-20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leetcode jianzhi Offer 11-20
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-20 21:20:45" itemprop="dateCreated datePublished" datetime="2023-12-20T21:20:45+08:00">2023-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-27 21:45:02" itemprop="dateModified" datetime="2023-12-27T21:45:02+08:00">2023-12-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="《剑指Offer》与Leetcode主站题目链接对应"><a href="#《剑指Offer》与Leetcode主站题目链接对应" class="headerlink" title="《剑指Offer》与Leetcode主站题目链接对应"></a>《剑指Offer》与Leetcode主站题目链接对应</h2><h3 id="11、旋转数组的最小数字-gt-https-leetcode-com-problems-find-minimum-in-rotated-sorted-array-ii"><a href="#11、旋转数组的最小数字-gt-https-leetcode-com-problems-find-minimum-in-rotated-sorted-array-ii" class="headerlink" title="11、旋转数组的最小数字 -&gt; https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/"></a>11、旋转数组的最小数字 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/">https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/</a></h3><p>已知一个长度为 <code>n</code> 的数组，预先按照升序排列，经由 <code>1</code> 到 <code>n</code> 次 <strong>旋转</strong> 后，得到输入数组。例如，原数组 <code>nums = [0,1,4,4,5,6,7]</code> 在变化后可能得到：</p>
+<ul>
+<li>若旋转 <code>4</code> 次，则可以得到 <code>[4,5,6,7,0,1,4]</code></li>
+<li>若旋转 <code>7</code> 次，则可以得到 <code>[0,1,4,4,5,6,7]</code></li>
+</ul>
+<p>注意，数组 <code>[a[0], a[1], a[2], ..., a[n-1]]</code> <strong>旋转一次</strong> 的结果为数组 <code>[a[n-1], a[0], a[1], a[2], ..., a[n-2]]</code> 。</p>
+<p>给你一个可能存在 <strong>重复</strong> 元素值的数组 <code>nums</code> ，它原来是一个升序排列的数组，并按上述情形进行了多次旋转。请你找出并返回数组中的 <strong>最小元素</strong> 。<br> <strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [1,3,5]</span><br><span class="line">Output: 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [2,2,2,0,1]</span><br><span class="line">Output: 0</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;  <span class="comment">//二分查找</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findMin</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 初始化两个指针 i 和 j，分别指向数组的起始和末尾</span></span><br><span class="line">        <span class="type">int</span> i = <span class="number">0</span>, j = nums.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 使用二分查找算法查找最小值</span></span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="comment">// 计算中间索引</span></span><br><span class="line">            <span class="type">int</span> m = (i + j) / <span class="number">2</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果中间元素大于末尾元素，说明最小值在右侧，更新 i</span></span><br><span class="line">            <span class="keyword">if</span> (nums[m] &gt; nums[j]) &#123;</span><br><span class="line">                i = m + <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果中间元素小于末尾元素，说明最小值在左侧，更新 j</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (nums[m] &lt; nums[j]) &#123;</span><br><span class="line">                j = m;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 如果中间元素等于末尾元素，缩小搜索范围，更新 j</span></span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                j = j - <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 返回找到的最小值</span></span><br><span class="line">        <span class="keyword">return</span> nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="12、√矩阵中的路径-gt-https-leetcode-com-problems-word-search"><a href="#12、√矩阵中的路径-gt-https-leetcode-com-problems-word-search" class="headerlink" title="12、√矩阵中的路径 -&gt; https://leetcode.com/problems/word-search/"></a>12、√矩阵中的路径 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/word-search/">https://leetcode.com/problems/word-search/</a></h3><p>给定一个 <code>m x n</code> 二维字符网格 <code>board</code> 和一个字符串单词 <code>word</code> 。如果 <code>word</code> 存在于网格中，返回 <code>true</code> ；否则，返回 <code>false</code> 。</p>
+<p>单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。同一个单元格内的字母不允许被重复使用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">exist</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; board, string word)</span> </span>&#123;</span><br><span class="line">        rows = board.<span class="built_in">size</span>();</span><br><span class="line">        cols = board[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历二维数组中的每一个格子</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; rows; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; cols; j++) &#123;</span><br><span class="line">                <span class="comment">// 调用DFS搜索，如果找到符合条件的路径，返回true</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">dfs</span>(board, word, i, j, <span class="number">0</span>)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果在整个数组中都没有找到符合条件的路径，返回false</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> rows, cols;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 深度优先搜索函数</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">dfs</span><span class="params">(vector&lt;vector&lt;<span class="type">char</span>&gt;&gt;&amp; board, string word, <span class="type">int</span> i, <span class="type">int</span> j, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 判断边界条件</span></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= rows || i &lt; <span class="number">0</span> || j &gt;= cols || j &lt; <span class="number">0</span> || board[i][j] != word[k]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 如果字符串的每个字符都匹配，返回true</span></span><br><span class="line">        <span class="keyword">if</span> (k == word.<span class="built_in">size</span>() - <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 将当前格子标记为已访问，防止重复访问</span></span><br><span class="line">        board[i][j] = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 在上下左右四个方向递归搜索</span></span><br><span class="line">        <span class="type">bool</span> res = <span class="built_in">dfs</span>(board, word, i + <span class="number">1</span>, j, k + <span class="number">1</span>) || </span><br><span class="line">                   <span class="built_in">dfs</span>(board, word, i - <span class="number">1</span>, j, k + <span class="number">1</span>) || </span><br><span class="line">                   <span class="built_in">dfs</span>(board, word, i, j + <span class="number">1</span>, k + <span class="number">1</span>) || </span><br><span class="line">                   <span class="built_in">dfs</span>(board, word, i, j - <span class="number">1</span>, k + <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 恢复当前格子的状态，使其可以被其他路径访问</span></span><br><span class="line">        board[i][j] = word[k];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="13、机器人的运动范围-gt-没找到"><a href="#13、机器人的运动范围-gt-没找到" class="headerlink" title="13、机器人的运动范围 -&gt; 没找到"></a>13、机器人的运动范围 -&gt; 没找到</h3><h3 id="14、剪绳子（dp）-gt-https-leetcode-cn-com-problems-integer-break-）"><a href="#14、剪绳子（dp）-gt-https-leetcode-cn-com-problems-integer-break-）" class="headerlink" title="14、剪绳子（dp） -&gt; https://leetcode-cn.com/problems/integer-break/）"></a>14、剪绳子（dp） -&gt; <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-break/%EF%BC%89">https://leetcode-cn.com/problems/integer-break/）</a></h3><p>给定一个正整数 <code>n</code> ，将其拆分为 <code>k</code> 个 <strong>正整数</strong> 的和（ <code>k &gt;= 2</code> ），并使这些整数的乘积最大化。</p>
+<p>返回 <em>你可以获得的最大乘积</em> 。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: n = 2</span><br><span class="line">输出: 1</span><br><span class="line">解释: 2 = 1 + 1, 1 × 1 = 1。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: n = 10</span><br><span class="line">输出: 36</span><br><span class="line">解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">integerBreak</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建一个动态规划数组 dp，其中 dp[i] 表示整数 i 的最大乘积</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n + <span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化 dp[2] 为 1，因为对于整数 2，只能拆分成 1+1，乘积为 1</span></span><br><span class="line">        dp[<span class="number">2</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从整数 3 开始计算最大乘积</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="comment">// 遍历拆分点 j，其中 1 &lt;= j &lt;= i-1</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt; i - <span class="number">1</span>; j++) &#123;</span><br><span class="line">                <span class="comment">// 计算拆分点 j 时的乘积，并更新 dp[i] 为最大值</span></span><br><span class="line">                dp[i] = <span class="built_in">max</span>(dp[i], <span class="built_in">max</span>((i - j) * j, dp[i - j] * j));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回整数 n 的最大乘积</span></span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="15、√二进制中1的个数-gt-https-leetcode-com-problems-number-of-1-bits-gt-（升级版）https-leetcode-com-problems-counting-bits"><a href="#15、√二进制中1的个数-gt-https-leetcode-com-problems-number-of-1-bits-gt-（升级版）https-leetcode-com-problems-counting-bits" class="headerlink" title="15、√二进制中1的个数 -&gt; https://leetcode.com/problems/number-of-1-bits/ -&gt;（升级版）https://leetcode.com/problems/counting-bits/"></a>15、√二进制中1的个数 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/number-of-1-bits/">https://leetcode.com/problems/number-of-1-bits/</a> -&gt;（升级版）<a target="_blank" rel="noopener" href="https://leetcode.com/problems/counting-bits/">https://leetcode.com/problems/counting-bits/</a></h3><p>编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 ‘1’ 的个数（也被称为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B1%89%E6%98%8E%E9%87%8D%E9%87%8F">汉明重量</a>）。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 00000000000000000000000000001011</span><br><span class="line">输出：3</span><br><span class="line">解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 &#x27;1&#x27;。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 00000000000000000000000010000000</span><br><span class="line">输出：1</span><br><span class="line">解释：输入的二进制串 00000000000000000000000010000000 中，共有一位为 &#x27;1&#x27;。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">hammingWeight</span><span class="params">(<span class="type">uint32_t</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 初始化一个变量 ret 用于记录二进制表示中1的个数</span></span><br><span class="line">        <span class="type">int</span> ret = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历32位，检查每一位是否为1</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">32</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 使用位运算 (n &amp; (1 &lt;&lt; i)) 来检查第i位是否为1</span></span><br><span class="line">            <span class="keyword">if</span> (n &amp; (<span class="number">1</span> &lt;&lt; i)) &#123;</span><br><span class="line">                <span class="comment">// 如果第i位为1，则增加计数器</span></span><br><span class="line">                ret++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 返回二进制表示中1的个数</span></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="16、√数值的整数次方（溢出）-gt-https-leetcode-com-problems-powx-n"><a href="#16、√数值的整数次方（溢出）-gt-https-leetcode-com-problems-powx-n" class="headerlink" title="16、√数值的整数次方（溢出） -&gt; https://leetcode.com/problems/powx-n/"></a>16、√数值的整数次方（溢出） -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/powx-n/">https://leetcode.com/problems/powx-n/</a></h3><ol start="50">
+<li>Pow(x, n)   实现 <a target="_blank" rel="noopener" href="https://www.cplusplus.com/reference/valarray/pow/">pow(<em>x</em>, <em>n</em>)</a> ，即计算 <code>x</code> 的整数 <code>n</code> 次幂函数（即，<code>xn</code> ）。</li>
+</ol>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 2.00000, n = 10</span><br><span class="line">输出：1024.00000</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 2.10000, n = 3</span><br><span class="line">输出：9.26100</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">myPow</span><span class="params">(<span class="type">double</span> x, <span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 处理边界情况</span></span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123; <span class="keyword">return</span> <span class="number">1</span>; &#125;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123; <span class="keyword">return</span> x; &#125;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">-1</span>) &#123; <span class="keyword">return</span> <span class="number">1</span> / x; &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 使用递归和分治，将幂运算分解为子问题</span></span><br><span class="line">        <span class="type">double</span> half = <span class="built_in">myPow</span>(x, n / <span class="number">2</span>);</span><br><span class="line">        <span class="type">double</span> rest = <span class="built_in">myPow</span>(x, n % <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 计算最终结果，根据指数的奇偶性考虑是否需要额外乘以一个 x</span></span><br><span class="line">        <span class="keyword">return</span> rest * half * half;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="17、打印从1到最大的n位数（溢出）-gt-没找到"><a href="#17、打印从1到最大的n位数（溢出）-gt-没找到" class="headerlink" title="17、打印从1到最大的n位数（溢出） -&gt; 没找到"></a>17、打印从1到最大的n位数（溢出） -&gt; 没找到</h3><h3 id="18、√删除链表的节点-gt-（简单版）https-leetcode-com-problems-delete-node-in-a-linked-list-gt-（升级版）https-leetcode-com-problems-remove-linked-list-elements"><a href="#18、√删除链表的节点-gt-（简单版）https-leetcode-com-problems-delete-node-in-a-linked-list-gt-（升级版）https-leetcode-com-problems-remove-linked-list-elements" class="headerlink" title="18、√删除链表的节点 -&gt;（简单版）https://leetcode.com/problems/delete-node-in-a-linked-list/ -&gt;（升级版）https://leetcode.com/problems/remove-linked-list-elements"></a>18、√删除链表的节点 -&gt;（简单版）<a target="_blank" rel="noopener" href="https://leetcode.com/problems/delete-node-in-a-linked-list/">https://leetcode.com/problems/delete-node-in-a-linked-list/</a> -&gt;（升级版）<a target="_blank" rel="noopener" href="https://leetcode.com/problems/remove-linked-list-elements">https://leetcode.com/problems/remove-linked-list-elements</a></h3><p>有一个单链表的 <code>head</code>，我们想删除它其中的一个节点 <code>node</code>。</p>
+<p>给你一个需要删除的节点 <code>node</code> 。你将 <strong>无法访问</strong> 第一个节点 <code>head</code>。</p>
+<p>链表的所有值都是 <strong>唯一的</strong>，并且保证给定的节点 <code>node</code> 不是链表中的最后一个节点。</p>
+<p>删除给定的节点。注意，删除节点并不是指从内存中删除它。这里的意思是：</p>
+<ul>
+<li>给定节点的值不应该存在于链表中。</li>
+<li>链表中的节点数应该减少 1。</li>
+<li><code>node</code> 前面的所有值顺序相同。</li>
+<li><code>node</code> 后面的所有值顺序相同。</li>
+</ul>
+<p><strong>自定义测试：</strong></p>
+<ul>
+<li><p>对于输入，你应该提供整个链表 <code>head</code> 和要给出的节点 <code>node</code>。<code>node</code> 不应该是链表的最后一个节点，而应该是链表中的一个实际节点。</p>
+</li>
+<li><p>我们将构建链表，并将节点传递给你的函数。</p>
+</li>
+<li><p>输出将是调用你函数后的整个链表。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deleteNode</span><span class="params">(ListNode* node)</span> </span>&#123;</span><br><span class="line">        node-&gt;val = node-&gt;next-&gt;val;</span><br><span class="line">        node-&gt;next = node-&gt;next-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="19、×正则表达式匹配-gt-https-leetcode-com-problems-regular-expression-matching"><a href="#19、×正则表达式匹配-gt-https-leetcode-com-problems-regular-expression-matching" class="headerlink" title="19、×正则表达式匹配 -&gt; https://leetcode.com/problems/regular-expression-matching/"></a>19、×正则表达式匹配 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/regular-expression-matching/">https://leetcode.com/problems/regular-expression-matching/</a></h3><p>给你一个字符串 <code>s</code> 和一个字符规律 <code>p</code>，请你来实现一个支持 <code>&#39;.&#39;</code> 和 <code>&#39;*&#39;</code> 的正则表达式匹配。</p>
+<ul>
+<li><code>&#39;.&#39;</code> 匹配任意单个字符</li>
+<li><code>&#39;*&#39;</code> 匹配零个或多个前面的那一个元素</li>
+</ul>
+<p>所谓匹配，是要涵盖 <strong>整个</strong> 字符串 <code>s</code>的，而不是部分字符串。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;aa&quot;, p = &quot;a&quot;</span><br><span class="line">输出：false</span><br><span class="line">解释：&quot;a&quot; 无法匹配 &quot;aa&quot; 整个字符串。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;aa&quot;, p = &quot;a*&quot;</span><br><span class="line">输出：true</span><br><span class="line">解释：因为 &#x27;*&#x27; 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 &#x27;a&#x27;。因此，字符串 &quot;aa&quot; 可被视为 &#x27;a&#x27; 重复了一次。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;ab&quot;, p = &quot;.*&quot;</span><br><span class="line">输出：true</span><br><span class="line">解释：&quot;.*&quot; 表示可匹配零个或多个（&#x27;*&#x27;）任意字符（&#x27;.&#x27;）。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">isMatch</span><span class="params">(string s, string p)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> m = s.<span class="built_in">size</span>() + <span class="number">1</span>, n = p.<span class="built_in">size</span>() + <span class="number">1</span>;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">bool</span>&gt;&gt; <span class="built_in">dp</span>(m, <span class="built_in">vector</span>&lt;<span class="type">bool</span>&gt;(n, <span class="literal">false</span>));</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">2</span>; j &lt; n; j += <span class="number">2</span>)</span><br><span class="line">            dp[<span class="number">0</span>][j] = dp[<span class="number">0</span>][j - <span class="number">2</span>] &amp;&amp; p[j - <span class="number">1</span>] == <span class="string">&#x27;*&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">                dp[i][j] = p[j - <span class="number">1</span>] == <span class="string">&#x27;*&#x27;</span> ?</span><br><span class="line">                    dp[i][j - <span class="number">2</span>] || dp[i - <span class="number">1</span>][j] &amp;&amp; (s[i - <span class="number">1</span>] == p[j - <span class="number">2</span>] || p[j - <span class="number">2</span>] == <span class="string">&#x27;.&#x27;</span>):</span><br><span class="line">                    dp[i - <span class="number">1</span>][j - <span class="number">1</span>] &amp;&amp; (p[j - <span class="number">1</span>] == <span class="string">&#x27;.&#x27;</span> || s[i - <span class="number">1</span>] == p[j - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="20、×表示数值的字符串-gt-https-leetcode-com-problems-valid-number"><a href="#20、×表示数值的字符串-gt-https-leetcode-com-problems-valid-number" class="headerlink" title="20、×表示数值的字符串 -&gt; https://leetcode.com/problems/valid-number/"></a>20、×表示数值的字符串 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/valid-number/">https://leetcode.com/problems/valid-number/</a></h3><p><strong>有效数字</strong>（按顺序）可以分成以下几个部分：</p>
+<ol>
+<li>一个 <strong>小数</strong> 或者 <strong>整数</strong></li>
+<li>（可选）一个 <code>&#39;e&#39;</code> 或 <code>&#39;E&#39;</code> ，后面跟着一个 <strong>整数</strong></li>
+</ol>
+<p><strong>小数</strong>（按顺序）可以分成以下几个部分：</p>
+<ol>
+<li>（可选）一个符号字符（<code>&#39;+&#39;</code> 或 <code>&#39;-&#39;</code>）</li>
+<li>下述格式之一：<ol>
+<li>至少一位数字，后面跟着一个点 <code>&#39;.&#39;</code></li>
+<li>至少一位数字，后面跟着一个点 <code>&#39;.&#39;</code> ，后面再跟着至少一位数字</li>
+<li>一个点 <code>&#39;.&#39;</code> ，后面跟着至少一位数字</li>
+</ol>
+</li>
+</ol>
+<p><strong>整数</strong>（按顺序）可以分成以下几个部分：</p>
+<ol>
+<li>（可选）一个符号字符（<code>&#39;+&#39;</code> 或 <code>&#39;-&#39;</code>）</li>
+<li>至少一位数字</li>
+</ol>
+<p>部分有效数字列举如下：<code>[&quot;2&quot;, &quot;0089&quot;, &quot;-0.1&quot;, &quot;+3.14&quot;, &quot;4.&quot;, &quot;-.9&quot;, &quot;2e10&quot;, &quot;-90E3&quot;, &quot;3e+7&quot;, &quot;+6e-1&quot;, &quot;53.5e93&quot;, &quot;-123.456e789&quot;]</code></p>
+<p>部分无效数字列举如下：<code>[&quot;abc&quot;, &quot;1a&quot;, &quot;1e&quot;, &quot;e3&quot;, &quot;99e2.5&quot;, &quot;--6&quot;, &quot;-+3&quot;, &quot;95a54e53&quot;]</code></p>
+<p>给你一个字符串 <code>s</code> ，如果 <code>s</code> 是一个 <strong>有效数字</strong> ，请返回 <code>true</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;0&quot;</span><br><span class="line">输出：true</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;e&quot;</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;.&quot;</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/10/jianzhi-Offer-Leetcode-1-10/" rel="prev" title="Leetcode jianzhi Offer 1-10">
+      <i class="fa fa-chevron-left"></i> Leetcode jianzhi Offer 1-10
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E5%89%91%E6%8C%87Offer%E3%80%8B%E4%B8%8ELeetcode%E4%B8%BB%E7%AB%99%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5%E5%AF%B9%E5%BA%94"><span class="nav-number">1.</span> <span class="nav-text">《剑指Offer》与Leetcode主站题目链接对应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11%E3%80%81%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97-gt-https-leetcode-com-problems-find-minimum-in-rotated-sorted-array-ii"><span class="nav-number">1.1.</span> <span class="nav-text">11、旋转数组的最小数字 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;find-minimum-in-rotated-sorted-array-ii&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12%E3%80%81%E2%88%9A%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84-gt-https-leetcode-com-problems-word-search"><span class="nav-number">1.2.</span> <span class="nav-text">12、√矩阵中的路径 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;word-search&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13%E3%80%81%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E8%BF%90%E5%8A%A8%E8%8C%83%E5%9B%B4-gt-%E6%B2%A1%E6%89%BE%E5%88%B0"><span class="nav-number">1.3.</span> <span class="nav-text">13、机器人的运动范围 -&gt; 没找到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14%E3%80%81%E5%89%AA%E7%BB%B3%E5%AD%90%EF%BC%88dp%EF%BC%89-gt-https-leetcode-cn-com-problems-integer-break-%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">14、剪绳子（dp） -&gt; https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;integer-break&#x2F;）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15%E3%80%81%E2%88%9A%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0-gt-https-leetcode-com-problems-number-of-1-bits-gt-%EF%BC%88%E5%8D%87%E7%BA%A7%E7%89%88%EF%BC%89https-leetcode-com-problems-counting-bits"><span class="nav-number">1.5.</span> <span class="nav-text">15、√二进制中1的个数 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;number-of-1-bits&#x2F; -&gt;（升级版）https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;counting-bits&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#16%E3%80%81%E2%88%9A%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9%EF%BC%88%E6%BA%A2%E5%87%BA%EF%BC%89-gt-https-leetcode-com-problems-powx-n"><span class="nav-number">1.6.</span> <span class="nav-text">16、√数值的整数次方（溢出） -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;powx-n&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#17%E3%80%81%E6%89%93%E5%8D%B0%E4%BB%8E1%E5%88%B0%E6%9C%80%E5%A4%A7%E7%9A%84n%E4%BD%8D%E6%95%B0%EF%BC%88%E6%BA%A2%E5%87%BA%EF%BC%89-gt-%E6%B2%A1%E6%89%BE%E5%88%B0"><span class="nav-number">1.7.</span> <span class="nav-text">17、打印从1到最大的n位数（溢出） -&gt; 没找到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#18%E3%80%81%E2%88%9A%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E8%8A%82%E7%82%B9-gt-%EF%BC%88%E7%AE%80%E5%8D%95%E7%89%88%EF%BC%89https-leetcode-com-problems-delete-node-in-a-linked-list-gt-%EF%BC%88%E5%8D%87%E7%BA%A7%E7%89%88%EF%BC%89https-leetcode-com-problems-remove-linked-list-elements"><span class="nav-number">1.8.</span> <span class="nav-text">18、√删除链表的节点 -&gt;（简单版）https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;delete-node-in-a-linked-list&#x2F; -&gt;（升级版）https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;remove-linked-list-elements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19%E3%80%81%C3%97%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%8C%B9%E9%85%8D-gt-https-leetcode-com-problems-regular-expression-matching"><span class="nav-number">1.9.</span> <span class="nav-text">19、×正则表达式匹配 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;regular-expression-matching&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#20%E3%80%81%C3%97%E8%A1%A8%E7%A4%BA%E6%95%B0%E5%80%BC%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2-gt-https-leetcode-com-problems-valid-number"><span class="nav-number">1.10.</span> <span class="nav-text">20、×表示数值的字符串 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;valid-number&#x2F;</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">HUI</p>
+  <div class="site-description" itemprop="description">We have a long way to go</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HUI</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
