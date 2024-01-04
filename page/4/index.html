@@ -162,6 +162,270 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/24/C++%20Primer%20Chapter%208%20Notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/24/C++%20Primer%20Chapter%208%20Notes/" class="post-title-link" itemprop="url">C++ Primer Chapter 8 Notes</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-24 13:12:13" itemprop="dateCreated datePublished" datetime="2023-03-24T13:12:13+08:00">2023-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-05 20:12:25" itemprop="dateModified" datetime="2023-04-05T20:12:25+08:00">2023-04-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="IO库"><a href="#IO库" class="headerlink" title="IO库"></a>IO库</h1><h2 id="前面章节已经在用的IO库设施"><a href="#前面章节已经在用的IO库设施" class="headerlink" title="前面章节已经在用的IO库设施"></a>前面章节已经在用的IO库设施</h2><ul>
+<li><strong>istream</strong>：输入流类型，提供输入操作。</li>
+<li><strong>ostream</strong>：输出流类型，提供输出操作</li>
+<li><strong>cin</strong>：一个<code>istream</code>对象，从标准输入读取数据。</li>
+<li><strong>cout</strong>：一个<code>ostream</code>对象，向标准输出写入数据。</li>
+<li><strong>cerr</strong>：一个<code>ostream</code>对象，向标准错误写入消息。</li>
+<li><strong>&gt;&gt;运算符</strong>：用来从一个<code>istream</code>对象中读取输入数据。</li>
+<li><strong>&lt;&lt;运算符</strong>：用来向一个<code>ostream</code>对象中写入输出数据。</li>
+<li><strong>getline函数</strong>：从一个给定的<code>istream</code>对象中读取一行数据，存入到一个给定的<code>string</code>对象中。</li>
+</ul>
+<h2 id="IO类"><a href="#IO类" class="headerlink" title="IO类"></a>IO类</h2><h3 id="标准库定义的IO类型"><a href="#标准库定义的IO类型" class="headerlink" title="标准库定义的IO类型"></a>标准库定义的IO类型</h3><ul>
+<li><code>iostream</code>头文件：从标准流中读写数据，<code>istream</code>、<code>ostream</code>等。</li>
+<li><code>fstream</code>头文件：从文件中读写数据，<code>ifstream</code>、<code>ofstream</code>等。</li>
+<li><code>sstream</code>头文件：从字符串中读写数据，<code>istringstream</code>、<code>ostringstream</code></li>
+</ul>
+<h3 id="IO对象不可复制或赋值"><a href="#IO对象不可复制或赋值" class="headerlink" title="IO对象不可复制或赋值"></a>IO对象不可复制或赋值</h3><ul>
+<li>1.IO对象不能存在容器里.</li>
+<li>2.形参和返回类型也不能是流类型。</li>
+<li>3.形参和返回类型一般是流的<strong>引用</strong>。</li>
+<li>4.读写一个IO对象会改变其状态，因此传递和返回的引用不能是<code>const</code>的。</li>
+</ul>
+<h3 id="条件状态"><a href="#条件状态" class="headerlink" title="条件状态"></a>条件状态</h3><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>strm:iostate</code></td>
+<td>是一种机器无关的<strong>类型</strong>，提供了表达条件状态的完整功能</td>
+</tr>
+<tr>
+<td><code>strm:badbit</code></td>
+<td>用来指出流已经崩溃</td>
+</tr>
+<tr>
+<td><code>strm:failbit</code></td>
+<td>用来指出一个IO操作失败了</td>
+</tr>
+<tr>
+<td><code>strm:eofbit</code></td>
+<td>用来指出流到达了文件结束</td>
+</tr>
+<tr>
+<td><code>strm:goodbit</code></td>
+<td>用来指出流未处于错误状态，此值保证为零</td>
+</tr>
+<tr>
+<td><code>s.eof()</code></td>
+<td>若流<code>s</code>的<code>eofbit</code>置位，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.fail()</code></td>
+<td>若流<code>s</code>的<code>failbit</code>置位，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.bad()</code></td>
+<td>若流<code>s</code>的<code>badbit</code>置位，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.good()</code></td>
+<td>若流<code>s</code>处于有效状态，则返回<code>true</code></td>
+</tr>
+<tr>
+<td><code>s.clear()</code></td>
+<td>将流<code>s</code>中所有条件状态位复位，将流的状态设置成有效，返回<code>void</code></td>
+</tr>
+<tr>
+<td><code>s.clear(flags)</code></td>
+<td>将流<code>s</code>中指定的条件状态位复位，返回<code>void</code></td>
+</tr>
+<tr>
+<td><code>s.setstate(flags)</code></td>
+<td>根据给定的标志位，将流<code>s</code>中对应的条件状态位置位，返回<code>void</code></td>
+</tr>
+<tr>
+<td><code>s.rdstate()</code></td>
+<td>返回流<code>s</code>的当前条件状态，返回值类型为<code>strm::iostate</code></td>
+</tr>
+</tbody></table>
+<p>上表中，<code>strm</code>是一种IO类型，（如<code>istream</code>）， <code>s</code>是一个流对象。</p>
+<h3 id="管理输出缓冲"><a href="#管理输出缓冲" class="headerlink" title="管理输出缓冲"></a>管理输出缓冲</h3><ul>
+<li>每个输出流都管理一个缓冲区，执行输出的代码，文本串可能立即打印出来，也可能被操作系统保存在缓冲区内，随后再打印。</li>
+<li>刷新缓冲区，可以使用如下IO操纵符：<ul>
+<li><code>endl</code>：输出一个换行符并刷新缓冲区。</li>
+<li><code>flush</code>：刷新流，单不添加任何字符。</li>
+<li><code>ends</code>：在缓冲区插入空字符<code>null</code>，然后刷新。</li>
+<li><code>unitbuf</code>：告诉流接下来每次操作之后都要进行一次<code>flush</code>操作。</li>
+<li><code>nounitbuf</code>：回到正常的缓冲方式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件输入输出"><a href="#文件输入输出" class="headerlink" title="文件输入输出"></a>文件输入输出</h2><ul>
+<li>头文件<code>fstream</code>定义了三个类型来支持文件IO：<ul>
+<li><code>ifstream</code>从一个给定文件读取数据。</li>
+<li><code>ofstream</code>向一个给定文件写入数据。</li>
+<li><code>fstream</code>可以读写给定文件。</li>
+</ul>
+</li>
+<li><strong>文件流</strong>：需要读写文件时，必须定义自己的文件流对象，并绑定在需要的文件上。</li>
+</ul>
+<h3 id="fstream特有的操作"><a href="#fstream特有的操作" class="headerlink" title="fstream特有的操作"></a>fstream特有的操作</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>fstream fstrm;</code></td>
+<td>创建一个未绑定的文件流。</td>
+</tr>
+<tr>
+<td><code>fstream fstrm(s);</code></td>
+<td>创建一个文件流，并打开名为<code>s</code>的文件，<code>s</code>可以是<code>string</code>也可以是<code>char</code>指针</td>
+</tr>
+<tr>
+<td><code>fstream fstrm(s, mode);</code></td>
+<td>与前一个构造函数类似，但按指定<code>mode</code>打开文件</td>
+</tr>
+<tr>
+<td><code>fstrm.open(s)</code></td>
+<td>打开名为<code>s</code>的文件，并和<code>fstrm</code>绑定</td>
+</tr>
+<tr>
+<td><code>fstrm.close()</code></td>
+<td>关闭和<code>fstrm</code>绑定的文件</td>
+</tr>
+<tr>
+<td><code>fstrm.is_open()</code></td>
+<td>返回一个<code>bool</code>值，指出与<code>fstrm</code>关联的文件是否成功打开且尚未关闭</td>
+</tr>
+</tbody></table>
+<p>上表中，<code>fstream</code>是头文件<code>fstream</code>中定义的一个类型，<code>fstrm</code>是一个文件流对象。</p>
+<h3 id="文件模式"><a href="#文件模式" class="headerlink" title="文件模式"></a>文件模式</h3><table>
+<thead>
+<tr>
+<th>文件模式</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>in</code></td>
+<td>以读的方式打开</td>
+</tr>
+<tr>
+<td><code>out</code></td>
+<td>以写的方式打开</td>
+</tr>
+<tr>
+<td><code>app</code></td>
+<td>每次写操作前均定位到文件末尾</td>
+</tr>
+<tr>
+<td><code>ate</code></td>
+<td>打开文件后立即定位到文件末尾</td>
+</tr>
+<tr>
+<td><code>trunc</code></td>
+<td>截断文件</td>
+</tr>
+<tr>
+<td><code>binary</code></td>
+<td>以二进制方式进行IO操作。</td>
+</tr>
+</tbody></table>
+<h2 id="string流"><a href="#string流" class="headerlink" title="string流"></a>string流</h2><ul>
+<li>头文件<code>sstream</code>定义了三个类型来支持内存IO：<ul>
+<li><code>istringstream</code>从<code>string</code>读取数据。</li>
+<li><code>ostringstream</code>向<code>string</code>写入数据。</li>
+<li><code>stringstream</code>可以读写给定<code>string</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="stringstream特有的操作"><a href="#stringstream特有的操作" class="headerlink" title="stringstream特有的操作"></a>stringstream特有的操作</h3><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sstream strm</code></td>
+<td>定义一个未绑定的<code>stringstream</code>对象</td>
+</tr>
+<tr>
+<td><code>sstream strm(s)</code></td>
+<td>用<code>s</code>初始化对象</td>
+</tr>
+<tr>
+<td><code>strm.str()</code></td>
+<td>返回<code>strm</code>所保存的<code>string</code>的拷贝</td>
+</tr>
+<tr>
+<td><code>strm.str(s)</code></td>
+<td>将<code>s</code>拷贝到<code>strm</code>中，返回<code>void</code></td>
+</tr>
+</tbody></table>
+<p>上表中<code>sstream</code>是头文件<code>sstream</code>中任意一个类型。<code>s</code>是一个<code>string</code>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/13/C++%20Primer%20Chapter%207%20Notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1920,7 +2184,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1952,7 +2216,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

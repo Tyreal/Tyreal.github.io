@@ -162,6 +162,119 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/C++STL_9_Hash_Table/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/18/C++STL_9_Hash_Table/" class="post-title-link" itemprop="url">C++ STL 9</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-18 19:34:18" itemprop="dateCreated datePublished" datetime="2023-08-18T19:34:18+08:00">2023-08-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-19 10:58:32" itemprop="dateModified" datetime="2023-08-19T10:58:32+08:00">2023-08-19</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="HashTable-深度探索"><a href="#HashTable-深度探索" class="headerlink" title="HashTable 深度探索"></a>HashTable 深度探索</h1><ul>
+<li><p>HashTable</p>
+<ul>
+<li><p>问题引入</p>
+<p>  有大量的 OBJ 通过某种映射，映射为一种编号，放在对应编号的内存里</p>
+<ul>
+<li>内存充足时，采用一一映射，但是在元素稀疏的情形比较浪费内存</li>
+<li>内存不足时，通过取模映射，则会产生，两个不同的元素映射到同一位置，就会发生碰撞<ul>
+<li><p><strong>解决碰撞的方法</strong>：</p>
+<ul>
+<li>这个是 Hash 的核心，可以通过另一种函数映射到另一位置，防止碰撞，但是不够好</li>
+</ul>
+</li>
+<li><p>通过链表将碰撞的元素进行串接</p>
+</li>
+<li><p>如果串接的链表过长，就必须打散整个 HashTable </p>
+</li>
+<li><p>原则是链表串接的元素个数比本身hash table 的元素还要多，就要进行打散</p>
+</li>
+<li><p>打散（<strong>rehashing</strong>）扩充以2倍开始的质数，而且在GNUC中被写死</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HashTable 的 STL 实现</p>
+<ul>
+<li><p>HashFcn 表征了 hash 编码函数，ExtractKey 提供获取 object 的 key 方法，EqualKey 表征了 Key 的相等方法</p>
+</li>
+<li><p>bucket 是用 vector 实现的</p>
+</li>
+<li><p>hash iterator 提供了指向当前元素的指针，同时给出了查找原始 bucket的指针ht</p>
+</li>
+<li><p>eqstr 是对 c接口 strcmp 的封装。因为 此处仿函数 需要传出 bool 值</p>
+</li>
+<li><ul>
+<li>hash func 是使用 偏特化模式实现的，如果是数值，数值本身就是编号，对于不存在的 obj，则需要手动设计 哈希函数，比如 std::string</li>
+</ul>
+</li>
+<li><p>Notes</p>
+<ul>
+<li>Hash code 到 bucket 的映射</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/12/C++STL_8_RB_tree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1581,303 +1694,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/15/C++%20Primer%20Chapter%2018%20Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HUI">
-      <meta itemprop="description" content="We have a long way to go">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HUI BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/15/C++%20Primer%20Chapter%2018%20Notes/" class="post-title-link" itemprop="url">C++ Primer Chapter 18 Notes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-15 21:12:55" itemprop="dateCreated datePublished" datetime="2023-06-15T21:12:55+08:00">2023-06-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-24 10:41:17" itemprop="dateModified" datetime="2023-06-24T10:41:17+08:00">2023-06-24</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第18章-用于大型程序的工具"><a href="#第18章-用于大型程序的工具" class="headerlink" title="第18章 用于大型程序的工具"></a>第18章 用于大型程序的工具</h1><h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>异常处理机制允许程序中独立开发的部分能够在运行期间就出现的问题进行通信并做出相应的处理，使问题检测和解决过程相互分离。</p>
-<h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><p>在C++中，通过抛出（throwing）一条表达式来引发（raised）一个异常。被抛出的表达式类型和当前的调用链共同决定了应该使用哪段处理代码（handler）来处理该异常。被选中的处理代码是在调用链中与抛出对象类型匹配且距离最近的代码。</p>
-<p>执行一个<code>throw</code>语句时，跟在<code>throw</code>后面的语句将不再执行。程序的控制权从<code>throw</code>转移到与之匹配的<code>catch</code>语句中。该<code>catch</code>可能是同一个函数中的局部<code>catch</code>，也可能位于直接或间接调用了发生异常的函数的另一个函数中。控制权的转移意味着两个问题：</p>
-<ul>
-<li><p>沿着调用链的函数可能会提前退出。</p>
-</li>
-<li><p>一旦程序开始执行异常处理代码，则沿着调用链创建的对象会被销毁。</p>
-</li>
-</ul>
-<p>抛出异常后，程序暂停执行当前函数并立即寻找对应<code>catch</code>语句的过程叫做栈展开（stack unwinding）。栈展开沿着嵌套函数的调用链不断查找，直到找到了与异常匹配的<code>catch</code>语句为止。如果没有对应的<code>catch</code>语句，则退出主函数后查找过程结束。</p>
-<ul>
-<li><p>如果找到了匹配的<code>catch</code>语句，则程序进入该子句并执行其中的代码。<code>catch</code>语句执行结束后，程序会转移到与<code>try</code>块关联的最后一个<code>catch</code>语句之后的位置继续执行。</p>
-</li>
-<li><p>如果没有找到匹配的<code>catch</code>语句，程序会调用标准库的<code>terminate</code>函数，终止运行。</p>
-</li>
-</ul>
-<p>在栈展开过程中，位于调用链上的语句块可能会提前退出，其中的局部对象也会被销毁。如果异常发生在构造函数或者数组及容器的元素初始化过程中，则当前的对象可能只构造了一部分，此时必须确保已构造的成员能被正确销毁。</p>
-<p>如果一个块分配了资源，并且在执行资源释放代码前发生了异常，则资源不会被释放。</p>
-<p>由于栈展开可能会调用析构函数，因此析构函数不应该抛出不能被它自身处理的异常。</p>
-<p>编译器使用异常抛出表达式对异常对象（exception object）进行拷贝初始化，因此<code>throw</code>语句中的表达式必须具有完全类型。</p>
-<p>抛出一条表达式时，该表达式的静态编译类型决定了异常对象的类型。如果<code>throw</code>表达式解引用一个基类指针，而该指针实际指向派生类对象，则只有基类部分会被抛出。</p>
-<p>抛出指针时必须确保在任何对应的处理代码中，指针指向的对象一定存在。</p>
-<h3 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h3><p><code>catch</code>语句（catch clause）中的异常声明（exception declaration）类似只包含一个形参的函数形参列表。声明的类型决定了处理代码所能捕获的异常类型。该类型必须是完全类型，可以是左值引用，但不能是右值引用。如果<code>catch</code>无须访问抛出的表达式，则可以忽略捕获形参的名字。</p>
-<p>进入<code>catch</code>语句后，使用异常对象初始化异常声明中的参数。<code>catch</code>参数的特性和函数参数类似。</p>
-<ul>
-<li><p>如果<code>catch</code>的参数类型是非引用类型，则该参数是异常对象的一个副本，改变参数不会影响异常对象本身。</p>
-</li>
-<li><p>如果<code>catch</code>的参数类型是引用类型，则该参数是异常对象的一个别名，改变参数就是改变异常对象本身。</p>
-</li>
-<li><p>在继承体系中，如果<code>catch</code>的参数类型是基类类型，则可以使用其派生类类型的异常对象对其初始化。</p>
-<ul>
-<li><p><code>catch</code>的参数是基类非引用类型时，异常对象会被切除一部分。</p>
-</li>
-<li><p><code>catch</code>的参数是基类引用类型时，以常规方式绑定到异常对象。</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>异常声明的静态类型决定了<code>catch</code>语句所能执行的操作。如果<code>catch</code>的参数是基类类型，则无法使用派生类特有的成员。</p>
-<p>通常情况下，如果<code>catch</code>接受的异常与某个继承体系有关，则最好将<code>catch</code>参数定义为引用类型。</p>
-<p>查找异常处理代码时，最终结果是第一个与异常匹配的<code>catch</code>语句，但这未必是最佳匹配。因此，越特殊的<code>catch</code>越应该位于整个<code>catch</code>列表的前端。当程序使用具有继承关系的异常时，派生类异常的处理代码应该位于基类异常的处理代码之前。</p>
-<p>异常和异常声明的匹配规则比函数参数严格，绝大多数类型转换都不能使用。</p>
-<ul>
-<li><p>允许从非常量到常量的类型转换。</p>
-</li>
-<li><p>允许从派生类到基类的类型转换。</p>
-</li>
-<li><p>数组被转换成指向数组元素类型的指针，函数被转换成指向该函数类型的指针。</p>
-</li>
-</ul>
-<p>有时一个单独的<code>catch</code>语句不能完整处理某个异常。执行完一些校正操作后，当前的<code>catch</code>可能会让位于调用链上层的函数继续处理异常。一个<code>catch</code>语句通过重新抛出（rethrowing）的操作将异常传递给另一个<code>catch</code>语句。重新抛出是一条不包含表达式的<code>throw</code>语句。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span>;</span><br></pre></td></tr></table></figure>
-
-<p>空<code>throw</code>语句只能出现在<code>catch</code>或<code>catch</code>语句调用的函数之内。如果在异常处理代码之外的区域遇到了空<code>throw</code>语句，编译器将调用<code>terminate</code>函数。</p>
-<p>重新抛出语句不指定新的表达式，而是将当前的异常对象沿着调用链向上传递。如果<code>catch</code>语句修改了其参数并重新抛出异常，则只有当<code>catch</code>异常声明是引用类型时，程序对参数所做的改变才会被保留并继续传播。</p>
-<p>使用省略号<code>...</code>作为异常声明可以一次性捕获所有异常，这种处理代码被称为捕获所有异常（catch-all）的处理代码，可以与任意类型的异常相匹配。</p>
-<p><code>catch(…)</code>通常与重新抛出语句一起使用。</p>
-<p>如果<code>catch(…)</code>与其他<code>catch</code>语句一起使用，则<code>catch(…)</code>必须位于最后，否则<code>catch(…)</code>后面的<code>catch</code>语句永远不会被匹配。</p>
-<h3 id="函数try语句块与构造函数"><a href="#函数try语句块与构造函数" class="headerlink" title="函数try语句块与构造函数"></a>函数<code>try</code>语句块与构造函数</h3><p>要想处理构造函数初始值列表抛出的异常，必须将构造函数写成函数<code>try</code>语句块（function try block）的形式。函数<code>try</code>语句块使得一组<code>catch</code>语句可以同时处理构造函数体和构造函数初始化过程中的异常。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">Blob&lt;T&gt;::<span class="built_in">Blob</span>(std::initializer_list&lt;T&gt; il) <span class="keyword">try</span> :</span><br><span class="line">    <span class="built_in">data</span>(std::make_shared&lt;std::vector&lt;T&gt;&gt;(il))</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">catch</span>(<span class="type">const</span> std::bad_alloc &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">handle_out_of_memory</span>(e);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>函数<code>try</code>语句块的<code>catch</code>语句会在结尾处隐式地重新抛出异常，通知上层函数对象构造失败。上层函数需要继续处理该异常。</p>
-<p>在初始化构造函数参数时发生的异常不属于函数<code>try</code>语句块处理的范围。</p>
-<h3 id="noexcept异常说明"><a href="#noexcept异常说明" class="headerlink" title="noexcept异常说明"></a><code>noexcept</code>异常说明</h3><p>在C++11中，可以通过提供<code>noexcept</code>说明（noexcept specification）来指出某个函数不会抛出异常。</p>
-<p><code>noexcept</code>说明的出现位置：</p>
-<ul>
-<li><p>关键字<code>noexcept</code>位于函数的参数列表之后，尾置返回类型之前。</p>
-</li>
-<li><p>对于一个函数来说，<code>noexcept</code>说明必须同时出现在该函数的所有声明和定义语句中。</p>
-</li>
-<li><p>函数指针的声明和定义也可以指定<code>noexcept</code>。</p>
-</li>
-<li><p>在<code>typedef</code>或类型别名中不能使用<code>noexcept</code>。</p>
-</li>
-<li><p>在成员函数中，关键字<code>noexcept</code>位于<code>const</code>或引用限定符之后，<code>final</code>、<code>override</code>或虚函数的<code>=0</code>之前。</p>
-</li>
-</ul>
-<p>编译器并不会在编译时检查<code>noexcept</code>说明。如果一个函数在指定了<code>noexcept</code>的同时又含有<code>throw</code>语句或其他可能抛出异常的操作，仍然会通过编译（个别编译器可能会提出警告）。</p>
-<p>一旦<code>noexcept</code>函数抛出异常，程序会调用<code>terminate</code>函数终止运行（该过程是否执行栈展开未作规定）。因此<code>noexcept</code>可以用于两种情况：</p>
-<ul>
-<li><p>确认函数不会抛出异常。</p>
-</li>
-<li><p>不知道该如何处理函数抛出的异常。</p>
-</li>
-</ul>
-<p>指明某个函数不会抛出异常可以让调用者不必再考虑异常处理操作。</p>
-<p>早期的C++版本设计了一套更详细的异常说明方案。函数可以使用一个关键字<code>throw</code>，后面跟上用括号包围的异常类型列表，用于指定函数可能抛出的异常类型。关键字<code>throw</code>出现的位置与C++11的<code>noexcept</code>相同。该方案在C++11中被取消。但如果一个函数被声明为<code>throw()</code>的，则也说明该函数不会抛出异常。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">recoup</span><span class="params">(<span class="type">int</span>)</span> <span class="keyword">noexcept</span></span>;  </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">recoup</span><span class="params">(<span class="type">int</span>)</span> <span class="title">throw</span><span class="params">()</span></span>;  </span><br></pre></td></tr></table></figure>
-
-<p><code>noexcept</code>说明符接受一个可选的实参，该实参必须能转换为<code>bool</code>类型。如果实参为<code>true</code>，则函数不会抛出异常；如果实参为<code>false</code>，则函数可能抛出异常。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">recoup</span><span class="params">(<span class="type">int</span>)</span> <span class="title">noexcept</span><span class="params">(<span class="literal">true</span>)</span></span>;  </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">alloc</span><span class="params">(<span class="type">int</span>)</span> <span class="title">noexcept</span><span class="params">(<span class="literal">false</span>)</span></span>;    </span><br></pre></td></tr></table></figure>
-
-<p><code>noexcept</code>运算符（noexcept operator）是一个一元运算符，返回<code>bool</code>类型的右值常量表达式，表示给定的运算对象是否会抛出异常。和<code>sizeof</code>类似，<code>noexcept</code>运算符也不会对运算对象求值。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">noexcept</span>(e)</span><br></pre></td></tr></table></figure>
-
-<p>当<code>e</code>调用的函数都含有<code>noexcept</code>说明且<code>e</code>本身不含有<code>throw</code>语句时，上述表达式返回<code>true</code>，否则返回<code>false</code>。</p>
-<p><code>noexcept</code>运算符通常在<code>noexcept</code>说明符的实参中使用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span> <span class="title">noexcept</span><span class="params">(<span class="keyword">noexcept</span>(g()))</span></span>;   </span><br></pre></td></tr></table></figure>
-
-<p>函数指针与该指针指向的函数必须具有一致的异常说明。如果某个函数指针是<code>noexcept</code>的，则该指针只能指向<code>noexcept</code>函数；如果显式或隐式地说明了函数指针可能抛出异常，则该指针可以指向任何函数。</p>
-<p>如果一个虚函数是<code>noexcept</code>的，则后续派生出来的虚函数必须也是<code>noexcept</code>的。如果基类的虚函数允许抛出异常，则派生类的对应函数既可以允许，也可以禁止抛出异常。</p>
-<p>编译器合成拷贝控制成员时，也会生成一个异常声明。如果所有的成员和基类操作都含有<code>noexcept</code>说明，则合成成员也是<code>noexcept</code>的。</p>
-<h3 id="异常类层次"><a href="#异常类层次" class="headerlink" title="异常类层次"></a>异常类层次</h3><p><code>exception</code>类型只定义了拷贝构造函数、拷贝赋值运算符、一个虚析构函数和一个名为<code>what</code>的虚成员。<code>what</code>函数返回一个<code>const char*</code>，指向一个以<code>NULL</code>结尾的字符数组，并且不会抛出异常。</p>
-<p><code>exception</code>、<code>bad_cast</code>和<code>bad_alloc</code>类型定义了默认构造函数。<code>runtime_error</code>和<code>logic_error</code>类型没有默认构造函数，但是有一个接受C风格字符串或<code>string</code>类型实参的构造函数，该实参通常用于提供错误信息。<code>what</code>函数返回用于初始化异常对象的错误信息。</p>
-<p>实际编程中通常会自定义<code>exception</code>（或者<code>exception</code>的标准库派生类）的派生类以扩展其继承体系。这些面向具体应用的异常类表示了与应用相关的异常状态。</p>
-<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>大型应用程序通常会使用多个独立开发的库，其中某些名字可能会相互冲突。多个库将名字放置在全局命名空间中会产生命名空间污染（namespace pollution）。</p>
-<p>命名空间分割了全局命名空间，其中每个命名空间都是一个作用域。</p>
-<h3 id="命名空间定义"><a href="#命名空间定义" class="headerlink" title="命名空间定义"></a>命名空间定义</h3><p>命名空间的定义包含两部分：关键字<code>namespace</code>和随后的命名空间名字。在命名空间名字后面是一系列由花括号包围的声明和定义。能出现在全局作用域中的声明就也能出现在命名空间中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> cplusplus_primer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Sales_data</span> &#123; / * ... * /&#125;;</span><br><span class="line">    Sales_data <span class="keyword">operator</span>+(<span class="type">const</span> Sales_data&amp;, <span class="type">const</span> Sales_data&amp;);</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Query</span> &#123; <span class="comment">/* ... */</span> &#125;;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Query_base</span> &#123; <span class="comment">/* ... */</span>&#125;;</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
-
-<p>命名空间作用域后面不需要分号结束。</p>
-<p>和其他名字一样，命名空间的名字也必须在定义它的作用域内保持唯一。命名空间可以定义在全局作用域内，也可以定义在其他命名空间中，但是不能定义在函数或类的内部。</p>
-<p>每个命名空间都是一个作用域，不同命名空间内可以有相同名字的成员。</p>
-<p>定义在某个命名空间中的名字可以被该命名空间内的其他成员直接访问，也可以被这些成员内嵌作用域中的任何单位访问。位于该命名空间之外的代码则必须明确指出所使用的名字属于哪个命名空间。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cplusplus_primer::Query q = cplusplus_primer::<span class="built_in">Query</span>(<span class="string">&quot;hello&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>命名空间的定义可以是不连续的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> nsp</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// declarations</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果之前没有名为<code>nsp</code>的命名空间定义，则上述代码创建一个新的命名空间；否则，上述代码打开已经存在的命名空间定义并为其添加新的成员声明。</p>
-<p>利用命名空间不连续的特性可以将几个独立的接口和实现文件组成一个命名空间。此时，命名空间的组织方式类似管理自定义类和函数的方式。</p>
-<ul>
-<li><p>命名空间的一部分成员用于定义类，以及声明作为类接口的函数和对象。这些成员应该放置在头文件中。</p>
-</li>
-<li><p>命名空间成员的定义部分放置在另外的源文件中。源文件需要包含对应的头文件。</p>
-</li>
-</ul>
-<p>程序中的某些实体只能定义一次，如非内联函数、静态数据成员等，命名空间中定义的名字也需要满足该要求。</p>
-<p>通常情况下，<code>#include</code>不应该出现在命名空间内部。否则头文件中的所有名字都会被定义为该命名空间的成员。</p>
-<p>定义多个类型不相关的命名空间时应该使用单独的文件分别表示每个类型。</p>
-<p>可以在命名空间的外部定义该命名空间的成员。命名空间对于名字的声明必须在作用域内，同时该名字的定义需要明确指出其所属的命名空间。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cplusplus_primer::Sales_data</span><br><span class="line">cplusplus_primer::<span class="keyword">operator</span>+(<span class="type">const</span> Sales_data&amp; lhs, <span class="type">const</span> Sales_data&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Sales_data <span class="title">ret</span><span class="params">(lhs)</span></span>;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>模板特例化必须定义在原始模板所属的命名空间中。可以在命名空间内部添加模板特例化声明，而在外部对其进行定义。</p>
-<p>全局作用域中定义的名字被隐式添加到全局命名空间（global namespace）中。全局命名空间以隐式方式声明，在所有程序中都存在。</p>
-<p>作用域运算符<code>::</code>可以用于全局命名空间的成员。因为全局命名空间是隐式声明的，所以它并没有名字。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::member_name</span><br></pre></td></tr></table></figure>
-
-<p>命名空间可以嵌套。嵌套的命名空间同时也是一个嵌套的作用域，它嵌套在外层命名空间的作用域内。内层命名空间声明的名字会隐藏外层命名空间的同名成员。在嵌套的命名空间中定义的名字只在内层命名空间中有效，外层命名空间中的代码在访问时需要在名字前添加限定符。</p>
-<p>C++11新增了内联命名空间（inline namespace）。和一般的嵌套命名空间不同，内联命名空间中的名字可以被外层命名空间直接使用。定义内联命名空间的方式是在<code>namespace</code>前添加关键字<code>inline</code>。<code>inline</code>必须出现在该命名空间第一次定义的地方。</p>
-<p>当应用程序的代码在两次发布之间发生了改变时，通常会使用内联命名空间。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> FourthEd</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Item_base</span> &#123; <span class="comment">/* ... */</span>&#125;;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Query_base</span> &#123; <span class="comment">/* ... */</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> cplusplus_primer</span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;FifthEd.h&quot;</span></span></span><br><span class="line">    <span class="meta">#<span class="keyword">include</span> <span class="string">&quot;FourthEd.h&quot;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因为<code>FifthEd</code>是内联的，所以形如<code>cplusplus_primer::</code>的代码可以直接获得<code>FifthEd</code>的成员。如果想使用早期版本，则必须加上完整的外层命名空间名字。</p>
-<p>未命名的命名空间（unnamed namespace）指关键字<code>namespace</code>后紧跟以花括号包围的一系列声明语句。未命名的命名空间中定义的变量拥有静态生命周期：它们在第一次使用前创建，直到程序结束才销毁。</p>
-<p>一个未命名的命名空间可以在某个给定的文件内不连续，但是不能跨越多个文件。每个文件定义自己的未命名的命名空间。如果一个头文件定义了未命名的命名空间，则该命名空间中定义的名字在每个包含该头文件的文件中对应不同实体。</p>
-<p>定义在未命名的命名空间中的名字可以直接使用，不能对其使用作用域运算符。</p>
-<p>定义在未命名的命名空间中的名字的作用域与该命名空间所在的作用域相同。如果未命名的命名空间定义在最外层作用域中，则该命名空间中的名字必须要与全局作用域中的名字有所区别。</p>
-<p>在标准C++引入命名空间的概念之前，程序需要将名字声明为<code>static</code>的以令其对整个文件有效。在文件中进行静态声明的做法是从C语言继承而来的。在C语言中，声明为<code>static</code>的全局实体在其所在的文件之外不可见。该做法已经被C++标准取消，现在应该使用未命名的命名空间。</p>
-<h3 id="使用命名空间成员"><a href="#使用命名空间成员" class="headerlink" title="使用命名空间成员"></a>使用命名空间成员</h3><p>可以使用关键字<code>namespace</code>和<code>=</code>为命名空间定义别名（namespace alias）。别名必须出现在命名空间的定义之后。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> primer = cplusplus_primer;</span><br></pre></td></tr></table></figure>
-
-<p>一个命名空间可以有多个别名，它们都与命名空间的原名等价。</p>
-<p>一条<code>using</code>声明（using declaration）一次只引入命名空间的一个成员。</p>
-<p><code>using</code>声明的有效范围从<code>using</code>声明语句开始，一直到<code>using</code>声明所在的作用域结束为止。在此过程中，外层作用域的同名实体会被隐藏。未加限定的名字只能在<code>using</code>声明所在的作用域及其内层作用域中使用。</p>
-<p><code>using</code>声明可以出现在全局作用域、局部作用域、命名空间作用域和类的作用域中。在类的作用域中使用时，<code>using</code>声明只能指向基类成员。</p>
-<p>和<code>using</code>声明不同，<code>using</code>指示使某个命名空间中的所有名字都可见。</p>
-<p><code>using</code>指示可以出现在全局作用域、局部作用域和命名空间作用域中，不能出现在类的作用域中。</p>
-<p>如果对<code>std</code>等命名空间使用了<code>using</code>指示而未做任何特殊控制的话，会重新引入多个库之间的名字冲突问题。</p>
-<p> <code>using</code>指示具有将命名空间成员提升到包含命名空间本身和<code>using</code>指示的最近外层作用域的能力。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> A</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> i, j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> A; </span><br><span class="line">    cout &lt;&lt; i * j &lt;&lt; endl;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>当命名空间被注入到其外层作用域之后，该命名空间中定义的名字可能会与其外层作用域的成员冲突。这种冲突允许存在，但是要想使用冲突的名字，就必须明确指出名字的版本。</p>
-<p>头文件如果在其顶层作用域中使用<code>using</code>声明或<code>using</code>指示，则会将名字注入到包含该头文件的所有文件中。通常，头文件只负责定义接口部分的名字，而不定义实现部分的名字。因此，头文件最多只能在它的函数或命名空间内使用<code>using</code>声明或<code>using</code>指示。</p>
-<p>相比于使用<code>using</code>指示，在程序中对命名空间中的每个成员分别使用<code>using</code>声明效果更好。</p>
-<ul>
-<li><p>如果程序使用了多个不同的库，而这些库中的名字通过<code>using</code>指示变得可见，则全局命名空间污染问题将重新出现。</p>
-</li>
-<li><p><code>using</code>指示引发的二义性错误只有在使用了冲突名字的地方才会被发现。而<code>using</code>声明引发的二义性错误在声明处就能发现。</p>
-</li>
-</ul>
-<p>建议在命名空间本身的实现文件中使用<code>using</code>指示。</p>
-<h3 id="类、命名空间与作用域"><a href="#类、命名空间与作用域" class="headerlink" title="类、命名空间与作用域"></a>类、命名空间与作用域</h3><p>对命名空间内部名字的查找遵循常规查找规则：由内向外依次查找每个外层作用域。只有位于开放的块中且在使用点之前声明的名字才会被考虑。</p>
-<p>对于位于命名空间中的类来说，名字的常规查找规则依然适用：当成员函数使用某个名字时，首先在该成员中查找，然后在类（包括基类）中查找，接着在外层作用域中查找。</p>
-<p>可以从函数的限定名推断出名字查找时检查作用域的顺序，限定名以相反的顺序指出被查找的作用域。</p>
-<p>命名空间中名字的隐藏规则有一个例外：传递给函数一个类类型的对象、指向类的引用或指针时，除了在常规作用域查找名字外，还会查找实参类所属的命名空间。该例外允许概念上作为类接口一部分的非成员函数无须单独的<code>using</code>声明就能被程序使用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">std::string s;</span><br><span class="line">std::cin &gt;&gt; s;</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line">std::<span class="keyword">operator</span>&gt;&gt;(std::cin, s);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 若该规则不存在，则必须为&gt;&gt;运算符提供using声明</span></span><br><span class="line"><span class="keyword">using</span> std::<span class="keyword">operator</span>&gt;&gt;;</span><br><span class="line"><span class="comment">// 或者显式使用std::operator&gt;&gt;</span></span><br><span class="line">std::<span class="keyword">operator</span>&gt;&gt;(std::cin, s);</span><br></pre></td></tr></table></figure>
-
-<p>标准库定义的<code>move</code>和<code>forward</code>模板函数接受一个右值引用形参，可以匹配任何类型。如果应用程序也定义了一个接受单一参数的<code>move</code>和<code>forward</code>函数，则不管形参是什么类型，都会与标准库的版本冲突。对于这两个函数来说，冲突大多是无意的，因此建议使用它们的含有限定语的完整版本（即<code>std::move</code>、<code>std::forward</code>）。</p>
-<p>如果一个未声明的类或函数第一次出现在友元声明中，则会被认定是离它最近的外层命名空间的成员。</p>
-<h3 id="重载与命名空间"><a href="#重载与命名空间" class="headerlink" title="重载与命名空间"></a>重载与命名空间</h3><p><code>using</code>声明和<code>using</code>指示能将某些函数添加到候选函数集。</p>
-<p>确定候选函数集时，会在函数的每个实参类（以及实参类的基类）所属的命名空间中搜索候选函数。这些命名空间中所有与被调用函数同名的函数都会被添加到候选集当中，即使其中某些函数在调用语句处不可见也是如此。</p>
-<p><code>using</code>声明语句声明的是一个名字，而非一个特定的函数。一个<code>using</code>声明囊括了重载函数的所有版本以确保不违反命名空间的接口。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">using</span> <span class="title">NS::print</span><span class="params">(<span class="type">int</span>)</span></span>;   <span class="comment">// error</span></span><br><span class="line"><span class="keyword">using</span> NS::print;        <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
-
-<p>一个<code>using</code>声明引入的函数将重载该声明语句所属作用域中已有的其他同名函数。如果<code>using</code>声明出现在局部作用域中，则引入的名字会隐藏外层作用域的相关声明。如果<code>using</code>声明所在的作用域中已经有一个函数与引入的函数同名且形参列表相同，则该<code>using</code>声明会引发错误。除此之外，<code>using</code>声明将为引入的名字添加额外的重载实例，并最终扩充候选函数集的规模。</p>
-<p><code>using</code>指示将命名空间的成员提升到外层作用域中，如果命名空间的某个函数与该命名空间所属作用域中的函数同名，则命名空间的函数会被添加到重载集合中。</p>
-<p>与<code>using</code>声明不同，<code>using</code>指示引入一个与已有函数形参列表完全相同的函数并不会引发错误。但需要明确指出调用的是命名空间中的函数版本还是当前作用域中的版本。</p>
-<p>如果存在多个<code>using</code>指示，则来自每个命名空间的名字都会成为候选函数集的一部分。</p>
-<h2 id="多重继承与虚继承"><a href="#多重继承与虚继承" class="headerlink" title="多重继承与虚继承"></a>多重继承与虚继承</h2><p>多重继承（Multiple inheritance）是指从多个直接基类中产生派生类的能力。多重继承的派生类继承了所有父类的属性。</p>
-<h3 id="多重继承"><a href="#多重继承" class="headerlink" title="多重继承"></a>多重继承</h3><p>派生类的派生列表中可以包含多个基类。每个基类都包含一个可选的访问说明符。和单继承相同，如果访问说明符被省略，则关键字<code>class</code>对应的默认访问说明符是<code>private</code>，关键字<code>struct</code>对应的是<code>public</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Bear</span> : <span class="keyword">public</span> ZooAnimal &#123; <span class="comment">/* ... */</span> &#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Panda</span> : <span class="keyword">public</span> Bear, <span class="keyword">public</span> Endangered &#123; <span class="comment">/* ... */</span> &#125;;</span><br></pre></td></tr></table></figure>
-
-<p>和单继承相同，多重继承的派生列表也只能包含已经被定义过的类，且这些类不能是<code>final</code>的。</p>
-<p>多重继承关系中，派生类对象包含每个基类的子对象。</p>
-<p>构造一个多重继承的派生类对象将同时构造并初始化它的所有基类子对象。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Panda::<span class="built_in">Panda</span>(std::string name, <span class="type">bool</span> onExhibit)</span><br><span class="line">    : <span class="built_in">Bear</span>(name, onExhibit, <span class="string">&quot;Panda&quot;</span>),</span><br><span class="line">      <span class="built_in">Endangered</span>(Endangered::critical) &#123; &#125;</span><br><span class="line">Panda::<span class="built_in">Panda</span>()</span><br><span class="line">    : <span class="built_in">Endangered</span>(Endangered::critical) &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>派生类的构造函数初始值列表将实参分别传递给每个直接基类。其中基类的构造顺序与派生列表中基类的出现顺序一致，与构造函数初始值列表中基类的顺序无关。</p>
-<p>C++11允许派生类从它的一个或多个基类中继承构造函数，但如果从多个基类中继承了相同的构造函数（即形参列表完全相同），程序会产生错误。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Base1</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">Base1</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">Base1</span>(<span class="type">const</span> std::string&amp;);</span><br><span class="line">    <span class="built_in">Base1</span>(std::shared_ptr&lt;<span class="type">int</span>&gt;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Base2</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">Base2</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">Base2</span>(<span class="type">const</span> std::string&amp;);</span><br><span class="line">    <span class="built_in">Base2</span>(<span class="type">int</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// error</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">D1</span>: <span class="keyword">public</span> Base1, <span class="keyword">public</span> Base2</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> Base1::Base1;   </span><br><span class="line">    <span class="keyword">using</span> Base2::Base2;   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>如果一个类从它的多个基类中继承了相同的构造函数，则必须为该构造函数定义其自己的版本。</p>
-<p>和单继承相同，多重继承的派生类如果定义了自己的拷贝&#x2F;赋值构造函数和赋值运算符，则必须在完整的对象上执行这些操作。只有当派生类使用的是合成版本的拷贝、移动或赋值成员时，才会自动处理其基类部分。在合成版本的拷贝控制成员中，每个基类分别使用自己的对应成员隐式地完成构造、赋值或销毁等工作。</p>
-<h3 id="类型转换与多个基类"><a href="#类型转换与多个基类" class="headerlink" title="类型转换与多个基类"></a>类型转换与多个基类</h3><p>多重继承和单继承相同，某个可访问基类的指针或引用可以直接指向派生类对象。</p>
-<p>编译器不会在派生类向基类的几种转换中进行比较和选择。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Bear&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">const</span> Endangered&amp;)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function">Panda <span class="title">ying_yang</span><span class="params">(<span class="string">&quot;ying_yang&quot;</span>)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>和单继承相同，对象、指针和引用的静态类型决定了我们可以使用的成员。</p>
-<h3 id="多重继承下的类作用域"><a href="#多重继承下的类作用域" class="headerlink" title="多重继承下的类作用域"></a>多重继承下的类作用域</h3><p>在单继承中，派生类的作用域嵌套在直接基类和间接基类的作用域中。名称查找沿着继承体系自底向上进行，直到找到所需的名字。派生类的名字会隐藏基类的同名成员。在多重继承中，相同的查找过程在所有基类中同时进行。如果名字在多个基类中都被找到，则会产生二义性错误。</p>
-<p>派生类可以从多个基类中分别继承名字相同的成员，但是在使用该名字时必须明确指出其版本。避免潜在二义性的最好方法是在派生类中定义新的版本。</p>
-<h3 id="虚继承"><a href="#虚继承" class="headerlink" title="虚继承"></a>虚继承</h3><p>尽管在派生列表中同一个基类只能出现一次，但实际上派生类可以多次继承同一个类。派生类可以通过它的两个直接基类分别继承同一个间接基类，也可以直接继承某个基类，然后通过另一个基类再次间接继承该类。</p>
-<p>默认情况下，派生类含有继承链上每个类对应的子部分。如果某个类在派生过程中出现了多次，则派生类中会包含该类的多个子对象。这种默认情况对某些类并不适用。例如<code>iostream</code>，它直接继承自<code>istream</code>和<code>ostream</code>，而<code>istream</code>和<code>ostream</code>都继承自<code>base_ios</code>，所以<code>iostream</code>继承了<code>base_ios</code>两次。如果<code>iostream</code>对象包含<code>base_ios</code>的两份拷贝，则无法在同一个缓冲区中进行读写操作。</p>
-<p>虚继承可以让某个类共享它的基类，其中共享的基类子对象称为虚基类（virtual base class）。在该机制下，不论虚基类在继承体系中出现了多少次，派生类都只包含唯一一个共享的虚基类子对象。</p>
-<p>通常情况下，使用虚继承的类层次是由一个人或一个项目组一次性设计完成的。对于一个独立开发的类来说，很少需要基类中的某一个是虚基类，况且新基类的开发者也无法改变已存在的类体系。</p>
-<p>虚派生只影响从指定了虚基类的派生类中进一步派生出的类，它不会影响派生类本身。</p>
-<p>指定虚基类的方式是在派生列表中添加关键字<code>virtual</code>。</p>
-<p>不论基类是不是虚基类，派生类对象都能被可访问基类的指针或引用操作。</p>
-<p>因为在每个共享的虚基类中只有唯一一个共享的子对象，所以该基类的成员可以被直接访问，而且不会产生二义性。此外，如果虚基类的成员只被一条派生路径覆盖，则也可以直接访问该成员。但如果成员被多个基类覆盖，则一般情况下派生类必须为该成员定义新的版本。例如，假设类<code>B</code>定义了一个名为<code>X</code>的成员，<code>D1</code>和<code>D2</code>都从<code>B</code>虚继承得到，<code>D</code>继承了<code>D1</code>和<code>D2</code>。则在<code>D</code>的作用域中，<code>X</code>通过<code>D</code>的两个基类都是可见的。如果通过<code>D</code>的对象使用<code>X</code>，则有三种可能性：</p>
-<ul>
-<li><p>如果<code>D1</code>和<code>D2</code>中都没有<code>X</code>的定义，则<code>X</code>会被解析为<code>B</code>的成员，此时不存在二义性。</p>
-</li>
-<li><p>如果<code>D1</code>和<code>D2</code>中的某一个定义了<code>X</code>，派生类的<code>X</code>会比共享虚基类<code>B</code>的<code>X</code>优先级更高，此时同样没有二义性。</p>
-</li>
-<li><p>如果<code>D1</code>和<code>D2</code>都定义了<code>X</code>，则直接访问<code>X</code>会产生二义性问题。</p>
-</li>
-</ul>
-<h3 id="构造函数与虚继承"><a href="#构造函数与虚继承" class="headerlink" title="构造函数与虚继承"></a>构造函数与虚继承</h3><p>在虚派生中，虚基类是由最低层的派生类初始化的。如果按普通规则处理，虚基类将会在多条继承路径上被重复初始化。</p>
-<p>继承体系中的每个类都可能在某个时刻成为“最低层的派生类”。只要能创建虚基类的派生类对象，该派生类的构造函数就必须初始化它的虚基类。即使虚基类不是派生类的直接基类，构造函数也可以进行初始化。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Bear::<span class="built_in">Bear</span>(std::string name, <span class="type">bool</span> onExhibit)</span><br><span class="line">    : <span class="built_in">ZooAnimal</span>(name, onExhibit, <span class="string">&quot;Bear&quot;</span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line">Raccoon::<span class="built_in">Raccoon</span>(std::string name, <span class="type">bool</span> onExhibit)</span><br><span class="line">    : <span class="built_in">ZooAnimal</span>(name, onExhibit, <span class="string">&quot;Raccoon&quot;</span>) &#123; &#125;</span><br><span class="line"></span><br><span class="line">Panda::<span class="built_in">Panda</span>(std::string name, <span class="type">bool</span> onExhibit)</span><br><span class="line">    : <span class="built_in">ZooAnimal</span>(name, onExhibit, <span class="string">&quot;Panda&quot;</span>),</span><br><span class="line">      <span class="built_in">Bear</span>(name, onExhibit),</span><br><span class="line">      <span class="built_in">Raccoon</span>(name, onExhibit),</span><br><span class="line">      <span class="built_in">Endangered</span>(Endangered::critical),</span><br><span class="line">      <span class="function">sleeping <span class="title">flag</span><span class="params">(<span class="literal">false</span>)</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>构造含有虚基类的对象时，首先使用提供给最低层派生类构造函数的初始值初始化该对象的虚基类子部分，之后再按照直接基类在派生列表中出现的顺序依次对其初始化。</p>
-<p>一个类可以有多个虚基类，此时这些虚子对象按照它们在派生列表中出现的顺序依次构造。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1947,7 +1763,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1979,7 +1795,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
