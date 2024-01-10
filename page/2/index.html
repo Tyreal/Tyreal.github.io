@@ -162,6 +162,147 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/19/C++STL_10_Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/19/C++STL_10_Algorithm/" class="post-title-link" itemprop="url">C++ STL 10</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-19 11:00:57 / 修改时间：11:01:08" itemprop="dateCreated datePublished" datetime="2023-08-19T11:00:57+08:00">2023-08-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="算法Algorithm"><a href="#算法Algorithm" class="headerlink" title="算法Algorithm"></a>算法Algorithm</h1><ul>
+<li><p>算法的形式</p>
+<ul>
+<li>右下角是算法常用的两种接口形式</li>
+</ul>
+</li>
+<li><p>迭代器的分类</p>
+<ul>
+<li><p>迭代器通常由具体的container 依据自己的特性提供</p>
+</li>
+<li><p>分类：随机索引（random access）；双向（bidirecition）；单向（forward）；STL 中<strong>没有定义 enum 类型，而是 struct 类型</strong>，主要是因为基于这些类别存在继承关系，而非独立的，方便简化后续的实现</p>
+</li>
+<li><p>typeid 可以 获取 类对象的命名 <strong>typeid(itr).name()</strong></p>
+<ul>
+<li>通过给定默认参数，保证使用接口一致</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>iterator_category 对算法效率的影响</p>
+<ul>
+<li><p>不同的 iterator_category 意味着距离计算不同</p>
+</li>
+<li><p>由于 farward、 bidierection都是继承 input ，所以只要实现input</p>
+</li>
+<li><p>不同的是 category 的取出方式</p>
+</li>
+<li><p>type traits 提供 重要性 的解答</p>
+</li>
+<li><p>函数前加入 <strong>__</strong> 表示这个函数不直接作为接口 </p>
+</li>
+<li><p>*read 表示读，Output iterator 是无法进行 读操作的，所以unique_copy 要单独写</p>
+</li>
+</ul>
+</li>
+<li><p>算法源码无法对 iterator_category 无法限制的，只能通过 模板 typename 进行暗示，具体调用 某一块时报错退出</p>
+</li>
+<li><p>算法用例</p>
+<p>算法一般会提供两个版本，一个默认版本，一个允许提供仿函数的扩展版本</p>
+<ul>
+<li><p>accumulate</p>
+<ul>
+<li><ul>
+<li>binary_op 表征了 自己定义的函数指针或者仿函数（函数对象）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>for_each</p>
+<ul>
+<li><ul>
+<li>对每个元素做同一件事情</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>replace &amp; replace_if &amp; replace_copy</p>
+</li>
+</ul>
+<p>借这个算法，提供STL 算法模板的功能式命名</p>
+<pre><code>    - 带 if 表征了外部需要提供一个判断准则的function
+    - 带 copy 表征了存在拷贝的动作，不改变源数据
+</code></pre>
+<ul>
+<li><p>全局算法与关联式容器自带的算法</p>
+<ul>
+<li><p>count &amp; count_if</p>
+</li>
+<li><p>find &amp; find_if</p>
+<pre><code>顺序查找
+</code></pre>
+</li>
+<li><p>sort</p>
+<pre><code>- rbegin； rend 表示逆向的起止点和终止点
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>二分搜索<br>  - 注意 lower bound 表示下界；upper bound 表征上界</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/C++STL_9_Hash_Table/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1403,297 +1544,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/20/C++%20Primer%20Chapter%2019%20Notes/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="HUI">
-      <meta itemprop="description" content="We have a long way to go">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="HUI BLOG">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/20/C++%20Primer%20Chapter%2019%20Notes/" class="post-title-link" itemprop="url">C++ Primer Chapter 19 Notes</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-20 17:56:32" itemprop="dateCreated datePublished" datetime="2023-06-20T17:56:32+08:00">2023-06-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-24 10:49:28" itemprop="dateModified" datetime="2023-06-24T10:49:28+08:00">2023-06-24</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="第19章-特殊工具与技术"><a href="#第19章-特殊工具与技术" class="headerlink" title="第19章 特殊工具与技术"></a>第19章 特殊工具与技术</h1><h2 id="控制内存分配"><a href="#控制内存分配" class="headerlink" title="控制内存分配"></a>控制内存分配</h2><h3 id="重载new和delete"><a href="#重载new和delete" class="headerlink" title="重载new和delete"></a>重载<code>new</code>和<code>delete</code></h3><p>使用<code>new</code>表达式时，实际执行了三步操作：</p>
-<ul>
-<li><p><code>new</code>表达式调用名为<code>operator new</code>（或<code>operator new[]</code>）的标准库函数。该函数分配一块足够大、原始、未命名的内存空间以便存储特定类型的对象（或对象数组）。</p>
-</li>
-<li><p>编译器调用对应的构造函数构造这些对象并初始化。</p>
-</li>
-<li><p>对象被分配了空间并构造完成，返回指向该对象的指针。</p>
-</li>
-</ul>
-<p>使用<code>delete</code>表达式时，实际执行了两步操作：</p>
-<ul>
-<li><p>对指针所指向的对象（或对象数组）执行对应的析构函数。</p>
-</li>
-<li><p>编译器调用名为<code>operator delete</code>（或<code>operator delete[]</code>）的标准库函数释放内存空间。</p>
-</li>
-</ul>
-<p>程序可以在全局作用域中定义<code>operator new</code>和<code>operator delete</code>函数，也可以将其定义为成员函数。编译器发现<code>new</code>或<code>delete</code>表达式后，将在程序中查找可供调用的<code>operator</code>函数。</p>
-<p>可以使用作用域运算符令<code>new</code>或<code>delete</code>表达式忽略定义在类中的函数，直接执行全局作用域版本。</p>
-<p><code>nothrow_t</code>类型是定义在头文件<code>new</code>中的一个结构体，这个类型不包含任何成员。头文件<code>new</code>还定义了一个名为<code>nothrow</code>的<code>const</code>对象，用户可以通过这个对象请求<code>new</code>的非抛出版本。</p>
-<p>将<code>operator</code>函数定义为类的成员时，它们是隐式静态的，无须显式地声明<code>static</code>。</p>
-<p><code>operator new</code>和<code>operator new[]</code>函数的返回类型必须是<code>void*</code>，第一个形参的类型必须是<code>size_t</code>且不能有默认实参。编译器调用<code>operator new</code>时，用存储指定类型对象所需的字节数初始化<code>size_t</code>形参；调用<code>operator new[]</code>时，传入函数的则是存储数组中所有元素所需的空间。</p>
-<p>自定义<code>operator new</code>函数时可以为它提供额外的形参，用到这些自定义函数的<code>new</code>表达式必须使用<code>new</code>的定位形式传递参数。下面这种形式的<code>new</code>函数只供标准库使用，不能被用户重定义：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> *<span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span>, <span class="type">void</span>*)</span></span>;   </span><br></pre></td></tr></table></figure>
-
-<p><code>operator delete</code>和<code>operator delete[]</code>函数的返回类型必须是<code>void</code>，第一个形参的类型必须是<code>void*</code>。函数被调用时，编译器会用指向待释放内存的指针来初始化<code>void*</code>形参。</p>
-<p>将<code>operator delete</code>或<code>operator delete[]</code>定义为类的成员时，可以包含另一个类型为<code>size_t</code>的形参。该形参的初始值是第一个形参所指向对象的字节数。</p>
-<p><code>malloc</code>函数接受一个表示待分配字节数的<code>size_t</code>参数，返回指向分配空间的指针，或者返回0以表示分配失败。<code>free</code>函数接受一个<code>void*</code>参数，它是<code>malloc</code>返回的指针的副本，<code>free</code>将相关内存返回给系统。调用<code>free(0)</code>没有任何意义。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> *<span class="keyword">operator</span> <span class="title">new</span><span class="params">(<span class="type">size_t</span> size)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="type">void</span> *mem = <span class="built_in">malloc</span>(size))</span><br><span class="line">        <span class="keyword">return</span> mem;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">bad_alloc</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="type">void</span> *mem)</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">free</span>(mem);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="定位new表达式"><a href="#定位new表达式" class="headerlink" title="定位new表达式"></a>定位<code>new</code>表达式</h3><p>在C++的早期版本中，<code>allocator</code>类还不是标准库的一部分。如果程序想分开内存分配和初始化过程，需要直接调用<code>operator new</code>和<code>operator delete</code>函数。它们类似<code>allocator</code>类的<code>allocate</code>和<code>deallocate</code>成员，负责分配或释放内存空间，但不会构造或销毁对象。</p>
-<p>不能使用<code>allocator</code>类的<code>construct</code>函数在<code>operator new</code>分配的内存空间中构造对象，而应该使用定位<code>new</code>表达式构造。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> (place_address) type</span><br><span class="line"><span class="built_in">new</span> (place_address) <span class="built_in">type</span> (initializers)</span><br><span class="line"><span class="built_in">new</span> (place_address) type [size]</span><br><span class="line"><span class="built_in">new</span> (place_address) type [size] &#123; braced initializer list &#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中<code>place_address</code>是一个指针。<code>initializers</code>是一个以逗号分隔的初始值列表（可能为空），该列表用于构造新分配的对象。</p>
-<p>当仅通过一个地址值调用定位<code>new</code>时，它会使用<code>operator new(size_t, void*)</code>函数（用户无法重载的版本）。该函数不分配任何内存，直接返回指针形参。然后由<code>new</code>表达式负责在指定的地址初始化对象。</p>
-<p>传递给<code>construct</code>函数的指针必须指向同一个<code>allocator</code>对象分配的空间，但是传递给定位<code>new</code>的指针无须指向<code>operator new</code>分配的内存，甚至不需要指向动态内存。</p>
-<p>调用析构函数会销毁对象，但不会释放内存。如果需要的话，可以重新使用该空间。</p>
-<h2 id="运行时类型识别"><a href="#运行时类型识别" class="headerlink" title="运行时类型识别"></a>运行时类型识别</h2><p>运行时类型识别（RTTI）的功能由两个运算符实现：</p>
-<ul>
-<li><p><code>typeid</code>运算符，用于返回表达式的类型。</p>
-</li>
-<li><p><code>dynamic_cast</code>运算符，用于将基类的指针或引用安全地转换为派生类的指针或引用。</p>
-</li>
-</ul>
-<p>RTTI运算符适用于以下情况：想通过基类对象的指针或引用执行某个派生类操作，并且该操作不是虚函数。</p>
-<h3 id="dynamic-cast运算符"><a href="#dynamic-cast运算符" class="headerlink" title="dynamic_cast运算符"></a><code>dynamic_cast</code>运算符</h3><p><code>dynamic_cast</code>运算符的形式如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dynamic_cast</span>&lt;type*&gt;(e)</span><br><span class="line"><span class="built_in">dynamic_cast</span>&lt;type&amp;&gt;(e)</span><br><span class="line"><span class="built_in">dynamic_cast</span>&lt;type&amp;&amp;&gt;(e)</span><br></pre></td></tr></table></figure>
-
-<p>其中<code>type</code>是一个类类型，并且通常情况下该类型应该含有虚函数。在第一种形式中，<code>e</code>必须是一个有效指针；在第二种形式中，<code>e</code>必须是一个左值；在第三种形式中，<code>e</code>不能是左值。在所有形式中，<code>e</code>的类型必须符合以下条件之一：</p>
-<ul>
-<li><p><code>e</code>是<code>type</code>的公有派生类。</p>
-</li>
-<li><p><code>e</code>是<code>type</code>的公有基类。</p>
-</li>
-<li><p><code>e</code>和<code>type</code>类型相同。</p>
-</li>
-</ul>
-<p>如果条件符合，则类型转换成功，否则转换失败。转换失败可能有两种结果：</p>
-<ul>
-<li><p>如果<code>dynamic_cast</code>语句的转换目标是指针类型，则结果为0。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Derived *dp = <span class="built_in">dynamic_cast</span>&lt;Derived*&gt;(bp))</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果<code>dynamic_cast</code>语句的转换目标是引用类型，则抛出<code>bad_cast</code>异常（定义在头文件<code>typeinfo</code>中）。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">f</span><span class="params">(<span class="type">const</span> Base &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">const</span> Derived &amp;d = <span class="built_in">dynamic_cast</span>&lt;<span class="type">const</span> Derived&amp;&gt;(b);</span><br><span class="line">   </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (bad_cast)</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>在条件判断部分执行<code>dynamic_cast</code>可以确保类型转换和结果检查在同一条表达式中完成。</p>
-<p>可以对一个空指针执行<code>dynamic_cast</code>，结果是所需类型的空指针。</p>
-<h3 id="typeid运算符（"><a href="#typeid运算符（" class="headerlink" title="typeid运算符（"></a><code>typeid</code>运算符（</h3><p><code>typeid</code>表达式的形式是<code>typeid(e)</code>，其中<code>e</code>可以是任意表达式或类型名称。<code>typeid</code>的结果是一个指向常量对象的引用，该对象的类型是标准库<code>type_info</code>（定义在头文件<code>typeinfo</code>中）或<code>type_info</code>的公有派生类型。</p>
-<p><code>typeid</code>可以作用于任何类型的表达式，其中的顶层<code>const</code>会被忽略。如果表达式是一个引用，则<code>typeid</code>返回该引用所指对象的类型。当<code>typeid</code>作用于数组或函数时，不会执行向指针的标准类型转换。</p>
-<p>当<code>typeid</code>的运算对象不属于类类型或者是一个不包含任何虚函数的类时，<code>typeid</code>返回其静态类型。而当运算对象是至少包含一个虚函数的类的左值时，<code>typeid</code>的结果直到运行期间才会确定。</p>
-<p>通常情况下，<code>typeid</code>用于比较两条表达式的类型是否相同，或者比较一条表达式的类型是否与指定类型相同。</p>
-<p><code>typeid</code>应该作用于对象。当<code>typeid</code>作用于指针时，返回的结果是该指针的静态编译类型。</p>
-<h3 id="使用RTTI"><a href="#使用RTTI" class="headerlink" title="使用RTTI"></a>使用RTTI</h3><p>使用RTTI可以为具有继承关系的类实现相等运算符。</p>
-<p>相等运算符的形参是基类的引用。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Base</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">friend</span> <span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> Base&amp;, <span class="type">const</span> Base&amp;);</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">bool</span> <span class="title">equal</span><span class="params">(<span class="type">const</span> Base&amp;)</span> <span class="type">const</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Derived</span>: <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  </span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">equal</span><span class="params">(<span class="type">const</span> Base&amp;)</span> <span class="type">const</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>typeid</code>检查两个运算对象的类型是否一致，类型一致才会继续判断每个数据成员的取值是否相同。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> Base &amp;lhs, <span class="type">const</span> Base &amp;rhs)</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">typeid</span>(lhs) == <span class="built_in">typeid</span>(rhs) &amp;&amp; lhs.<span class="built_in">equal</span>(rhs);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>每个类定义的<code>equal</code>函数负责比较类型自己的数据成员。<code>equal</code>函数的形参都是基类的引用，但是在比较之前需要先把运算对象转换成自己的类型。</p>
-<h3 id="type-info类"><a href="#type-info类" class="headerlink" title="type_info类"></a><code>type_info</code>类</h3><p><code>type_info</code>类一般是作为一个基类出现，所以它还应该提供一个公有虚析构函数。当编译器希望提供额外的类型信息时，通常在<code>type_info</code>的派生类中完成。</p>
-<p><code>type_info</code>类没有默认构造函数，而且它的拷贝和移动构造函数以及赋值运算符都被定义为删除的。创建<code>type_info</code>对象的唯一方式就是使用<code>typeid</code>运算符。</p>
-<p>对于某种给定类型来说，<code>name</code>成员的返回值因编译器而异并且不一定与在程序中使用的名字一致。对于<code>name</code>返回值的唯一要求就是类型不同则返回的字符串必须有所区别。</p>
-<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><p>和类一样，每个枚举类型都定义了一种新的类型。枚举属于字面值常量类型。</p>
-<p>C++包含两种枚举：</p>
-<ul>
-<li><p>限定作用域的枚举（scoped enumeration，C++11新增）。定义形式是关键字<code>enum class</code>（或<code>enum struct</code>）后接枚举类型名字以及用花括号包围、以逗号分隔的枚举成员（enumerator）列表。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">open_modes</span></span><br><span class="line">&#123;</span><br><span class="line">    input,</span><br><span class="line">    output,</span><br><span class="line">    append</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不限定作用域的枚举（unscoped enumeration）。定义时省略关键字<code>class</code>（或<code>struct</code>），枚举类型名字是可选的。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">C++<span class="comment">// unscoped enumeration</span></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">color</span></span><br><span class="line">&#123;</span><br><span class="line">    red,</span><br><span class="line">    yellow,</span><br><span class="line">    green</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// unnamed, unscoped enum</span></span><br><span class="line"><span class="keyword">enum</span></span><br><span class="line">&#123;</span><br><span class="line">    floatPrec = <span class="number">6</span>,</span><br><span class="line">    doublePrec = <span class="number">10</span>,</span><br><span class="line">    double_doublePrec = <span class="number">10</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>如果枚举是未命名的，则只能在定义该枚举时一同定义它的对象。</p>
-</li>
-</ul>
-<p>在限定作用域的枚举类型中，枚举成员的名字遵循常规作用域规则，并且在枚举类型的作用域外是不可访问的。与之相反，在不限定作用域的枚举类型中，枚举成员的作用域与枚举类型本身的作用域相同。</p>
-<p>默认情况下，枚举值从0开始，依次加1。也可以直接为枚举成员指定特定的值。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">intTypes</span></span><br><span class="line">&#123;</span><br><span class="line">    charTyp = <span class="number">8</span>, shortTyp = <span class="number">16</span>, intTyp = <span class="number">16</span>,</span><br><span class="line">    longTyp = <span class="number">32</span>, long_longTyp = <span class="number">64</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>枚举值可以不唯一。如果没有显式提供初始值，则当前枚举成员的值等于之前枚举成员的值加1。</p>
-<p>枚举成员是<code>const</code>的，因此在初始化枚举成员时提供的初始值必须是常量表达式。</p>
-<p>可以在任何需要常量表达式的地方使用枚举成员。如：</p>
-<ul>
-<li><p>定义枚举类型的<code>constexpr</code>变量。</p>
-</li>
-<li><p>将枚举类型对象作为<code>switch</code>语句的表达式，而将枚举值作为<code>case</code>标签。</p>
-</li>
-<li><p>将枚举类型作为非类型模板形参使用。</p>
-</li>
-<li><p>在类的定义中初始化枚举类型的静态数据成员。</p>
-</li>
-</ul>
-<p>初始化枚举对象或者给枚举对象赋值时，必须使用该类型的一个枚举成员或者该类型的另一个对象。即使某个整型值恰好与枚举成员的值相等，也不能用其初始化枚举对象。</p>
-<p>不限定作用域的枚举类型对象或枚举成员能自动转换成整型。</p>
-<p>枚举是由某种整数类型表示的。C++11中，可以在枚举名字后面指定用来表示枚举成员的整型类型。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">intValues</span> : <span class="type">unsigned</span> <span class="type">long</span> <span class="type">long</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*...*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>如果没有指定枚举的潜在类型，则默认情况下限定作用域的枚举成员类型是<code>int</code>。不限定作用域的枚举成员不存在默认类型。</p>
-<p>C++11中可以提前声明枚举。枚举的前置声明必须指定（无论隐式或显式）其成员的类型。</p>
-<h2 id="类成员指针"><a href="#类成员指针" class="headerlink" title="类成员指针"></a>类成员指针</h2><p>成员指针（pointer to member）是指可以指向类的非静态成员的指针。</p>
-<p>成员指针的类型包括类的类型和成员的类型。初始化成员指针时，会令其指向类的某个成员，但是不指定该成员所属的对象。直到使用成员指针时，才提供成员所属的对象。</p>
-<h3 id="数据成员指针"><a href="#数据成员指针" class="headerlink" title="数据成员指针"></a>数据成员指针</h3><p>声明成员指针时必须在<code>*</code>前添加<code>classname::</code>以表示当前定义的指针可以指向<code>classname</code>的成员。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Screen</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">typedef</span> std::string::size_type pos;</span><br><span class="line">    <span class="function"><span class="type">char</span> <span class="title">get_cursor</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> contents[cursor]; &#125;</span><br><span class="line">    <span class="function"><span class="type">char</span> <span class="title">get</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="type">char</span> <span class="title">get</span><span class="params">(pos ht, pos wd)</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    std::string contents;</span><br><span class="line">    pos cursor;</span><br><span class="line">    pos height, width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> string Screen::*pdata;</span><br></pre></td></tr></table></figure>
-
-<p>初始化或者给成员指针赋值时，需要指定它所指向的成员。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pdata = &amp;Screen::contents;</span><br></pre></td></tr></table></figure>
-
-<p>成员指针使用<code>.*</code>和<code>-&gt;*</code>来获得其指向对象的成员。</p>
-<p>常规的访问控制规则对成员指针同样有效。数据成员一般是私有的，因此通常不能直接获得数据成员的指针。如果类希望外部代码能访问它的私有数据成员，可以定义一个函数，令其返回指向私有成员的指针。</p>
-<h3 id="成员函数指针"><a href="#成员函数指针" class="headerlink" title="成员函数指针"></a>成员函数指针</h3><p>类似于其他函数指针，指向成员函数的指针也需要指定目标函数的返回类型和形参列表。如果成员函数是<code>const</code>成员或引用成员，则指针也必须包含<code>const</code>或引用限定符。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> pmf = &amp;Screen::get_cursor;</span><br></pre></td></tr></table></figure>
-
-<p>如果成员函数存在重载问题，则必须显式声明指针指向的函数类型。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">char</span> (Screen::*pmf2)(Screen::pos, Screen::pos) <span class="type">const</span>;</span><br><span class="line">pmf2 = &amp;Screen::get;</span><br></pre></td></tr></table></figure>
-
-<p>和普通函数指针不同，在成员函数和指向该成员的指针之间不存在自动转换规则。</p>
-<p>成员函数指针使用<code>.*</code>和<code>-&gt;*</code>来调用类的成员函数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Screen myScreen, *pScreen = &amp;myScreen;</span><br><span class="line"><span class="type">char</span> c1 = (pScreen-&gt;*pmf)();</span><br><span class="line"><span class="type">char</span> c2 = (myScreen.*pmf2)(<span class="number">0</span>, <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-
-<p>可以使用类型别名来增强含有成员指针的代码的可读性。</p>
-<h3 id="将成员函数用作可调用对象"><a href="#将成员函数用作可调用对象" class="headerlink" title="将成员函数用作可调用对象"></a>将成员函数用作可调用对象</h3><p>成员指针不是一个可调用对象，不支持函数调用运算符。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> fp = &amp;string::empty;   </span><br><span class="line"><span class="built_in">find_if</span>(svec.<span class="built_in">begin</span>(), svec.<span class="built_in">end</span>(), fp);</span><br></pre></td></tr></table></figure>
-
-<p>从成员函数指针获取可调用对象的一种方法是使用标准库模板<code>function</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function&lt;<span class="type">bool</span> (<span class="type">const</span> string&amp;)&gt; fcn = &amp;string::empty;</span><br><span class="line"><span class="built_in">find_if</span>(svec.<span class="built_in">begin</span>(), svec.<span class="built_in">end</span>(), fcn);</span><br></pre></td></tr></table></figure>
-
-<p>定义一个<code>function</code>对象时，必须指定该对象所能表示的函数类型（即可调用对象的形式）。如果可调用对象是一个成员函数，则第一个形参必须表示该成员是在哪个对象上执行的。</p>
-<p>使用标准库功能<code>mem_fn</code>（定义在头文件<code>functional</code>中）可以让编译器推断成员的类型。和<code>function</code>一样，<code>mem_fn</code>可以从成员指针生成可调用对象。但<code>mem_fn</code>可以根据成员指针的类型推断可调用对象的类型，无须显式指定。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">find_if</span>(svec.<span class="built_in">begin</span>(), svec.<span class="built_in">end</span>(), <span class="built_in">mem_fn</span>(&amp;string::empty));</span><br></pre></td></tr></table></figure>
-
-<p><code>mem_fn</code>生成的可调用对象可以通过对象和指针调用。</p>
-<h2 id="嵌套类"><a href="#嵌套类" class="headerlink" title="嵌套类"></a>嵌套类</h2><p>一个类可以定义在另一个类的内部，前者被称为嵌套类或嵌套类型（nested type）。嵌套类通常用于定义作为实现部分的类。</p>
-<p>外层类的对象和嵌套类的对象是相互独立的。在嵌套类对象中不包含任何外层类定义的成员，在外层类对象中也不包含任何嵌套类定义的成员。</p>
-<p>嵌套类的名字在外层类作用域中是可见的，在外层类作用域之外不可见。</p>
-<p>外层类对嵌套类的成员没有特殊的访问权限，嵌套类对外层类的成员也没有特殊的访问权限。</p>
-<p>嵌套类在其外层类中定义了一个类型成员。和其他成员类似，该类型的访问权限由外层类的访问说明符决定。</p>
-<p>嵌套类必须声明在类的内部，但是可以定义在类的内部或外部。在外层类之外定义嵌套类时，必须用外层类的名字限定嵌套类的名字。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TextQuery</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">QueryResult</span>;  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TextQuery</span>::QueryResult</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/*...*/</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>在嵌套类在其外层类之外完成真正的定义之前，它都是一个不完全类型。</p>
-<h2 id="union：一种节省空间的类"><a href="#union：一种节省空间的类" class="headerlink" title="union：一种节省空间的类"></a><code>union</code>：一种节省空间的类</h2><p>联合（union）是一种特殊的类。一个联合可以有多个数据成员，但是在任意时刻只有一个数据成员可以有值。给联合的某个成员赋值之后，其他成员会变为未定义状态。分配给联合对象的存储空间至少要能容纳它的最大数据成员。</p>
-<p>联合不能包含引用类型的成员。在C++11中，含有构造函数或析构函数的类类型也可以作为联合的成员类型。</p>
-<p>联合可以为其成员指定<code>public</code>、<code>protected</code>和<code>private</code>等保护标记。默认情况下，联合的成员都是公有的。</p>
-<p>联合可以定义包括构造函数和析构函数在内的成员函数。但是由于联合既不能继承自其他类，也不能作为基类使用，所以在联合中不能含有虚函数。</p>
-<p>定义联合时，首先是关键字<code>union</code>，随后是该联合的名字（可选）以及在花括号内的一组成员声明。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">union</span> <span class="title class_">Token</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="type">char</span> cval;</span><br><span class="line">    <span class="type">int</span> ival;</span><br><span class="line">    <span class="type">double</span> dval;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>默认情况下，联合是未初始化的。可以像显式初始化聚合类一样显式初始化联合，提供的初始值会被用于初始化第一个成员。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Token first_token = &#123; <span class="string">&#x27;a&#x27;</span> &#125;;   <span class="comment">// initializes the cval member</span></span><br></pre></td></tr></table></figure>
-
-<p>可以使用通用的成员访问运算符访问联合对象的成员。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">last_token.cval = <span class="string">&#x27;z&#x27;</span>;</span><br><span class="line">pt-&gt;ival = <span class="number">42</span>;</span><br></pre></td></tr></table></figure>
-
-<p>匿名联合（anonymous union）是一个未命名的联合，并且在右花括号和分号之间没有任何声明。一旦定义了一个匿名联合，编译器就会自动地为该联合创建一个未命名的对象。在匿名联合的定义所在的作用域内，该联合的成员都是可以直接访问的。</p>
-<p>匿名联合不能包含<code>protected</code>和<code>private</code>成员，也不能定义成员函数。</p>
-<p>C++的早期版本规定，在联合中不能含有定义了构造函数或拷贝控制成员的类类型成员。C++11取消了该限制。但是如果联合的成员类型定义了自己的构造函数或拷贝控制成员，该联合的用法会比只含有内置类型成员的联合复杂得多。</p>
-<ul>
-<li><p>当联合只包含内置类型的成员时，可以使用普通的赋值语句改变联合的值。但是如果想将联合的值改为类类型成员对应的值，或者将类类型成员的值改为一个其他值，则必须构造或析构该类类型的成员。</p>
-</li>
-<li><p>当联合只包含内置类型的成员时，编译器会按照成员顺序依次合成默认构造函数或拷贝控制成员。但是如果联合含有类类型成员，并且该类型自定义了默认构造函数或拷贝控制成员，则编译器会为该联合合成对应的版本并将其声明为删除的。</p>
-</li>
-</ul>
-<p>对于联合来说，构造或销毁类类型成员的操作非常复杂。通常情况下，可以把含有类类型成员的联合内嵌在另一个类中，这个类可以管理并控制与联合的类类型成员相关的状态转换。</p>
-<h2 id="局部类"><a href="#局部类" class="headerlink" title="局部类"></a>局部类</h2><p>类可以定义在某个函数的内部，这种类被称为局部类。局部类定义的类型只能在定义它的作用域内可见。</p>
-<p>局部类的所有成员（包括成员函数）都必须完整定义在类的内部，因此局部类的作用与嵌套类相比相差很远。</p>
-<p>局部类中不允许声明静态数据成员。</p>
-<p>局部类只能访问外层作用域定义的类型名、静态变量以及枚举成员，不能使用普通局部变量。</p>
-<p>常规的访问保护规则对于局部类同样适用。外层函数对局部类的私有成员没有任何访问特权。局部类可以将外层函数声明为友元。</p>
-<p>可以在局部类的内部再嵌套一个类。此时嵌套类的定义可以出现在局部类之外，不过嵌套类必须定义在与局部类相同的作用域中。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Bar</span></span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">        <span class="keyword">class</span> <span class="title class_">Nested</span>;   </span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Bar</span>::Nested</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>局部类内的嵌套类也是一个局部类，必须遵循局部类的各种规定。</p>
-<h2 id="固有的不可移植的特性"><a href="#固有的不可移植的特性" class="headerlink" title="固有的不可移植的特性"></a>固有的不可移植的特性</h2><p>类可以将其非静态数据成员定义成位域，在一个位域中含有一定数量的二进制位。当程序需要向其他程序或硬件设备传递二进制数据时，通常会使用位域。</p>
-<p>位域的声明形式是在成员名字之后紧跟一个冒号和一个常量表达式，该表达式用于指定成员所占的二进制位数。</p>
-<p>位域的类型必须是整型或枚举类型。因为带符号位域的行为是由具体实现确定的，所以通常情况下使用无符号类型保存位域。位域类型的大小不能小于位域结构的总大小。</p>
-<p>定义位域时建议结合<code>#pragma pack</code>指令将结构体对齐值修改为1，防止数据结构错位。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 保存原始对齐值，设置新对齐</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(push, 1)</span></span><br><span class="line"><span class="comment">// 结构体定义……</span></span><br><span class="line"><span class="comment">// 恢复原始对齐值</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> pack(pop)</span></span><br></pre></td></tr></table></figure>
-
-<p>位域成员按定义顺序在内存中由低地址向高地址排列，具体布局与机器相关。</p>
-<p>取地址符<code>&amp;</code>不能作用于位域，因此任何指针都无法指向类的位域。</p>
-<p>如果可能的话，类内部连续定义的位域会压缩在同一整数的相邻位，从而提供存储压缩。</p>
-<p>访问位域的方式与访问类的其他数据成员的方式类似。操作超过1位的位域时，通常会使用内置的位运算符。</p>
-<h3 id="volatile限定符"><a href="#volatile限定符" class="headerlink" title="volatile限定符"></a><code>volatile</code>限定符</h3><p>当对象的值可能在程序的控制或检测之外被改变时（如子线程），应该将该对象声明为<code>volatile</code>。关键字<code>volatile</code>的作用是告知编译器不要优化这样的对象。</p>
-<p><code>volatile</code>的确切含义与机器有关，只能通过查阅编译器文档来理解。要想让一个使用了<code>volatile</code>的程序在移植到新机器或新编译器后仍然有效，通常需要对该程序进行一些修改。</p>
-<p><code>volatile</code>的用法和<code>const</code>类似，都是对类型的额外修饰。二者相互之间并没有影响。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> display_register;   </span><br><span class="line"><span class="keyword">volatile</span> Task *curr_task;        </span><br><span class="line"><span class="keyword">volatile</span> <span class="type">int</span> iax[max_size];    </span><br></pre></td></tr></table></figure>
-
-<p>类可以将成员函数定义为<code>volatile</code>的。<code>volatile</code>对象只能调用<code>volatile</code>成员函数。</p>
-<p><code>volatile</code>和指针的关系类似<code>const</code>。可以声明<code>volatile</code>指针、指向<code>volatile</code>对象的指针和指向<code>volatile</code>对象的<code>volatile</code>指针。</p>
-<p>不能使用合成的拷贝&#x2F;移动构造函数和赋值运算符初始化<code>volatile</code>对象或者给<code>volatile</code>对象赋值。合成的成员接受的形参类型是非<code>volatile</code>常量引用，不能把非<code>volatile</code>引用绑定到<code>volatile</code>对象上。</p>
-<h3 id="链接指示：extern-quot-C-quot"><a href="#链接指示：extern-quot-C-quot" class="headerlink" title="链接指示：extern &quot;C&quot;"></a>链接指示：<code>extern &quot;C&quot;</code></h3><p>C++程序有时需要调用使用其他语言编写的函数，最常见的是调用C语言函数。其他语言中的函数名字也必须在C++中进行声明。对于这些函数，编译器检查其调用的方式与处理普通C++函数的方式相同，但是生成的代码有所区别。C++使用链接指示指出任意非C++函数所用的语言。</p>
-<p>链接指示有单个形式和复合形式，其不能出现在类定义或函数定义的内部。同样的链接指示必须出现在函数的每个声明处。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="function"><span class="type">size_t</span> <span class="title">strlen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *)</span></span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">strcmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span>*, <span class="type">const</span> <span class="type">char</span>*)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">char</span> *<span class="title">strcat</span><span class="params">(<span class="type">char</span>*, <span class="type">const</span> <span class="type">char</span>*)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>链接指示包含关键字<code>extern</code>、字符串字面值常量和一个函数声明。其中的字符串字面值常量指出了编写函数所用的语言。</p>
-<p>复合形式的链接指示可以应用于整个头文件。当一个<code>#include</code>指示被放置在复合链接指示的花括号中时，头文件中的所有函数声明都会被认为是由链接指示的语言编写的。链接指示可以嵌套，因此如果头文件包含自带链接指示的函数，该函数不会受到影响。</p>
-<p>C++从C语言继承的标准库函数可以定义成C函数，但并非必须。选择使用C还是C++实现C标准库，是由每个C++实现决定的。</p>
-<p>编写函数所使用的语言是函数类型的一部分。因此对于使用链接指示定义的函数来说，它的每个声明都必须使用相同的链接指示，而且指向这类函数的指针也必须使用与函数本身一样的链接指示。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="built_in">void</span> (*pf)(<span class="type">int</span>);</span><br></pre></td></tr></table></figure>
-
-<p>指向C函数的指针与指向C++函数的指针是不同的类型，两者不能相互赋值或初始化（少数C++编译器支持这种赋值操作并将其视为对语言的扩展，但是从严格意义上来说它是非法的）。</p>
-<p>链接指示不仅对函数本身有效，对作为返回类型或形参类型的函数指针也有效。所以如果希望给C++函数传入指向C函数的指针，必须使用类型别名。</p>
-<p>通过链接指示定义函数，可以令C++函数在其他语言编写的程序中可用。编译器会为该函数生成适合于指定语言的代码。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> <span class="function"><span class="type">double</span> <span class="title">calc</span><span class="params">(<span class="type">double</span> dparm)</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果需要在C和C++中编译同一个源文件，可以在编译C++版本时使用预处理定义<code>__cplusplus</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="comment">// ok</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">&quot;C&quot;</span></span><br><span class="line"><span class="meta"># <span class="keyword">endif</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">strcmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span>*, <span class="type">const</span> <span class="type">char</span>*)</span></span>;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1763,7 +1613,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
