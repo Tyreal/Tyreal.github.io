@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="《剑指Offer》与Leetcode主站题目链接对应41、√数据流中的中位数 -&gt; * https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;find-median-from-data-stream&#x2F;中位数是有序整数列表中的中间值。如果列表的大小是偶数，则没有中间值，中位数是两个中间值的平均值。  例如 arr &#x3D; [2,3,4] 的中位数是 3 。 例如 arr &#x3D; [2,3] 的中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode jianzhi Offer 41-50">
+<meta property="og:url" content="http://example.com/2024/01/16/jianzhi-Offer-Leetcode-41-50/index.html">
+<meta property="og:site_name" content="HUI BLOG">
+<meta property="og:description" content="《剑指Offer》与Leetcode主站题目链接对应41、√数据流中的中位数 -&gt; * https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;find-median-from-data-stream&#x2F;中位数是有序整数列表中的中间值。如果列表的大小是偶数，则没有中间值，中位数是两个中间值的平均值。  例如 arr &#x3D; [2,3,4] 的中位数是 3 。 例如 arr &#x3D; [2,3] 的中">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-16T12:59:44.000Z">
+<meta property="article:modified_time" content="2024-01-16T13:02:32.256Z">
+<meta property="article:author" content="HUI">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2024/01/16/jianzhi-Offer-Leetcode-41-50/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Leetcode jianzhi Offer 41-50 | HUI BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HUI BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/16/jianzhi-Offer-Leetcode-41-50/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leetcode jianzhi Offer 41-50
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-01-16 20:59:44 / 修改时间：21:02:32" itemprop="dateCreated datePublished" datetime="2024-01-16T20:59:44+08:00">2024-01-16</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="《剑指Offer》与Leetcode主站题目链接对应"><a href="#《剑指Offer》与Leetcode主站题目链接对应" class="headerlink" title="《剑指Offer》与Leetcode主站题目链接对应"></a>《剑指Offer》与Leetcode主站题目链接对应</h2><h3 id="41、√数据流中的中位数-gt-https-leetcode-com-problems-find-median-from-data-stream"><a href="#41、√数据流中的中位数-gt-https-leetcode-com-problems-find-median-from-data-stream" class="headerlink" title="41、√数据流中的中位数 -&gt; * https://leetcode.com/problems/find-median-from-data-stream/"></a>41、√数据流中的中位数 -&gt; * <a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-median-from-data-stream/">https://leetcode.com/problems/find-median-from-data-stream/</a></h3><p><strong>中位数</strong>是有序整数列表中的中间值。如果列表的大小是偶数，则没有中间值，中位数是两个中间值的平均值。</p>
+<ul>
+<li>例如 <code>arr = [2,3,4]</code> 的中位数是 <code>3</code> 。</li>
+<li>例如 <code>arr = [2,3]</code> 的中位数是 <code>(2 + 3) / 2 = 2.5</code> 。</li>
+</ul>
+<p>实现 MedianFinder 类:</p>
+<ul>
+<li><code>MedianFinder() </code>初始化 <code>MedianFinder</code> 对象。</li>
+<li><code>void addNum(int num)</code> 将数据流中的整数 <code>num</code> 添加到数据结构中。</li>
+<li><code>double findMedian()</code> 返回到目前为止所有元素的中位数。与实际答案相差 <code>10-5</code> 以内的答案将被接受。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">[&quot;MedianFinder&quot;, &quot;addNum&quot;, &quot;addNum&quot;, &quot;findMedian&quot;, &quot;addNum&quot;, &quot;findMedian&quot;]</span><br><span class="line">[[], [1], [2], [], [3], []]</span><br><span class="line">输出</span><br><span class="line">[null, null, null, 1.5, null, 2.0]</span><br><span class="line"></span><br><span class="line">解释</span><br><span class="line">MedianFinder medianFinder = new MedianFinder();</span><br><span class="line">medianFinder.addNum(1);    // arr = [1]</span><br><span class="line">medianFinder.addNum(2);    // arr = [1, 2]</span><br><span class="line">medianFinder.findMedian(); // 返回 1.5 ((1 + 2) / 2)</span><br><span class="line">medianFinder.addNum(3);    // arr[1, 2, 3]</span><br><span class="line">medianFinder.findMedian(); // return 2.0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MedianFinder</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt;&gt; A; <span class="comment">// 小顶堆，保存较大的一半</span></span><br><span class="line">    priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, less&lt;<span class="type">int</span>&gt;&gt; B;    <span class="comment">// 大顶堆，保存较小的一半</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数，初始化堆</span></span><br><span class="line">    <span class="built_in">MedianFinder</span>() &#123; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向数据流中添加一个元素</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">addNum</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (A.<span class="built_in">size</span>() != B.<span class="built_in">size</span>()) &#123;</span><br><span class="line">            A.<span class="built_in">push</span>(num);</span><br><span class="line">            B.<span class="built_in">push</span>(A.<span class="built_in">top</span>());</span><br><span class="line">            A.<span class="built_in">pop</span>();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            B.<span class="built_in">push</span>(num);</span><br><span class="line">            A.<span class="built_in">push</span>(B.<span class="built_in">top</span>());</span><br><span class="line">            B.<span class="built_in">pop</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到中位数</span></span><br><span class="line">    <span class="function"><span class="type">double</span> <span class="title">findMedian</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> A.<span class="built_in">size</span>() != B.<span class="built_in">size</span>() ? A.<span class="built_in">top</span>() : (A.<span class="built_in">top</span>() + B.<span class="built_in">top</span>()) / <span class="number">2.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="42、√连续子数组的最大和-gt-https-leetcode-com-problems-maximum-subarray"><a href="#42、√连续子数组的最大和-gt-https-leetcode-com-problems-maximum-subarray" class="headerlink" title="42、√连续子数组的最大和 -&gt; https://leetcode.com/problems/maximum-subarray/"></a>42、√连续子数组的最大和 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximum-subarray/">https://leetcode.com/problems/maximum-subarray/</a></h3><p>给你一个整数数组 <code>nums</code> ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+<p><strong>子数组</strong> 是数组中的一个连续部分。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出：6</span><br><span class="line">解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,4,-1,7,8]</span><br><span class="line">输出：23</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//动归</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个函数，用于找到给定数组的最大子数组和</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSubArray</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 检查数组是否为空，如果是，则返回0</span></span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">size</span>() == <span class="number">0</span>) </span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 初始化一个动态规划数组dp，用于存储以每个位置为结尾的最大子数组和</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(nums.size(), <span class="number">0</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 将dp的第一个元素初始化为nums的第一个元素</span></span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 初始化一个变量&#x27;result&#x27;，用于存储最终的最大子数组和</span></span><br><span class="line">        <span class="type">int</span> result = dp[<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 从数组的第二个元素开始循环</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 更新dp[i]，选择(dp[i-1] + nums[i])和nums[i]之间的最大值</span></span><br><span class="line">            dp[i] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>] + nums[i], nums[i]);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 更新&#x27;result&#x27;，选择&#x27;result&#x27;和dp[i]之间的最大值</span></span><br><span class="line">            <span class="keyword">if</span> (dp[i] &gt; result) </span><br><span class="line">                result = dp[i];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 返回最终的最大子数组和</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="43、×1-n整数中1出现的次数-gt-https-leetcode-com-problems-number-of-digit-one-submissions"><a href="#43、×1-n整数中1出现的次数-gt-https-leetcode-com-problems-number-of-digit-one-submissions" class="headerlink" title="43、×1~n整数中1出现的次数 -&gt; https://leetcode.com/problems/number-of-digit-one/submissions/"></a>43、×1~n整数中1出现的次数 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/number-of-digit-one/submissions/">https://leetcode.com/problems/number-of-digit-one/submissions/</a></h3><p>给定一个整数 <code>n</code>，计算所有小于等于 <code>n</code> 的非负整数中数字 <code>1</code> 出现的个数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 13</span><br><span class="line">输出：6</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">countDigitOne</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> mulk = <span class="number">1</span>; <span class="comment">// mulk 表示 10^k</span></span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; n &gt;= mulk; ++k) &#123;</span><br><span class="line">            <span class="comment">// 计算当前位上数字 1 的个数</span></span><br><span class="line">            ans += (n / (mulk * <span class="number">10</span>)) * mulk + <span class="built_in">min</span>(<span class="built_in">max</span>(n % (mulk * <span class="number">10</span>) - mulk + <span class="number">1</span>, <span class="number">0LL</span>), mulk);</span><br><span class="line">            mulk *= <span class="number">10</span>; <span class="comment">// 更新 mulk</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="44、×数字序列中某一位的数字-gt-https-leetcode-com-problems-nth-digit"><a href="#44、×数字序列中某一位的数字-gt-https-leetcode-com-problems-nth-digit" class="headerlink" title="44、×数字序列中某一位的数字 -&gt; https://leetcode.com/problems/nth-digit/"></a>44、×数字序列中某一位的数字 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/nth-digit/">https://leetcode.com/problems/nth-digit/</a></h3><p>给你一个整数 <code>n</code> ，请你在无限的整数序列 <code>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ...]</code> 中找出并返回第 <code>n</code> 位上的数字。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 3</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 11</span><br><span class="line">输出：0</span><br><span class="line">解释：第 11 位数字在序列 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, ... 里是 0 ，它是 10 的一部分。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findNthDigit</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> N = n;<span class="comment">//将输入的 n 转换为长整型</span></span><br><span class="line">        <span class="type">int</span> digits = <span class="number">1</span>; <span class="comment">// 初始化当前数字的位数</span></span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> border = <span class="number">9</span>; <span class="comment">// digits 位数一共产生多少位数字</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (N) &#123;</span><br><span class="line">            <span class="keyword">if</span> (N &lt;= border * digits) <span class="keyword">break</span>; <span class="comment">// 循环退出时即找到了当前数字的位数</span></span><br><span class="line">            N -= border * digits; <span class="comment">// N 为扣掉所有 digits 位数字（比如 2 位数）产生的数字之后还剩多少个数字</span></span><br><span class="line">            digits++;</span><br><span class="line">            border *= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 循环结束后剩余的 N 都是由 digits 位数贡献的</span></span><br><span class="line">        <span class="comment">// 每个 digits 位数都产生了 digits 个数字；因而我们求除求余就可以知道 n 对应的是第几个 digits 位数</span></span><br><span class="line">        <span class="type">int</span> offset = (N - <span class="number">1</span>) / digits;</span><br><span class="line">        <span class="type">int</span> begin = <span class="number">1</span>; <span class="comment">// 用于计算最小的 digits 位数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; digits - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            begin *= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> mod = (N - <span class="number">1</span>) % digits;<span class="comment">//计算余数，即当前数字的哪一位</span></span><br><span class="line">        string target = <span class="built_in">to_string</span>(offset + begin);<span class="comment">//构造当前数字字符串。</span></span><br><span class="line">        <span class="type">int</span> ans = target[mod] - <span class="string">&#x27;0&#x27;</span>;<span class="comment">//获取答案，即当前数字的第 mod 位</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="45、√把数组排成最小的数-gt-https-leetcode-com-problems-largest-number"><a href="#45、√把数组排成最小的数-gt-https-leetcode-com-problems-largest-number" class="headerlink" title="45、√把数组排成最小的数 -&gt; https://leetcode.com/problems/largest-number/"></a>45、√把数组排成最小的数 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/largest-number/">https://leetcode.com/problems/largest-number/</a></h3><p>给定一组非负整数 <code>nums</code>，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。</p>
+<p><strong>注意：</strong>输出结果可能非常大，所以你需要返回一个字符串而不是整数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [10,2]</span><br><span class="line">输出：&quot;210&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,30,34,5,9]</span><br><span class="line">输出：&quot;9534330&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">string <span class="title">largestNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123; <span class="comment">// 定义一个函数，参数为一个整数向量，返回一个字符串</span></span><br><span class="line">        vector&lt;string&gt; str; <span class="comment">// 创建一个字符串向量</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> i : nums) &#123; <span class="comment">// 遍历整数向量</span></span><br><span class="line">            str.<span class="built_in">push_back</span>(<span class="built_in">to_string</span>(i)); <span class="comment">// 将整数转换为字符串并添加到字符串向量中</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 使用 lambda 比较 elements.</span></span><br><span class="line">        <span class="keyword">auto</span> cmp = [](string left, string right) &#123; <span class="comment">// 定义一个lambda函数，比较两个字符串</span></span><br><span class="line">            <span class="keyword">return</span> left + right &gt; right + left; <span class="comment">// 按照拼接后的大小比较</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="built_in">sort</span>(str.<span class="built_in">begin</span>(),str.<span class="built_in">end</span>(), cmp); <span class="comment">// 使用lambda函数对字符串向量进行排序</span></span><br><span class="line">        stringstream ss; <span class="comment">// 创建一个字符串流</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> c : str) &#123; <span class="comment">// 遍历排序后的字符串向量</span></span><br><span class="line">            ss &lt;&lt; c; <span class="comment">// 将字符串添加到字符串流中</span></span><br><span class="line">        &#125;</span><br><span class="line">        string ans = ss.<span class="built_in">str</span>(); <span class="comment">// 将字符串流转换为字符串</span></span><br><span class="line">        <span class="keyword">if</span>(ans[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>)&#123; <span class="comment">// 如果第一个字符为0</span></span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;0&quot;</span>; <span class="comment">// 返回字符串&quot;0&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans; <span class="comment">// 返回排序后的字符串</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="46、√把数字翻译成字符串-gt-递归or动归-https-leetcode-com-problems-decode-ways"><a href="#46、√把数字翻译成字符串-gt-递归or动归-https-leetcode-com-problems-decode-ways" class="headerlink" title="46、√把数字翻译成字符串 -&gt; (递归or动归) https://leetcode.com/problems/decode-ways/"></a>46、√把数字翻译成字符串 -&gt; (递归or动归) <a target="_blank" rel="noopener" href="https://leetcode.com/problems/decode-ways/">https://leetcode.com/problems/decode-ways/</a></h3><p>一条包含字母 <code>A-Z</code> 的消息通过以下映射进行了 <strong>编码</strong> ：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x27;A&#x27; -&gt; &quot;1&quot;</span><br><span class="line">&#x27;B&#x27; -&gt; &quot;2&quot;</span><br><span class="line">...</span><br><span class="line">&#x27;Z&#x27; -&gt; &quot;26&quot;</span><br></pre></td></tr></table></figure>
+
+<p>要 <strong>解码</strong> 已编码的消息，所有数字必须基于上述映射的方法，反向映射回字母（可能有多种方法）。例如，<code>&quot;11106&quot;</code> 可以映射为：</p>
+<ul>
+<li><code>&quot;AAJF&quot;</code> ，将消息分组为 <code>(1 1 10 6)</code></li>
+<li><code>&quot;KJF&quot;</code> ，将消息分组为 <code>(11 10 6)</code></li>
+</ul>
+<p>注意，消息不能分组为 <code>(1 11 06)</code> ，因为 <code>&quot;06&quot;</code> 不能映射为 <code>&quot;F&quot;</code> ，这是由于 <code>&quot;6&quot;</code> 和 <code>&quot;06&quot;</code> 在映射中并不等价。</p>
+<p>给你一个只含数字的 <strong>非空</strong> 字符串 <code>s</code> ，请计算并返回 <strong>解码</strong> 方法的 <strong>总数</strong> 。</p>
+<p>题目数据保证答案肯定是一个 <strong>32 位</strong> 的整数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;12&quot;</span><br><span class="line">输出：2</span><br><span class="line">解释：它可以解码为 &quot;AB&quot;（1 2）或者 &quot;L&quot;（12）。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;226&quot;</span><br><span class="line">输出：3</span><br><span class="line">解释：它可以解码为 &quot;BZ&quot; (2 26), &quot;VF&quot; (22 6), 或者 &quot;BBF&quot; (2 2 6) 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;06&quot;</span><br><span class="line">输出：0</span><br><span class="line">解释：&quot;06&quot; 无法映射到 &quot;F&quot; ，因为存在前导零（&quot;6&quot; 和 &quot;06&quot; 并不等价）。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numDecodings</span><span class="params">(string s)</span> </span>&#123; <span class="comment">// 定义一个函数，参数为字符串s</span></span><br><span class="line">    <span class="keyword">if</span> (s[<span class="number">0</span>] == <span class="string">&#x27;0&#x27;</span>) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 如果字符串的第一个字符为&#x27;0&#x27;，则返回0</span></span><br><span class="line">    <span class="type">int</span> pre = <span class="number">1</span>, curr = <span class="number">1</span>; <span class="comment">// 初始化pre和curr为1，表示dp[-1] = dp[0] = 1</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 循环遍历字符串s</span></span><br><span class="line">        <span class="type">int</span> tmp = curr; <span class="comment">// 临时变量tmp等于curr</span></span><br><span class="line">        <span class="keyword">if</span> (s[i] == <span class="string">&#x27;0&#x27;</span>) <span class="comment">// 如果当前字符为&#x27;0&#x27;</span></span><br><span class="line">            <span class="keyword">if</span> (s[i - <span class="number">1</span>] == <span class="string">&#x27;1&#x27;</span> || s[i - <span class="number">1</span>] == <span class="string">&#x27;2&#x27;</span>) curr = pre; <span class="comment">// 如果前一个字符为&#x27;1&#x27;或&#x27;2&#x27;，则curr等于pre</span></span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 否则返回0</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (s[i - <span class="number">1</span>] == <span class="string">&#x27;1&#x27;</span> || (s[i - <span class="number">1</span>] == <span class="string">&#x27;2&#x27;</span> &amp;&amp; s[i] &gt;= <span class="string">&#x27;1&#x27;</span> &amp;&amp; s[i] &lt;= <span class="string">&#x27;6&#x27;</span>)) <span class="comment">// 如果前一个字符为&#x27;1&#x27;或者前一个字符为&#x27;2&#x27;并且当前字符在&#x27;1&#x27;到&#x27;6&#x27;之间</span></span><br><span class="line">            curr = curr + pre; <span class="comment">// curr等于curr加上pre</span></span><br><span class="line">        pre = tmp; <span class="comment">// pre等于tmp</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> curr; <span class="comment">// 返回curr</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;；</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="47、礼物最大值-gt-未找到-gt-（中文版）-https-leetcode-cn-com-problems-li-wu-de-zui-da-jie-zhi-lcof"><a href="#47、礼物最大值-gt-未找到-gt-（中文版）-https-leetcode-cn-com-problems-li-wu-de-zui-da-jie-zhi-lcof" class="headerlink" title="47、礼物最大值 -&gt; 未找到 -&gt; （中文版） https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/"></a>47、礼物最大值 -&gt; 未找到 -&gt; （中文版） <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/">https://leetcode-cn.com/problems/li-wu-de-zui-da-jie-zhi-lcof/</a></h3><p>现有一个记作二维矩阵 <code>frame</code> 的珠宝架，其中 <code>frame[i][j]</code> 为该位置珠宝的价值。拿取珠宝的规则为：</p>
+<ul>
+<li>只能从架子的左上角开始拿珠宝</li>
+<li>每次可以移动到右侧或下侧的相邻位置</li>
+<li>到达珠宝架子的右下角时，停止拿取</li>
+</ul>
+<p>注意：珠宝的价值都是大于 0 的。除非这个架子上没有任何珠宝，比如 <code>frame = [[0]]</code>。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: frame = [[1,3,1],[1,5,1],[4,2,1]]</span><br><span class="line">输出: 12</span><br><span class="line">解释: 路径 1→3→5→2→1 可以拿到最高价值的珠宝</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 计算矩阵中的最大值</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">jewelleryValue</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; frame)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取矩阵的行数和列数</span></span><br><span class="line">        <span class="type">int</span> m = frame.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> n = frame[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历矩阵的每个元素</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="comment">// 跳过矩阵的第一个元素，因为它没有左上方的元素</span></span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">0</span> &amp;&amp; j == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 如果当前元素在第一行，只能从左边到达，更新当前元素为当前值加上左边元素的值</span></span><br><span class="line">                <span class="keyword">if</span> (i == <span class="number">0</span>)</span><br><span class="line">                    frame[i][j] += frame[i][j - <span class="number">1</span>];</span><br><span class="line">                <span class="comment">// 如果当前元素在第一列，只能从上边到达，更新当前元素为当前值加上上边元素的值</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (j == <span class="number">0</span>)</span><br><span class="line">                    frame[i][j] += frame[i - <span class="number">1</span>][j];</span><br><span class="line">                <span class="comment">// 如果当前元素不在第一行也不在第一列，可以从左边或上边到达，更新当前元素为当前值加上左边和上边元素中的较大值</span></span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    frame[i][j] += <span class="built_in">max</span>(frame[i][j - <span class="number">1</span>], frame[i - <span class="number">1</span>][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回矩阵右下角元素的值，即最终的最大值</span></span><br><span class="line">        <span class="keyword">return</span> frame[m - <span class="number">1</span>][n - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="48、√最长不含重复字符的子字符串-gt-https-leetcode-com-problems-longest-substring-without-repeating-characters"><a href="#48、√最长不含重复字符的子字符串-gt-https-leetcode-com-problems-longest-substring-without-repeating-characters" class="headerlink" title="48、√最长不含重复字符的子字符串 -&gt; https://leetcode.com/problems/longest-substring-without-repeating-characters/"></a>48、√最长不含重复字符的子字符串 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-substring-without-repeating-characters/">https://leetcode.com/problems/longest-substring-without-repeating-characters/</a></h3><p>给定一个字符串 <code>s</code> ，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的长度。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//滑动窗口</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义起始、结束、长度和结果变量，初始值为0</span></span><br><span class="line">        <span class="function"><span class="type">int</span> <span class="title">start</span><span class="params">(<span class="number">0</span>)</span>, <span class="title">end</span><span class="params">(<span class="number">0</span>)</span>, <span class="title">length</span><span class="params">(<span class="number">0</span>)</span>, <span class="title">result</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">        <span class="type">int</span> sSize = <span class="built_in">int</span>(s.<span class="built_in">size</span>());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历字符串</span></span><br><span class="line">        <span class="keyword">while</span> (end &lt; sSize) &#123;</span><br><span class="line">            <span class="comment">// 获取当前字符</span></span><br><span class="line">            <span class="type">char</span> tmpChar = s[end];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 在[start, end)范围内查找是否有重复字符</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> index = start; index &lt; end; index++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (tmpChar == s[index]) &#123;</span><br><span class="line">                    <span class="comment">// 如果找到重复字符，更新起始位置，并计算新的长度</span></span><br><span class="line">                    start = index + <span class="number">1</span>;</span><br><span class="line">                    length = end - start;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 移动结束指针，增加长度</span></span><br><span class="line">            end++;</span><br><span class="line">            length++;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 更新最大长度</span></span><br><span class="line">            result = <span class="built_in">max</span>(result, length);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回最终结果</span></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="49、√丑数-gt-（有更好的解法）https-leetcode-com-problems-ugly-number-ii"><a href="#49、√丑数-gt-（有更好的解法）https-leetcode-com-problems-ugly-number-ii" class="headerlink" title="49、√丑数 -&gt; （有更好的解法）https://leetcode.com/problems/ugly-number-ii/"></a>49、√丑数 -&gt; （有更好的解法）<a target="_blank" rel="noopener" href="https://leetcode.com/problems/ugly-number-ii/">https://leetcode.com/problems/ugly-number-ii/</a></h3><p>给你一个整数 <code>n</code> ，请你找出并返回第 <code>n</code> 个 <strong>丑数</strong> 。</p>
+<p><strong>丑数</strong> 就是质因子只包含 <code>2</code>、<code>3</code> 和 <code>5</code> 的正整数。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 10</span><br><span class="line">输出：12</span><br><span class="line">解释：[1, 2, 3, 4, 5, 6, 8, 9, 10, 12] 是由前 10 个丑数组成的序列。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：n = 1</span><br><span class="line">输出：1</span><br><span class="line">解释：1 通常被视为丑数。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//优先队列（小根堆）</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">nthUglyNumber</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 定义质因数数组和优先队列</span></span><br><span class="line">        <span class="type">int</span> nums[] = &#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</span><br><span class="line">        set&lt;<span class="type">long</span>&gt; s;</span><br><span class="line">        priority_queue&lt;<span class="type">long</span>, vector&lt;<span class="type">long</span>&gt;, greater&lt;<span class="type">long</span>&gt;&gt; q;<span class="comment">//greater&lt;long&gt;是比较函数对象，表示使用小于号（&lt;）进行比较</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化集合和队列</span></span><br><span class="line">        s.<span class="built_in">insert</span>(<span class="number">1</span>);<span class="comment">//初始值 1</span></span><br><span class="line">        q.<span class="built_in">push</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 循环找到第n个丑数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="comment">// 弹出当前最小的丑数</span></span><br><span class="line">            <span class="type">long</span> x = q.<span class="built_in">top</span>();<span class="comment">//队列的顶部元素</span></span><br><span class="line">            q.<span class="built_in">pop</span>();<span class="comment">//删除队列中的最小元素</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果是第n个丑数，返回结果</span></span><br><span class="line">            <span class="keyword">if</span> (i == n)</span><br><span class="line">                <span class="keyword">return</span> (<span class="type">int</span>)x;<span class="comment">//将 long 类型的变量 x 转换成 int 类型</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将当前丑数乘以2、3、5得到新的丑数，加入集合和队列</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> num = <span class="number">0</span>; num &lt; <span class="number">3</span>; num++) &#123;</span><br><span class="line">                <span class="type">long</span> t = nums[num] * x;</span><br><span class="line">                <span class="keyword">if</span> (!s.<span class="built_in">count</span>(t)) &#123;</span><br><span class="line">                    s.<span class="built_in">insert</span>(t);</span><br><span class="line">                    q.<span class="built_in">push</span>(t);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果未找到，返回-1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="50、√第一个只出现一次的字符-gt-https-leetcode-com-problems-first-unique-character-in-a-string"><a href="#50、√第一个只出现一次的字符-gt-https-leetcode-com-problems-first-unique-character-in-a-string" class="headerlink" title="50、√第一个只出现一次的字符 -&gt;  https://leetcode.com/problems/first-unique-character-in-a-string/"></a>50、√第一个只出现一次的字符 -&gt;  <a target="_blank" rel="noopener" href="https://leetcode.com/problems/first-unique-character-in-a-string/">https://leetcode.com/problems/first-unique-character-in-a-string/</a></h3><p>给定一个字符串 <code>s</code> ，找到 <em>它的第一个不重复的字符，并返回它的索引</em> 。如果不存在，则返回 <code>-1</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;leetcode&quot;</span><br><span class="line">输出: 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;loveleetcode&quot;</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = &quot;aabb&quot;</span><br><span class="line">输出: -1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">firstUniqChar</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 遍历字符串</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="comment">// 判断字符第一次和最后一次出现的位置是否相同</span></span><br><span class="line">            <span class="keyword">if</span> (s.<span class="built_in">find</span>(s[i]) == s.<span class="built_in">rfind</span>(s[i]))<span class="comment">//rfind是逆向搜查</span></span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 如果没有唯一字符，返回-1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/10/jianzhi-Offer-Leetcode-31-40/" rel="prev" title="Leetcode jianzhi Offer 31-40">
+      <i class="fa fa-chevron-left"></i> Leetcode jianzhi Offer 31-40
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E5%89%91%E6%8C%87Offer%E3%80%8B%E4%B8%8ELeetcode%E4%B8%BB%E7%AB%99%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5%E5%AF%B9%E5%BA%94"><span class="nav-number">1.</span> <span class="nav-text">《剑指Offer》与Leetcode主站题目链接对应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#41%E3%80%81%E2%88%9A%E6%95%B0%E6%8D%AE%E6%B5%81%E4%B8%AD%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0-gt-https-leetcode-com-problems-find-median-from-data-stream"><span class="nav-number">1.1.</span> <span class="nav-text">41、√数据流中的中位数 -&gt; * https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;find-median-from-data-stream&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42%E3%80%81%E2%88%9A%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%A4%A7%E5%92%8C-gt-https-leetcode-com-problems-maximum-subarray"><span class="nav-number">1.2.</span> <span class="nav-text">42、√连续子数组的最大和 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;maximum-subarray&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#43%E3%80%81%C3%971-n%E6%95%B4%E6%95%B0%E4%B8%AD1%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0-gt-https-leetcode-com-problems-number-of-digit-one-submissions"><span class="nav-number">1.3.</span> <span class="nav-text">43、×1~n整数中1出现的次数 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;number-of-digit-one&#x2F;submissions&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#44%E3%80%81%C3%97%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97%E4%B8%AD%E6%9F%90%E4%B8%80%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97-gt-https-leetcode-com-problems-nth-digit"><span class="nav-number">1.4.</span> <span class="nav-text">44、×数字序列中某一位的数字 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;nth-digit&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#45%E3%80%81%E2%88%9A%E6%8A%8A%E6%95%B0%E7%BB%84%E6%8E%92%E6%88%90%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0-gt-https-leetcode-com-problems-largest-number"><span class="nav-number">1.5.</span> <span class="nav-text">45、√把数组排成最小的数 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;largest-number&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#46%E3%80%81%E2%88%9A%E6%8A%8A%E6%95%B0%E5%AD%97%E7%BF%BB%E8%AF%91%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2-gt-%E9%80%92%E5%BD%92or%E5%8A%A8%E5%BD%92-https-leetcode-com-problems-decode-ways"><span class="nav-number">1.6.</span> <span class="nav-text">46、√把数字翻译成字符串 -&gt; (递归or动归) https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;decode-ways&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#47%E3%80%81%E7%A4%BC%E7%89%A9%E6%9C%80%E5%A4%A7%E5%80%BC-gt-%E6%9C%AA%E6%89%BE%E5%88%B0-gt-%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89-https-leetcode-cn-com-problems-li-wu-de-zui-da-jie-zhi-lcof"><span class="nav-number">1.7.</span> <span class="nav-text">47、礼物最大值 -&gt; 未找到 -&gt; （中文版） https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;li-wu-de-zui-da-jie-zhi-lcof&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#48%E3%80%81%E2%88%9A%E6%9C%80%E9%95%BF%E4%B8%8D%E5%90%AB%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2-gt-https-leetcode-com-problems-longest-substring-without-repeating-characters"><span class="nav-number">1.8.</span> <span class="nav-text">48、√最长不含重复字符的子字符串 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;longest-substring-without-repeating-characters&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#49%E3%80%81%E2%88%9A%E4%B8%91%E6%95%B0-gt-%EF%BC%88%E6%9C%89%E6%9B%B4%E5%A5%BD%E7%9A%84%E8%A7%A3%E6%B3%95%EF%BC%89https-leetcode-com-problems-ugly-number-ii"><span class="nav-number">1.9.</span> <span class="nav-text">49、√丑数 -&gt; （有更好的解法）https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;ugly-number-ii&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#50%E3%80%81%E2%88%9A%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6-gt-https-leetcode-com-problems-first-unique-character-in-a-string"><span class="nav-number">1.10.</span> <span class="nav-text">50、√第一个只出现一次的字符 -&gt;  https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;first-unique-character-in-a-string&#x2F;</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">HUI</p>
+  <div class="site-description" itemprop="description">We have a long way to go</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HUI</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
