@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="《剑指Offer》与Leetcode主站题目链接对应51、×数组中的逆序对 -&gt; （升级版）https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;reverse-pairs&#x2F;#&#x2F;description给定一个数组 nums ，如果 i &lt; j 且 nums[i] &gt; 2*nums[j] 我们就将 (i, j) 称作一个***重要翻转对***。 你需要返回给定数组中的重要翻转">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode jianzhi Offer 51-68">
+<meta property="og:url" content="http://example.com/2024/01/23/jianzhi-Offer-Leetcode-51-68/index.html">
+<meta property="og:site_name" content="HUI BLOG">
+<meta property="og:description" content="《剑指Offer》与Leetcode主站题目链接对应51、×数组中的逆序对 -&gt; （升级版）https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;reverse-pairs&#x2F;#&#x2F;description给定一个数组 nums ，如果 i &lt; j 且 nums[i] &gt; 2*nums[j] 我们就将 (i, j) 称作一个***重要翻转对***。 你需要返回给定数组中的重要翻转">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/03/05/160_example_1_1.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/03/05/160_example_2.png">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/28/kthtree1.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2021/01/28/kthtree2.jpg">
+<meta property="og:image" content="https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/binarysearchtree_improved.png">
+<meta property="article:published_time" content="2024-01-23T14:03:31.000Z">
+<meta property="article:modified_time" content="2024-01-28T13:01:21.893Z">
+<meta property="article:author" content="HUI">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png">
+
+<link rel="canonical" href="http://example.com/2024/01/23/jianzhi-Offer-Leetcode-51-68/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Leetcode jianzhi Offer 51-68 | HUI BLOG</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">HUI BLOG</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/23/jianzhi-Offer-Leetcode-51-68/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="HUI">
+      <meta itemprop="description" content="We have a long way to go">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HUI BLOG">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leetcode jianzhi Offer 51-68
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-23 22:03:31" itemprop="dateCreated datePublished" datetime="2024-01-23T22:03:31+08:00">2024-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-28 21:01:21" itemprop="dateModified" datetime="2024-01-28T21:01:21+08:00">2024-01-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="《剑指Offer》与Leetcode主站题目链接对应"><a href="#《剑指Offer》与Leetcode主站题目链接对应" class="headerlink" title="《剑指Offer》与Leetcode主站题目链接对应"></a>《剑指Offer》与Leetcode主站题目链接对应</h2><h3 id="51、×数组中的逆序对-gt-（升级版）https-leetcode-com-problems-reverse-pairs-description"><a href="#51、×数组中的逆序对-gt-（升级版）https-leetcode-com-problems-reverse-pairs-description" class="headerlink" title="51、×数组中的逆序对 -&gt; （升级版）https://leetcode.com/problems/reverse-pairs/#/description"></a>51、×数组中的逆序对 -&gt; （升级版）<a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-pairs/#/description">https://leetcode.com/problems/reverse-pairs/#/description</a></h3><p>给定一个数组 <code>nums</code> ，如果 <code>i &lt; j</code> 且 <code>nums[i] &gt; 2*nums[j]</code> 我们就将 <code>(i, j)</code> 称作一个***重要翻转对***。</p>
+<p>你需要返回给定数组中的重要翻转对的数量。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [1,3,2,3,1]</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [2,4,3,5,1]</span><br><span class="line">输出: 3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//归并排序</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 函数用于在归并排序的过程中找到逆序对的数量</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">find_reversed_pairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span>&amp; left, <span class="type">int</span>&amp; right)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>, mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="type">int</span> i = left, j = mid + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (; i &lt;= mid; i++) &#123;</span><br><span class="line">            <span class="comment">// 检查逆序对条件并计数</span></span><br><span class="line">            <span class="keyword">while</span> (j &lt;= right &amp;&amp; (<span class="type">long</span>)nums[i] &gt; <span class="number">2</span> * (<span class="type">long</span>)nums[j]) &#123;</span><br><span class="line">                res += mid - i + <span class="number">1</span>;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 归并排序的实现，返回逆序对的数量</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">merge_sort</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> nums_sorted[], <span class="type">int</span> left, <span class="type">int</span> right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (left &gt;= right) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 递归调用归并排序，并累加逆序对数量</span></span><br><span class="line">        <span class="type">int</span> res = <span class="built_in">merge_sort</span>(nums, nums_sorted, left, mid) + </span><br><span class="line">                  <span class="built_in">merge_sort</span>(nums, nums_sorted, mid + <span class="number">1</span>, right) + </span><br><span class="line">                  <span class="built_in">find_reversed_pairs</span>(nums, left, right);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 归并过程，将两个有序部分合并</span></span><br><span class="line">        <span class="type">int</span> i = left, j = mid + <span class="number">1</span>, ind = left;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= right) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] &lt;= nums[j]) </span><br><span class="line">                nums_sorted[ind++] = nums[i++];</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                nums_sorted[ind++] = nums[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (i &lt;= mid) </span><br><span class="line">            nums_sorted[ind++] = nums[i++];</span><br><span class="line">        <span class="keyword">while</span> (j &lt;= right) </span><br><span class="line">            nums_sorted[ind++] = nums[j++];</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 将有序合并后的数组复制回原数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> ind = left; ind &lt;= right; ind++) </span><br><span class="line">            nums[ind] = nums_sorted[ind];</span><br><span class="line">    </span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 主函数，用于计算给定数组中的逆序对数量</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">reversePairs</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (nums.<span class="built_in">empty</span>()) </span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> nums_sorted[nums.<span class="built_in">size</span>()];</span><br><span class="line">        <span class="built_in">memset</span>(nums_sorted, <span class="number">0</span>, <span class="built_in">sizeof</span>(nums_sorted));</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">merge_sort</span>(nums, nums_sorted, <span class="number">0</span>, nums.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="52、√两个链表的第一个公共节点-gt-https-leetcode-com-problems-intersection-of-two-linked-lists"><a href="#52、√两个链表的第一个公共节点-gt-https-leetcode-com-problems-intersection-of-two-linked-lists" class="headerlink" title="52、√两个链表的第一个公共节点 -&gt; https://leetcode.com/problems/intersection-of-two-linked-lists/"></a>52、√两个链表的第一个公共节点 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/intersection-of-two-linked-lists/">https://leetcode.com/problems/intersection-of-two-linked-lists/</a></h3><p>给你两个单链表的头节点 <code>headA</code> 和 <code>headB</code> ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 <code>null</code> 。</p>
+<p>图示两个链表在节点 <code>c1</code> 开始相交<strong>：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" alt="img"></a></p>
+<p>题目数据 <strong>保证</strong> 整个链式结构中不存在环。</p>
+<p><strong>注意</strong>，函数返回结果后，链表必须 <strong>保持其原始结构</strong> 。</p>
+<p><strong>自定义评测：</strong></p>
+<p><strong>评测系统</strong> 的输入如下（你设计的程序 <strong>不适用</strong> 此输入）：</p>
+<ul>
+<li><code>intersectVal</code> - 相交的起始节点的值。如果不存在相交节点，这一值为 <code>0</code></li>
+<li><code>listA</code> - 第一个链表</li>
+<li><code>listB</code> - 第二个链表</li>
+<li><code>skipA</code> - 在 <code>listA</code> 中（从头节点开始）跳到交叉节点的节点数</li>
+<li><code>skipB</code> - 在 <code>listB</code> 中（从头节点开始）跳到交叉节点的节点数</li>
+</ul>
+<p>评测系统将根据这些输入创建链式数据结构，并将两个头节点 <code>headA</code> 和 <code>headB</code> 传递给你的程序。如果程序能够正确返回相交节点，那么你的解决方案将被 <strong>视作正确答案</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_1.png"><img src="https://assets.leetcode.com/uploads/2021/03/05/160_example_1_1.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3</span><br><span class="line">输出：Intersected at &#x27;8&#x27;</span><br><span class="line">解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,6,1,8,4,5]。</span><br><span class="line">在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br><span class="line">— 请注意相交节点的值不为 1，因为在链表 A 和链表 B 之中值为 1 的节点 (A 中第二个节点和 B 中第三个节点) 是不同的节点。换句话说，它们在内存中指向两个不同的位置，而链表 A 和链表 B 中值为 8 的节点 (A 中第三个节点，B 中第四个节点) 在内存中指向相同的位置。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_2.png"><img src="https://assets.leetcode.com/uploads/2021/03/05/160_example_2.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 2, listA = [1,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1</span><br><span class="line">输出：Intersected at &#x27;2&#x27;</span><br><span class="line">解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [1,9,1,2,4]，链表 B 为 [3,2,4]。</span><br><span class="line">在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<p><a target="_blank" rel="noopener" href="https://assets.leetcode.com/uploads/2018/12/13/160_example_3.png"><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_example_3.png" alt="img"></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2</span><br><span class="line">输出：null</span><br><span class="line">解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。</span><br><span class="line">由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</span><br><span class="line">这两个链表不相交，因此返回 null 。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 函数用于获取两个单链表的相交节点</span></span><br><span class="line">    <span class="function">ListNode *<span class="title">getIntersectionNode</span><span class="params">(ListNode *headA, ListNode *headB)</span> </span>&#123;</span><br><span class="line">        ListNode *A = headA, *B = headB;</span><br><span class="line">        <span class="comment">// 循环直到找到相交节点或两个链表都遍历完</span></span><br><span class="line">        <span class="keyword">while</span> (A != B) &#123;</span><br><span class="line">            <span class="comment">// 如果当前节点非空，移动到下一个节点；否则，移动到另一个链表的头</span></span><br><span class="line">            A = A != <span class="literal">NULL</span> ? A-&gt;next : headB;</span><br><span class="line">            B = B != <span class="literal">NULL</span> ? B-&gt;next : headA;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 返回相交节点或NULL（如果两个链表不相交）</span></span><br><span class="line">        <span class="keyword">return</span> A;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="53、√在排序数组中查找数字-gt-https-leetcode-com-problems-find-first-and-last-position-of-element-in-sorted-array-submissions"><a href="#53、√在排序数组中查找数字-gt-https-leetcode-com-problems-find-first-and-last-position-of-element-in-sorted-array-submissions" class="headerlink" title="53、√在排序数组中查找数字 -&gt; https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/submissions/"></a>53、√在排序数组中查找数字 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/submissions/">https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/submissions/</a></h3><p>给你一个按照非递减顺序排列的整数数组 <code>nums</code>，和一个目标值 <code>target</code>。请你找出给定目标值在数组中的开始位置和结束位置。</p>
+<p>如果数组中不存在目标值 <code>target</code>，返回 <code>[-1, -1]</code>。</p>
+<p>你必须设计并实现时间复杂度为 <code>O(log n)</code> 的算法解决此问题。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,7,7,8,8,10], target = 8</span><br><span class="line">输出：[3,4]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [5,7,7,8,8,10], target = 6</span><br><span class="line">输出：[-1,-1]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [], target = 0</span><br><span class="line">输出：[-1,-1]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//二分</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">searchRange</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">empty</span>()) <span class="keyword">return</span> &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line">    </span><br><span class="line">        <span class="type">int</span> l = <span class="number">0</span>, r = nums.<span class="built_in">size</span>() - <span class="number">1</span>; <span class="comment">//二分范围</span></span><br><span class="line">        <span class="keyword">while</span>( l &lt; r)			        <span class="comment">//查找元素的开始位置</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> mid = (l + r )/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &gt;= target) r = mid;</span><br><span class="line">            <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>( nums[r] != target) <span class="keyword">return</span> &#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;;  <span class="comment">//查找失败</span></span><br><span class="line">        <span class="type">int</span> L = r;</span><br><span class="line">        l = <span class="number">0</span>, r = nums.<span class="built_in">size</span>() - <span class="number">1</span>;     <span class="comment">//二分范围</span></span><br><span class="line">        <span class="keyword">while</span>( l &lt; r)                   <span class="comment">//查找元素的结束位置</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">int</span> mid = (l + r + <span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[mid] &lt;= target ) l = mid;</span><br><span class="line">            <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> &#123;L,r&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="54、二叉搜索树的第K大节点-gt-https-leetcode-com-problems-kth-smallest-element-in-a-bst-description"><a href="#54、二叉搜索树的第K大节点-gt-https-leetcode-com-problems-kth-smallest-element-in-a-bst-description" class="headerlink" title="54、二叉搜索树的第K大节点 -&gt; https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/"></a>54、二叉搜索树的第K大节点 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/">https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/</a></h3><p>给定一个二叉搜索树的根节点 <code>root</code> ，和一个整数 <code>k</code> ，请你设计一个算法查找其中第 <code>k</code> 个最小元素（从 1 开始计数）。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/28/kthtree1.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [3,1,4,null,2], k = 1</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2021/01/28/kthtree2.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [5,3,6,2,4,null,null,1], k = 3</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//DFS</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 主函数，用于查找二叉搜索树中第 k 小的元素</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">kthSmallest</span><span class="params">(TreeNode* root, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">       vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">       <span class="comment">// 调用深度优先搜索函数，将节点值存储在数组中</span></span><br><span class="line">       <span class="built_in">dfs</span>(root, res);</span><br><span class="line">       <span class="comment">// 返回第 k 小的元素</span></span><br><span class="line">       <span class="keyword">return</span> res[k - <span class="number">1</span>]; </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 深度优先搜索函数，按照中序遍历将节点值存储在数组中</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(TreeNode* root, vector&lt;<span class="type">int</span>&gt;&amp; res)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!root) <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 先递归遍历左子树</span></span><br><span class="line">        <span class="built_in">dfs</span>(root-&gt;left, res);</span><br><span class="line">        <span class="comment">// 将当前节点值加入数组</span></span><br><span class="line">        res.<span class="built_in">push_back</span>(root-&gt;val);</span><br><span class="line">        <span class="comment">// 再递归遍历右子树</span></span><br><span class="line">        <span class="built_in">dfs</span>(root-&gt;right, res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="55、二叉树的深度-gt-https-leetcode-com-problems-maximum-depth-of-binary-tree"><a href="#55、二叉树的深度-gt-https-leetcode-com-problems-maximum-depth-of-binary-tree" class="headerlink" title="55、二叉树的深度 -&gt; https://leetcode.com/problems/maximum-depth-of-binary-tree/"></a>55、二叉树的深度 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/maximum-depth-of-binary-tree/">https://leetcode.com/problems/maximum-depth-of-binary-tree/</a></h3><p>给定一个二叉树 <code>root</code> ，返回其最大深度。</p>
+<p>二叉树的 <strong>最大深度</strong> 是指从根节点到最远叶子节点的最长路径上的节点数。</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/26/tmp-tree.jpg" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [3,9,20,null,null,15,7]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：root = [1,null,2]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//DFS</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">nullptr</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(<span class="built_in">maxDepth</span>(root-&gt;left), <span class="built_in">maxDepth</span>(root-&gt;right)) + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="56、数组中数字出现的次数-gt-https-leetcode-com-problems-single-number-iii"><a href="#56、数组中数字出现的次数-gt-https-leetcode-com-problems-single-number-iii" class="headerlink" title="56、数组中数字出现的次数 -&gt; https://leetcode.com/problems/single-number-iii/"></a>56、数组中数字出现的次数 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/single-number-iii/">https://leetcode.com/problems/single-number-iii/</a></h3><p>给你一个整数数组 <code>nums</code>，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。你可以按 <strong>任意顺序</strong> 返回答案。</p>
+<p>你必须设计并实现线性时间复杂度的算法且仅使用常量额外空间来解决此问题。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,2,1,3,2,5]</span><br><span class="line">输出：[3,5]</span><br><span class="line">解释：[5, 3] 也是有效的答案。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1,0]</span><br><span class="line">输出：[-1,0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0,1]</span><br><span class="line">输出：[1,0]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//异或运算</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 主函数，用于找到数组中只出现一次的两个数字</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">singleNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">int</span> res = <span class="number">0</span>; <span class="comment">//无符号整数，防止溢出</span></span><br><span class="line">        <span class="comment">// 第一次遍历，将所有数字进行异或运算，结果为两个只出现一次的数字的异或值</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : nums) &#123;</span><br><span class="line">            res ^= x;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 取异或结果的最低位的1，用于区分两个只出现一次的数字</span></span><br><span class="line">        <span class="type">int</span> low = res &amp; -res;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 第二次遍历，根据最低位的1将数组分为两组，分别异或得到两个只出现一次的数字</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(<span class="number">2</span>)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> x : nums) &#123;</span><br><span class="line">            ans[(x &amp; low) != <span class="number">0</span>] ^= x;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//哈希</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 主函数，用于找到数组中只出现一次的数字</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">singleNumber</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用哈希表记录每个数字的出现频率</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; freq;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num : nums) &#123;</span><br><span class="line">            ++freq[num];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历哈希表，找到出现频率为1的数字，将其加入结果数组</span></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span>&amp; [num, occ] : freq) &#123; <span class="comment">// C++17 的结构化绑定（structured binding）语法</span></span><br><span class="line">            <span class="keyword">if</span> (occ == <span class="number">1</span>) &#123;</span><br><span class="line">                ans.<span class="built_in">push_back</span>(num);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="57、和为S的数字-—-gt-https-leetcode-com-problems-two-sum"><a href="#57、和为S的数字-—-gt-https-leetcode-com-problems-two-sum" class="headerlink" title="57、和为S的数字 —&gt; https://leetcode.com/problems/two-sum/"></a>57、和为S的数字 —&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/two-sum/">https://leetcode.com/problems/two-sum/</a></h3><p>给定一个整数数组 <code>nums</code> 和一个整数目标值 <code>target</code>，请你在该数组中找出 <strong>和为目标值</strong> <em><code>target</code></em> 的那 <strong>两个</strong> 整数，并返回它们的数组下标。</p>
+<p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p>
+<p>你可以按任意顺序返回答案。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [2,7,11,15], target = 9</span><br><span class="line">输出：[0,1]</span><br><span class="line">解释：因为 nums[0] + nums[1] == 9 ，返回 [0, 1] 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,2,4], target = 6</span><br><span class="line">输出：[1,2]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [3,3], target = 6</span><br><span class="line">输出：[0,1]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//哈希表</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个函数twoSum，接受一个整数向量(nums)和一个整数(target)作为参数，返回一个整数向量</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">twoSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用unordered_map来存储每个元素及其索引的映射关系</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; map;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历nums向量</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">            <span class="comment">// 计算目标值与当前元素的差值</span></span><br><span class="line">            <span class="keyword">auto</span> it = map.<span class="built_in">find</span>(target - nums[i]);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果差值在map中存在，说明找到了两个元素的和等于目标值</span></span><br><span class="line">            <span class="keyword">if</span> (it != map.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                <span class="comment">// 返回这两个元素的索引</span></span><br><span class="line">                <span class="keyword">return</span> &#123;it-&gt;second, i&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果差值不在map中，将当前元素及其索引加入map</span></span><br><span class="line">            map[nums[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 如果遍历完整个向量都没有找到符合条件的元素，返回一个空向量</span></span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="58、翻转字符串-gt-https-leetcode-com-problems-reverse-words-in-a-string"><a href="#58、翻转字符串-gt-https-leetcode-com-problems-reverse-words-in-a-string" class="headerlink" title="58、翻转字符串 -&gt; https://leetcode.com/problems/reverse-words-in-a-string/"></a>58、翻转字符串 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/reverse-words-in-a-string/">https://leetcode.com/problems/reverse-words-in-a-string/</a></h3><p>给你一个字符串 <code>s</code> ，请你反转字符串中 <strong>单词</strong> 的顺序。</p>
+<p><strong>单词</strong> 是由非空格字符组成的字符串。<code>s</code> 中使用至少一个空格将字符串中的 <strong>单词</strong> 分隔开。</p>
+<p>返回 <strong>单词</strong> 顺序颠倒且 <strong>单词</strong> 之间用单个空格连接的结果字符串。</p>
+<p><strong>注意：</strong>输入字符串 <code>s</code>中可能会存在前导空格、尾随空格或者单词间的多个空格。返回的结果字符串中，单词间应当仅用单个空格分隔，且不包含任何额外的空格。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;the sky is blue&quot;</span><br><span class="line">输出：&quot;blue is sky the&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;  hello world  &quot;</span><br><span class="line">输出：&quot;world hello&quot;</span><br><span class="line">解释：反转后的字符串中不能存在前导空格和尾随空格。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;a good   example&quot;</span><br><span class="line">输出：&quot;example good a&quot;</span><br><span class="line">解释：如果两个单词间有多余的空格，反转后的字符串需要将单词间的空格减少到仅有一个。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个函数reverseWords，接受一个字符串s作为参数，返回一个翻转了单词顺序的新字符串</span></span><br><span class="line">    <span class="function">string <span class="title">reverseWords</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用双指针，m指向字符串末尾</span></span><br><span class="line">        <span class="type">int</span> m = s.<span class="built_in">size</span>() - <span class="number">1</span>;</span><br><span class="line">        string res;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 除去尾部空格</span></span><br><span class="line">        <span class="keyword">while</span> (s[m] == <span class="string">&#x27; &#x27;</span> &amp;&amp; m &gt; <span class="number">0</span>) m--;</span><br><span class="line">        <span class="type">int</span> n = m; <span class="comment">// n是另一个指针</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 从字符串末尾向前遍历</span></span><br><span class="line">        <span class="keyword">while</span> (m &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">// 移动m指针直到找到空格或字符串开头</span></span><br><span class="line">            <span class="keyword">while</span> (m &gt;= <span class="number">0</span> &amp;&amp; s[m] != <span class="string">&#x27; &#x27;</span>) m--;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 获取单词并加上空格，将单词添加到结果字符串</span></span><br><span class="line">            res += s.<span class="built_in">substr</span>(m + <span class="number">1</span>, n - m) + <span class="string">&quot; &quot;</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 移动m指针直到找到非空格字符或字符串开头</span></span><br><span class="line">            <span class="keyword">while</span> (m &gt;= <span class="number">0</span> &amp;&amp; s[m] == <span class="string">&#x27; &#x27;</span>) m--;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 更新n指针</span></span><br><span class="line">            n = m;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 忽略结果字符串最后一位的空格并返回结果</span></span><br><span class="line">        <span class="keyword">return</span> res.<span class="built_in">substr</span>(<span class="number">0</span>, res.<span class="built_in">size</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="59、队列的最大值-gt-https-leetcode-com-problems-sliding-window-maximum"><a href="#59、队列的最大值-gt-https-leetcode-com-problems-sliding-window-maximum" class="headerlink" title="59、队列的最大值 -&gt; https://leetcode.com/problems/sliding-window-maximum/"></a>59、队列的最大值 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/sliding-window-maximum/">https://leetcode.com/problems/sliding-window-maximum/</a></h3><p>给你一个整数数组 <code>nums</code>，有一个大小为 <code>k</code> 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 <code>k</code> 个数字。滑动窗口每次只向右移动一位。</p>
+<p>返回 <em>滑动窗口中的最大值</em> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1,3,-1,-3,5,3,6,7], k = 3</span><br><span class="line">输出：[3,3,5,5,6,7]</span><br><span class="line">解释：</span><br><span class="line">滑动窗口的位置                最大值</span><br><span class="line">---------------               -----</span><br><span class="line">[1  3  -1] -3  5  3  6  7       3</span><br><span class="line"> 1 [3  -1  -3] 5  3  6  7       3</span><br><span class="line"> 1  3 [-1  -3  5] 3  6  7       5</span><br><span class="line"> 1  3  -1 [-3  5  3] 6  7       5</span><br><span class="line"> 1  3  -1  -3 [5  3  6] 7       6</span><br><span class="line"> 1  3  -1  -3  5 [3  6  7]      7</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1], k = 1</span><br><span class="line">输出：[1]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MonotonicQueue</span> &#123; <span class="comment">//单调队列</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 使用deque（双端队列）来存储数据</span></span><br><span class="line">    deque&lt;<span class="type">int</span>&gt; data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义push方法，用于将元素加入队列</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 移除队列尾部小于新元素的元素，确保队列是单调递减的</span></span><br><span class="line">        <span class="keyword">while</span> (!data.<span class="built_in">empty</span>() &amp;&amp; data.<span class="built_in">back</span>() &lt; n) </span><br><span class="line">            data.<span class="built_in">pop_back</span>();</span><br><span class="line">        <span class="comment">// 将新元素加入队列</span></span><br><span class="line">        data.<span class="built_in">push_back</span>(n);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义max方法，返回队列头部（最大值）</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">max</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> data.<span class="built_in">front</span>(); &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义pop方法，用于将指定元素从队列中移除</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">pop</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 如果队列不为空且队列头部等于指定元素，将头部元素移除</span></span><br><span class="line">        <span class="keyword">if</span> (!data.<span class="built_in">empty</span>() &amp;&amp; data.<span class="built_in">front</span>() == n)</span><br><span class="line">            data.<span class="built_in">pop_front</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个名为maxSlidingWindow的函数，接受一个整数向量(nums)和一个整数(k)作为参数，返回一个整数向量</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">maxSlidingWindow</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个MonotonicQueue类的实例，用于维护滑动窗口中的单调递减序列</span></span><br><span class="line">    MonotonicQueue window;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用于存储每个窗口的最大值</span></span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 遍历整数向量</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &lt; k - <span class="number">1</span>) &#123; <span class="comment">// 先填满窗口的前 k - 1</span></span><br><span class="line">            <span class="comment">// 将当前元素加入窗口</span></span><br><span class="line">            window.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// 窗口向前滑动</span></span><br><span class="line">            <span class="comment">// 将当前元素加入窗口</span></span><br><span class="line">            window.<span class="built_in">push</span>(nums[i]);</span><br><span class="line">            <span class="comment">// 将当前窗口的最大值加入结果向量</span></span><br><span class="line">            res.<span class="built_in">push_back</span>(window.<span class="built_in">max</span>());</span><br><span class="line">            <span class="comment">// 移除窗口最左侧的元素</span></span><br><span class="line">            window.<span class="built_in">pop</span>(nums[i - k + <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 返回结果向量</span></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="60、n个骰子的点数-gt-（中文版）https-leetcode-cn-com-problems-nge-tou-zi-de-dian-shu-lcof"><a href="#60、n个骰子的点数-gt-（中文版）https-leetcode-cn-com-problems-nge-tou-zi-de-dian-shu-lcof" class="headerlink" title="60、n个骰子的点数 -&gt; （中文版）https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/"></a>60、n个骰子的点数 -&gt; （中文版）<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/">https://leetcode-cn.com/problems/nge-tou-zi-de-dian-shu-lcof/</a></h3><p>你选择掷出 <code>num</code> 个色子，请返回所有点数总和的概率。</p>
+<p>你需要用一个浮点数数组返回答案，其中第 <code>i</code> 个元素代表这 <code>num</code> 个骰子所能掷出的点数集合中第 <code>i</code> 小的那个的概率。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 3</span><br><span class="line">输出：[0.00463,0.01389,0.02778,0.04630,0.06944,0.09722,0.11574,0.12500,0.12500,0.11574,0.09722,0.06944,0.04630,0.02778,0.01389,0.00463]</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 5</span><br><span class="line">输出:[0.00013,0.00064,0.00193,0.00450,0.00900,0.01620,0.02636,0.03922,0.05401,0.06944,0.08372,0.09452,0.10031,0.10031,0.09452,0.08372,0.06944,0.05401,0.03922,0.02636,0.01620,0.00900,0.00450,0.00193,0.00064,0.00013]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//dp</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为statisticsProbability的函数，接受一个整数num作为参数，返回一个双精度浮点数向量</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">double</span>&gt; <span class="title">statisticsProbability</span><span class="params">(<span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 初始化一个长度为6的双精度浮点数向量dp，表示一个骰子的概率分布</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">double</span>&gt; <span class="title">dp</span><span class="params">(<span class="number">6</span>, <span class="number">1.0</span> / <span class="number">6.0</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 循环计算投掷多个骰子后的概率分布</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i &lt;= num; i++) &#123;</span><br><span class="line">            <span class="comment">// 初始化一个临时向量tmp，长度为5 * i + 1，用于存储新的概率分布</span></span><br><span class="line">            <span class="function">vector&lt;<span class="type">double</span>&gt; <span class="title">tmp</span><span class="params">(<span class="number">5</span> * i + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 遍历当前概率分布向量dp</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; dp.<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">                <span class="comment">// 对于每个概率分布，通过投掷一个骰子更新新的概率分布tmp</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> k = <span class="number">0</span>; k &lt; <span class="number">6</span>; k++) &#123;</span><br><span class="line">                    tmp[j + k] += dp[j] / <span class="number">6.0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 将新的概率分布tmp赋值给dp，用于下一轮循环</span></span><br><span class="line">            dp = tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 返回最终的概率分布向量dp</span></span><br><span class="line">        <span class="keyword">return</span> dp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="61、扑克牌中的顺子-gt-（中文版）https-leetcode-cn-com-problems-bu-ke-pai-zhong-de-shun-zi-lcof"><a href="#61、扑克牌中的顺子-gt-（中文版）https-leetcode-cn-com-problems-bu-ke-pai-zhong-de-shun-zi-lcof" class="headerlink" title="61、扑克牌中的顺子 -&gt; （中文版）https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/"></a>61、扑克牌中的顺子 -&gt; （中文版）<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/">https://leetcode-cn.com/problems/bu-ke-pai-zhong-de-shun-zi-lcof/</a></h3><p>展览馆展出来自 13 个朝代的文物，每排展柜展出 5 个文物。某排文物的摆放情况记录于数组 <code>places</code>，其中 <code>places[i]</code> 表示处于第 <code>i</code> 位文物的所属朝代编号。其中，编号为 0 的朝代表示未知朝代。请判断并返回这排文物的所属朝代编号是否连续（如遇未知朝代可算作连续情况）。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: places = [0, 6, 9, 0, 7]</span><br><span class="line">输出: True</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: places = [7, 8, 9, 10, 11]</span><br><span class="line">输出: True</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//哈希表</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为checkDynasty的函数，接受一个整数向量places作为参数，返回一个布尔值</span></span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">checkDynasty</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; places)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用unordered_set来存储朝代，用于检查是否有重复的朝代</span></span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; repeat;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 初始化最大和最小编号朝代</span></span><br><span class="line">        <span class="type">int</span> ma = <span class="number">0</span>, mi = <span class="number">14</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 遍历传入的整数向量places</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> place : places) &#123;</span><br><span class="line">            <span class="comment">// 跳过未知朝代，即朝代编号为0的情况</span></span><br><span class="line">            <span class="keyword">if</span>(place == <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 更新最大和最小编号朝代</span></span><br><span class="line">            ma = <span class="built_in">max</span>(ma, place); <span class="comment">// 最大编号朝代</span></span><br><span class="line">            mi = <span class="built_in">min</span>(mi, place); <span class="comment">// 最小编号朝代</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 如果当前朝代已经存在于集合中，说明有重复，返回false</span></span><br><span class="line">            <span class="keyword">if</span>(repeat.<span class="built_in">find</span>(place) != repeat.<span class="built_in">end</span>()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 将当前朝代添加到集合中</span></span><br><span class="line">            repeat.<span class="built_in">insert</span>(place);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 判断最大编号朝代和最小编号朝代的差是否小于5，如果是，则朝代连续</span></span><br><span class="line">        <span class="keyword">return</span> ma - mi &lt; <span class="number">5</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="62、圆圈中最后剩下的数字-gt-（中文版）-https-leetcode-cn-com-problems-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof"><a href="#62、圆圈中最后剩下的数字-gt-（中文版）-https-leetcode-cn-com-problems-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof" class="headerlink" title="62、圆圈中最后剩下的数字 -&gt; （中文版） https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/"></a>62、圆圈中最后剩下的数字 -&gt; （中文版） <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/">https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/</a></h3><p>社团共有 <code>num</code> 为成员参与破冰游戏，编号为 <code>0 ~ num-1</code>。成员们按照编号顺序围绕圆桌而坐。社长抽取一个数字 <code>target</code>，从 0 号成员起开始计数，排在第 <code>target</code> 位的成员离开圆桌，且成员离开后从下一个成员开始计数。请返回游戏结束时最后一位成员的编号。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 7, target = 4</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：num = 12, target = 5</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为lastRemaining的函数，接受两个整数n和m作为参数，返回一个整数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lastRemaining</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> m)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> pos = <span class="number">0</span>; <span class="comment">// 最终活下来那个人的初始位置</span></span><br><span class="line">   </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">2</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="comment">// 计算每次循环右移的位置</span></span><br><span class="line">            pos = (pos + m) % i;  <span class="comment">// 每次循环右移</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 返回最终活下来那个人的位置</span></span><br><span class="line">        <span class="keyword">return</span> pos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="63、股票的最大利润-gt-https-leetcode-com-problems-best-time-to-buy-and-sell-stock"><a href="#63、股票的最大利润-gt-https-leetcode-com-problems-best-time-to-buy-and-sell-stock" class="headerlink" title="63、股票的最大利润 -&gt; https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"></a>63、股票的最大利润 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock/</a></h3><p>给定一个数组 <code>prices</code> ，它的第 <code>i</code> 个元素 <code>prices[i]</code> 表示一支给定股票第 <code>i</code> 天的价格。</p>
+<p>你只能选择 <strong>某一天</strong> 买入这只股票，并选择在 <strong>未来的某一个不同的日子</strong> 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 <code>0</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：[7,1,5,3,6,4]</span><br><span class="line">输出：5</span><br><span class="line">解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。</span><br><span class="line">     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：prices = [7,6,4,3,1]</span><br><span class="line">输出：0</span><br><span class="line">解释：在这种情况下, 没有交易完成, 所以最大利润为 0。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;<span class="comment">//暴力 超时</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为maxProfit的函数，接受一个整数向量prices作为参数，返回一个整数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> result = <span class="number">0</span>; <span class="comment">// 初始化最大利润为0</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 使用两层循环遍历所有可能的买入和卖出情况</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; prices.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j = i + <span class="number">1</span>; j &lt; prices.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                result = <span class="built_in">max</span>(result, prices[j] - prices[i]); <span class="comment">// 计算并更新当前买入和卖出的利润</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result; <span class="comment">// 返回最终的最大利润</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;  <span class="comment">//贪心</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为maxProfit的函数，接受一个整数向量prices作为参数，返回一个整数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> minprice = INT_MAX; <span class="comment">// 初始化最小价格为一个很大的值；第一个价格会成为当前的最小价格，从而确保在计算最大利润时不会出现错误</span></span><br><span class="line">        <span class="type">int</span> maxprofit = <span class="number">0</span>; <span class="comment">// 初始化最大利润为0</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 遍历价格向量</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> price : prices)&#123;</span><br><span class="line">            <span class="comment">// 更新最大利润，取当前价格减去最小价格和当前最大利润的较大值</span></span><br><span class="line">            maxprofit = <span class="built_in">max</span>(maxprofit, price - minprice);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 更新最小价格，取当前价格和最小价格的较小值</span></span><br><span class="line">            minprice = <span class="built_in">min</span>(minprice, price);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 返回最终的最大利润</span></span><br><span class="line">        <span class="keyword">return</span> maxprofit;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//dp</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为maxProfit的函数，接受一个整数向量prices作为参数，返回一个整数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = prices.<span class="built_in">size</span>(); <span class="comment">// 获取股票价格数组的长度</span></span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 如果数组为空，返回0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化动态规划数组，dp[i][0]表示在第i天持有股票的最大收益，dp[i][1]表示在第i天不持有股票的最大收益</span></span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(len, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(<span class="number">2</span>));</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>] -= prices[<span class="number">0</span>]; <span class="comment">// 初始情况下，第一天持有股票，收益为负的股票价格</span></span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">0</span>; <span class="comment">// 初始情况下，第一天不持有股票，收益为0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从第二天开始遍历股票价格数组</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            <span class="comment">// 计算在第i天持有股票的最大收益，取前一天持有股票和当前股票价格的负值的最大值</span></span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][<span class="number">0</span>], -prices[i]);</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 计算在第i天不持有股票的最大收益，取前一天不持有股票和当前股票价格加上前一天持有股票的最大收益的最大值</span></span><br><span class="line">            dp[i][<span class="number">1</span>] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][<span class="number">1</span>], prices[i] + dp[i - <span class="number">1</span>][<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[len - <span class="number">1</span>][<span class="number">1</span>]; <span class="comment">// 返回最后一天不持有股票的最大收益</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="64、求1-2-…-n-gt-（中文版）-https-leetcode-cn-com-problems-qiu-12n-lcof"><a href="#64、求1-2-…-n-gt-（中文版）-https-leetcode-cn-com-problems-qiu-12n-lcof" class="headerlink" title="64、求1+2+…+n -&gt; （中文版） https://leetcode-cn.com/problems/qiu-12n-lcof/"></a>64、求1+2+…+n -&gt; （中文版） <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/qiu-12n-lcof/">https://leetcode-cn.com/problems/qiu-12n-lcof/</a></h3><p>请设计一个机械累加器，计算从 1、2… 一直累加到目标数值 <code>target</code> 的总和。注意这是一个只能进行加法操作的程序，不具备乘除、if-else、switch-case、for 循环、while 循环，及条件判断语句等高级功能。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: target = 5</span><br><span class="line">输出: 15</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: target = 7</span><br><span class="line">输出: 28</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为mechanicalAccumulator的函数，接受一个整数target作为参数，返回一个整数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">mechanicalAccumulator</span><span class="params">(<span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用递归和逻辑运算符</span></span><br><span class="line">        <span class="comment">// 如果target大于1，则执行(target += mechanicalAccumulator(target - 1))，即累加前一个数的结果</span></span><br><span class="line">        target &gt; <span class="number">1</span> &amp;&amp; (target += <span class="built_in">mechanicalAccumulator</span>(target - <span class="number">1</span>));</span><br><span class="line">        <span class="comment">// 返回累加后的结果</span></span><br><span class="line">        <span class="keyword">return</span> target;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="65、不用加减乘除做加法-gt-（中文版）-https-leetcode-cn-com-problems-bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof"><a href="#65、不用加减乘除做加法-gt-（中文版）-https-leetcode-cn-com-problems-bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof" class="headerlink" title="65、不用加减乘除做加法 -&gt; （中文版） https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/"></a>65、不用加减乘除做加法 -&gt; （中文版） <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/">https://leetcode-cn.com/problems/bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof/</a></h3><p>计算机安全专家正在开发一款高度安全的加密通信软件，需要在进行数据传输时对数据进行加密和解密操作。假定 <code>dataA</code> 和 <code>dataB</code> 分别为随机抽样的两次通信的数据量：</p>
+<ul>
+<li>正数为发送量</li>
+<li>负数为接受量</li>
+<li>0 为数据遗失</li>
+</ul>
+<p>请不使用四则运算符的情况下实现一个函数计算两次通信的数据量之和（三种情况均需被统计），以确保在数据传输过程中的高安全性和保密性。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：dataA = 5, dataB = -1</span><br><span class="line">输出：4</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为encryptionCalculate的函数，接受两个整数dataA和dataB作为参数，返回一个整数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">encryptionCalculate</span><span class="params">(<span class="type">int</span> dataA, <span class="type">int</span> dataB)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 使用位运算和递归</span></span><br><span class="line">        <span class="keyword">return</span> dataB ? <span class="built_in">encryptionCalculate</span>(dataA ^ dataB, (<span class="type">unsigned</span>)(dataA &amp; dataB) &lt;&lt; <span class="number">1</span>) : dataA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="66、构建乘积数组-gt-（中文版）-https-leetcode-cn-com-problems-gou-jian-cheng-ji-shu-zu-lcof"><a href="#66、构建乘积数组-gt-（中文版）-https-leetcode-cn-com-problems-gou-jian-cheng-ji-shu-zu-lcof" class="headerlink" title="66、构建乘积数组 -&gt; （中文版） https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/"></a>66、构建乘积数组 -&gt; （中文版） <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/">https://leetcode-cn.com/problems/gou-jian-cheng-ji-shu-zu-lcof/</a></h3><p>为了深入了解这些生物群体的生态特征，你们进行了大量的实地观察和数据采集。数组 <code>arrayA</code> 记录了各个生物群体数量数据，其中 <code>arrayA[i]</code> 表示第 <code>i</code> 个生物群体的数量。请返回一个数组 <code>arrayB</code>，该数组为基于数组 <code>arrayA</code> 中的数据计算得出的结果，其中 <code>arrayB[i]</code> 表示将第 <code>i</code> 个生物群体的数量从总体中排除后的其他数量的乘积。</p>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：arrayA = [2, 4, 6, 8, 10]</span><br><span class="line">输出：[1920, 960, 640, 480, 384]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为statisticalResult的函数，接受一个整数向量arrayA作为参数，返回一个整数向量</span></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">statisticalResult</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; arrayA)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = arrayA.<span class="built_in">size</span>(); <span class="comment">// 获取输入数组的长度</span></span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>) <span class="keyword">return</span> &#123;&#125;; <span class="comment">// 如果数组为空，返回空数组</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 初始化一个与输入数组同样长度的数组arrayB，初始值为1</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">arrayB</span><span class="params">(len, <span class="number">1</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 第一次循环，计算每个元素左边所有元素的乘积</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</span><br><span class="line">            arrayB[i] = arrayB[i - <span class="number">1</span>] * arrayA[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 初始化临时变量tmp为1</span></span><br><span class="line">        <span class="type">int</span> tmp = <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 第二次循环，计算每个元素右边所有元素的乘积，并与之前的左边乘积相乘</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = len - <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            tmp *= arrayA[i + <span class="number">1</span>];</span><br><span class="line">            arrayB[i] *= tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> arrayB; <span class="comment">// 返回最终的结果数组</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="67、把字符串转换成整数-gt-https-leetcode-com-problems-string-to-integer-atoi"><a href="#67、把字符串转换成整数-gt-https-leetcode-com-problems-string-to-integer-atoi" class="headerlink" title="67、把字符串转换成整数 -&gt; https://leetcode.com/problems/string-to-integer-atoi/"></a>67、把字符串转换成整数 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/string-to-integer-atoi/">https://leetcode.com/problems/string-to-integer-atoi/</a></h3><p>请你来实现一个 <code>myAtoi(string s)</code> 函数，使其能将字符串转换成一个 32 位有符号整数（类似 C&#x2F;C++ 中的 <code>atoi</code> 函数）。</p>
+<p>函数 <code>myAtoi(string s)</code> 的算法如下：</p>
+<ol>
+<li>读入字符串并丢弃无用的前导空格</li>
+<li>检查下一个字符（假设还未到字符末尾）为正还是负号，读取该字符（如果有）。 确定最终结果是负数还是正数。 如果两者都不存在，则假定结果为正。</li>
+<li>读入下一个字符，直到到达下一个非数字字符或到达输入的结尾。字符串的其余部分将被忽略。</li>
+<li>将前面步骤读入的这些数字转换为整数（即，”123” -&gt; 123， “0032” -&gt; 32）。如果没有读入数字，则整数为 <code>0</code> 。必要时更改符号（从步骤 2 开始）。</li>
+<li>如果整数数超过 32 位有符号整数范围 <code>[−231, 231 − 1]</code> ，需要截断这个整数，使其保持在这个范围内。具体来说，小于 <code>−231</code> 的整数应该被固定为 <code>−231</code> ，大于 <code>231 − 1</code> 的整数应该被固定为 <code>231 − 1</code> 。</li>
+<li>返回整数作为最终结果。</li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li>本题中的空白字符只包括空格字符 <code>&#39; &#39;</code> 。</li>
+<li>除前导空格或数字后的其余字符串外，<strong>请勿忽略</strong> 任何其他字符。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;42&quot;</span><br><span class="line">输出：42</span><br><span class="line">解释：加粗的字符串为已经读入的字符，插入符号是当前读取的字符。</span><br><span class="line">第 1 步：&quot;42&quot;（当前没有读入字符，因为没有前导空格）</span><br><span class="line">         ^</span><br><span class="line">第 2 步：&quot;42&quot;（当前没有读入字符，因为这里不存在 &#x27;-&#x27; 或者 &#x27;+&#x27;）</span><br><span class="line">         ^</span><br><span class="line">第 3 步：&quot;42&quot;（读入 &quot;42&quot;）</span><br><span class="line">           ^</span><br><span class="line">解析得到整数 42 。</span><br><span class="line">由于 &quot;42&quot; 在范围 [-231, 231 - 1] 内，最终结果为 42 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;   -42&quot;</span><br><span class="line">输出：-42</span><br><span class="line">解释：</span><br><span class="line">第 1 步：&quot;   -42&quot;（读入前导空格，但忽视掉）</span><br><span class="line">            ^</span><br><span class="line">第 2 步：&quot;   -42&quot;（读入 &#x27;-&#x27; 字符，所以结果应该是负数）</span><br><span class="line">             ^</span><br><span class="line">第 3 步：&quot;   -42&quot;（读入 &quot;42&quot;）</span><br><span class="line">               ^</span><br><span class="line">解析得到整数 -42 。</span><br><span class="line">由于 &quot;-42&quot; 在范围 [-231, 231 - 1] 内，最终结果为 -42 。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入：s = &quot;4193 with words&quot;</span><br><span class="line">输出：4193</span><br><span class="line">解释：</span><br><span class="line">第 1 步：&quot;4193 with words&quot;（当前没有读入字符，因为没有前导空格）</span><br><span class="line">         ^</span><br><span class="line">第 2 步：&quot;4193 with words&quot;（当前没有读入字符，因为这里不存在 &#x27;-&#x27; 或者 &#x27;+&#x27;）</span><br><span class="line">         ^</span><br><span class="line">第 3 步：&quot;4193 with words&quot;（读入 &quot;4193&quot;；由于下一个字符不是一个数字，所以读入停止）</span><br><span class="line">             ^</span><br><span class="line">解析得到整数 4193 。</span><br><span class="line">由于 &quot;4193&quot; 在范围 [-231, 231 - 1] 内，最终结果为 4193 。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为myAtoi的函数，接受一个字符串str作为参数，返回一个整数</span></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">myAtoi</span><span class="params">(string str)</span> </span>&#123;</span><br><span class="line">        <span class="type">unsigned</span> <span class="type">long</span> len = str.<span class="built_in">length</span>(); <span class="comment">// 获取字符串的长度</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 去除前导空格</span></span><br><span class="line">        <span class="type">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (index &lt; len) &#123;</span><br><span class="line">            <span class="keyword">if</span> (str[index] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (index == len) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">// 如果去除前导空格后，字符串为空，则返回0</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> sign = <span class="number">1</span>; <span class="comment">// 符号，默认为正数</span></span><br><span class="line">        <span class="comment">// 处理第1个非空字符为正负符号，这两个判断需要写在一起</span></span><br><span class="line">        <span class="keyword">if</span> (str[index] == <span class="string">&#x27;+&#x27;</span>) &#123;</span><br><span class="line">            index++;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (str[index] == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">            sign = <span class="number">-1</span>; <span class="comment">// 负数</span></span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 根据题目限制，只能使用int类型</span></span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (index &lt; len) &#123;</span><br><span class="line">            <span class="type">char</span> curChar = str[index];</span><br><span class="line">            <span class="keyword">if</span> (curChar &lt; <span class="string">&#x27;0&#x27;</span> || curChar &gt; <span class="string">&#x27;9&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">break</span>; <span class="comment">// 如果遇到非数字字符，则跳出循环</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (res &gt; INT_MAX / <span class="number">10</span> || (res == INT_MAX / <span class="number">10</span> &amp;&amp; (curChar - <span class="string">&#x27;0&#x27;</span>) &gt; INT_MAX % <span class="number">10</span>)) &#123;</span><br><span class="line">                <span class="keyword">return</span> INT_MAX; <span class="comment">// 处理溢出情况，如果当前结果已经大于INT_MAX的十分之一，或者等于INT_MAX的十分之一且当前字符大于INT_MAX的个位数，则返回INT_MAX</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (res &lt; INT_MIN / <span class="number">10</span> || (res == INT_MIN / <span class="number">10</span> &amp;&amp; (curChar - <span class="string">&#x27;0&#x27;</span>) &gt; -(INT_MIN % <span class="number">10</span>))) &#123;</span><br><span class="line">                <span class="keyword">return</span> INT_MIN; <span class="comment">// 处理溢出情况，如果当前结果已经小于INT_MIN的十分之一，或者等于INT_MIN的十分之一且当前字符大于INT_MIN的个位数的相反数，则返回INT_MIN</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            res = res * <span class="number">10</span> + sign * (curChar - <span class="string">&#x27;0&#x27;</span>); <span class="comment">// 更新结果</span></span><br><span class="line">            index++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res; <span class="comment">// 返回最终的整数结果</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="68、二叉搜索树的最近公共祖先-gt-https-leetcode-com-problems-lowest-common-ancestor-of-a-binary-search-tree"><a href="#68、二叉搜索树的最近公共祖先-gt-https-leetcode-com-problems-lowest-common-ancestor-of-a-binary-search-tree" class="headerlink" title="68、二叉搜索树的最近公共祖先 -&gt; https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/"></a>68、二叉搜索树的最近公共祖先 -&gt; <a target="_blank" rel="noopener" href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/">https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/</a></h3><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/8918834?fr=aladdin">百度百科</a>中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（<strong>一个节点也可以是它自己的祖先</strong>）。”</p>
+<p>例如，给定如下二叉搜索树: root &#x3D; [6,2,8,0,4,7,9,null,null,3,5]</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/binarysearchtree_improved.png" alt="img"></p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8</span><br><span class="line">输出: 6 </span><br><span class="line">解释: 节点 2 和节点 8 的最近公共祖先是 6。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4</span><br><span class="line">输出: 2</span><br><span class="line">解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123; <span class="comment">//递归</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// 定义一个私有函数traversal，用于递归查找最近公共祖先</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">traversal</span><span class="params">(TreeNode* cur, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="literal">NULL</span>) <span class="keyword">return</span> cur; <span class="comment">// 递归基，如果当前节点为空，直接返回空</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 中序遍历</span></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val &gt; p-&gt;val &amp;&amp; cur-&gt;val &gt; q-&gt;val) &#123;   <span class="comment">// 如果当前节点值大于p和q的值，说明p和q都在当前节点的左子树中</span></span><br><span class="line">            TreeNode* left = <span class="built_in">traversal</span>(cur-&gt;left, p, q); <span class="comment">// 递归左子树</span></span><br><span class="line">            <span class="keyword">if</span> (left != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> left; <span class="comment">// 如果左子树返回结果不为空，说明最近公共祖先在左子树中</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur-&gt;val &lt; p-&gt;val &amp;&amp; cur-&gt;val &lt; q-&gt;val) &#123;   <span class="comment">// 如果当前节点值小于p和q的值，说明p和q都在当前节点的右子树中</span></span><br><span class="line">            TreeNode* right = <span class="built_in">traversal</span>(cur-&gt;right, p, q); <span class="comment">// 递归右子树</span></span><br><span class="line">            <span class="keyword">if</span> (right != <span class="literal">NULL</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> right; <span class="comment">// 如果右子树返回结果不为空，说明最近公共祖先在右子树中</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> cur; <span class="comment">// 如果当前节点的值在p和q的值之间，说明当前节点即为最近公共祖先</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">// 定义一个名为lowestCommonAncestor的函数，接受一个树根节点和两个目标节点p、q作为参数，返回一个树节点</span></span><br><span class="line">    <span class="function">TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(TreeNode* root, TreeNode* p, TreeNode* q)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">traversal</span>(root, p, q); <span class="comment">// 调用traversal函数进行递归查找</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/01/16/jianzhi-Offer-Leetcode-41-50/" rel="prev" title="Leetcode jianzhi Offer 41-50">
+      <i class="fa fa-chevron-left"></i> Leetcode jianzhi Offer 41-50
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E3%80%8A%E5%89%91%E6%8C%87Offer%E3%80%8B%E4%B8%8ELeetcode%E4%B8%BB%E7%AB%99%E9%A2%98%E7%9B%AE%E9%93%BE%E6%8E%A5%E5%AF%B9%E5%BA%94"><span class="nav-number">1.</span> <span class="nav-text">《剑指Offer》与Leetcode主站题目链接对应</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#51%E3%80%81%C3%97%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9-gt-%EF%BC%88%E5%8D%87%E7%BA%A7%E7%89%88%EF%BC%89https-leetcode-com-problems-reverse-pairs-description"><span class="nav-number">1.1.</span> <span class="nav-text">51、×数组中的逆序对 -&gt; （升级版）https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;reverse-pairs&#x2F;#&#x2F;description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#52%E3%80%81%E2%88%9A%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9-gt-https-leetcode-com-problems-intersection-of-two-linked-lists"><span class="nav-number">1.2.</span> <span class="nav-text">52、√两个链表的第一个公共节点 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;intersection-of-two-linked-lists&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#53%E3%80%81%E2%88%9A%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%95%B0%E5%AD%97-gt-https-leetcode-com-problems-find-first-and-last-position-of-element-in-sorted-array-submissions"><span class="nav-number">1.3.</span> <span class="nav-text">53、√在排序数组中查找数字 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;find-first-and-last-position-of-element-in-sorted-array&#x2F;submissions&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#54%E3%80%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E7%AC%ACK%E5%A4%A7%E8%8A%82%E7%82%B9-gt-https-leetcode-com-problems-kth-smallest-element-in-a-bst-description"><span class="nav-number">1.4.</span> <span class="nav-text">54、二叉搜索树的第K大节点 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;kth-smallest-element-in-a-bst&#x2F;description&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#55%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6-gt-https-leetcode-com-problems-maximum-depth-of-binary-tree"><span class="nav-number">1.5.</span> <span class="nav-text">55、二叉树的深度 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;maximum-depth-of-binary-tree&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#56%E3%80%81%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0-gt-https-leetcode-com-problems-single-number-iii"><span class="nav-number">1.6.</span> <span class="nav-text">56、数组中数字出现的次数 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;single-number-iii&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#57%E3%80%81%E5%92%8C%E4%B8%BAS%E7%9A%84%E6%95%B0%E5%AD%97-%E2%80%94-gt-https-leetcode-com-problems-two-sum"><span class="nav-number">1.7.</span> <span class="nav-text">57、和为S的数字 —&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;two-sum&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#58%E3%80%81%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2-gt-https-leetcode-com-problems-reverse-words-in-a-string"><span class="nav-number">1.8.</span> <span class="nav-text">58、翻转字符串 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;reverse-words-in-a-string&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#59%E3%80%81%E9%98%9F%E5%88%97%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC-gt-https-leetcode-com-problems-sliding-window-maximum"><span class="nav-number">1.9.</span> <span class="nav-text">59、队列的最大值 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;sliding-window-maximum&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#60%E3%80%81n%E4%B8%AA%E9%AA%B0%E5%AD%90%E7%9A%84%E7%82%B9%E6%95%B0-gt-%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89https-leetcode-cn-com-problems-nge-tou-zi-de-dian-shu-lcof"><span class="nav-number">1.10.</span> <span class="nav-text">60、n个骰子的点数 -&gt; （中文版）https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;nge-tou-zi-de-dian-shu-lcof&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#61%E3%80%81%E6%89%91%E5%85%8B%E7%89%8C%E4%B8%AD%E7%9A%84%E9%A1%BA%E5%AD%90-gt-%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89https-leetcode-cn-com-problems-bu-ke-pai-zhong-de-shun-zi-lcof"><span class="nav-number">1.11.</span> <span class="nav-text">61、扑克牌中的顺子 -&gt; （中文版）https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;bu-ke-pai-zhong-de-shun-zi-lcof&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#62%E3%80%81%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-gt-%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89-https-leetcode-cn-com-problems-yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof"><span class="nav-number">1.12.</span> <span class="nav-text">62、圆圈中最后剩下的数字 -&gt; （中文版） https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#63%E3%80%81%E8%82%A1%E7%A5%A8%E7%9A%84%E6%9C%80%E5%A4%A7%E5%88%A9%E6%B6%A6-gt-https-leetcode-com-problems-best-time-to-buy-and-sell-stock"><span class="nav-number">1.13.</span> <span class="nav-text">63、股票的最大利润 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;best-time-to-buy-and-sell-stock&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64%E3%80%81%E6%B1%821-2-%E2%80%A6-n-gt-%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89-https-leetcode-cn-com-problems-qiu-12n-lcof"><span class="nav-number">1.14.</span> <span class="nav-text">64、求1+2+…+n -&gt; （中文版） https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;qiu-12n-lcof&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#65%E3%80%81%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%81%9A%E5%8A%A0%E6%B3%95-gt-%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89-https-leetcode-cn-com-problems-bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof"><span class="nav-number">1.15.</span> <span class="nav-text">65、不用加减乘除做加法 -&gt; （中文版） https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;bu-yong-jia-jian-cheng-chu-zuo-jia-fa-lcof&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#66%E3%80%81%E6%9E%84%E5%BB%BA%E4%B9%98%E7%A7%AF%E6%95%B0%E7%BB%84-gt-%EF%BC%88%E4%B8%AD%E6%96%87%E7%89%88%EF%BC%89-https-leetcode-cn-com-problems-gou-jian-cheng-ji-shu-zu-lcof"><span class="nav-number">1.16.</span> <span class="nav-text">66、构建乘积数组 -&gt; （中文版） https:&#x2F;&#x2F;leetcode-cn.com&#x2F;problems&#x2F;gou-jian-cheng-ji-shu-zu-lcof&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#67%E3%80%81%E6%8A%8A%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%88%90%E6%95%B4%E6%95%B0-gt-https-leetcode-com-problems-string-to-integer-atoi"><span class="nav-number">1.17.</span> <span class="nav-text">67、把字符串转换成整数 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;string-to-integer-atoi&#x2F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#68%E3%80%81%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88-gt-https-leetcode-com-problems-lowest-common-ancestor-of-a-binary-search-tree"><span class="nav-number">1.18.</span> <span class="nav-text">68、二叉搜索树的最近公共祖先 -&gt; https:&#x2F;&#x2F;leetcode.com&#x2F;problems&#x2F;lowest-common-ancestor-of-a-binary-search-tree&#x2F;</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">HUI</p>
+  <div class="site-description" itemprop="description">We have a long way to go</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">HUI</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
